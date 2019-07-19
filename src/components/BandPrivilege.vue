@@ -1,40 +1,40 @@
 <template>
   <svg
-    viewBox="-0.5 -0.5 200.5 40.5"
+    :view-box.camel="'-0.5 -0.5 ' + (windowWidth+0.5) + ' 40.5'"
     width="100%"
     class="bandprivilege"
   >
-    <text x="185" y="8">{{ privilege.name }}</text>
+    <text v-if="showName" :x="width + 5" y="8">{{ privilege.name }}</text>
     <g v-for="(slice, index) in privilege.slices" :key="index" class="slice">
       <rect
         :y="0"
         :height="12"
-        :x="(slice.from - from) / bandwidth * 180 + 0.25"
-        :width="(slice.to - slice.from) / bandwidth * 180"
+        :x="(slice.from - from) / bandwidth * width + 0.25"
+        :width="(slice.to - slice.from) / bandwidth * width"
         :class="slice.mode"
       />
       <line
         y1="0"
         y2="0"
-        :x1="(slice.from - from) / bandwidth * 180"
-        :x2="(slice.to - from) / bandwidth * 180"
+        :x1="(slice.from - from) / bandwidth * width"
+        :x2="(slice.to - from) / bandwidth * width"
       />
       <line
         y1="12"
         y2="12"
-        :x1="(slice.from - from) / bandwidth * 180"
-        :x2="(slice.to - from) / bandwidth * 180"
+        :x1="(slice.from - from) / bandwidth * width"
+        :x2="(slice.to - from) / bandwidth * width"
       />
       <line
         v-if="slice.startText !== null"
         y1="0"
         :y2="12 + Math.abs(slice.startText) * 8"
-        :x1="(slice.from - from) / bandwidth * 180"
-        :x2="(slice.from - from) / bandwidth * 180"
+        :x1="(slice.from - from) / bandwidth * width"
+        :x2="(slice.from - from) / bandwidth * width"
       />
       <text
         v-if="slice.startText"
-        :x="(slice.from - from) / bandwidth * 180 + (slice.startText < 0 ? -2 : 2 )"
+        :x="(slice.from - from) / bandwidth * width + (slice.startText < 0 ? -2 : 2 )"
         :y="12 + Math.abs(slice.startText) * 8"
         :text-anchor="slice.startText < 0 ? 'end' : 'start'"
       >{{ slice.from }}</text>
@@ -43,12 +43,12 @@
         v-if="slice.endText !== null"
         y1="0"
         :y2="12 + Math.abs(slice.endText) * 8"
-        :x1="(slice.to - from) / bandwidth * 180"
-        :x2="(slice.to - from) / bandwidth * 180"
+        :x1="(slice.to - from) / bandwidth * width"
+        :x2="(slice.to - from) / bandwidth * width"
       />
       <text
         v-if="slice.endText"
-        :x="(slice.to - from) / bandwidth * 180 + (slice.endText < 0 ? -2 : 2 )"
+        :x="(slice.to - from) / bandwidth * width + (slice.endText < 0 ? -2 : 2 )"
         :y="12 + Math.abs(slice.endText) * 8"
         :text-anchor="slice.endText < 0 ? 'end' : 'start'"
       >{{ slice.to + (index == privilege.slices.length - 1 ? ' ' + units : '') }}</text>
@@ -59,9 +59,18 @@
 <script>
 export default {
   name: 'home',
-  props: ['privilege', 'from', 'to', 'units'],
+  props: {
+    'privilege': Object,
+    'from': Number,
+    'to': Number,
+    'units': String,
+    'show-name': Boolean,
+    'large': Boolean
+  },
   computed: {
-    bandwidth () { return this.to - this.from }
+    bandwidth () { return this.to - this.from },
+    width () { return this.windowWidth - (this.showName ? 20 : 0) },
+    windowWidth () { return this.large ? 580 : 180 }
   }
 }
 </script>
@@ -92,5 +101,8 @@ export default {
 }
 .bandprivilege .green {
   fill: #c5e1a5; /* light green lighen 3 */
+}
+.bandprivilege .purple {
+  fill: #e1bee7;
 }
 </style>

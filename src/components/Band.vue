@@ -1,14 +1,15 @@
 <template>
-  <div class="band card">
-    <div class="card-content">
+  <div class="card">
+    <div class="card-content card-content--nobottom">
       <h2>{{ band.name }}</h2>
       <BandPrivilege
-        v-for="privilege in band.privileges"
+        v-for="privilege in visiblePrivileges"
         :key="privilege.name"
         :privilege="privilege"
         :from="band.from"
         :to="band.to"
         :units="band.units"
+        :show-name="activePrivileges.length > 1"
       />
     </div>
   </div>
@@ -20,14 +21,15 @@ import BandPrivilege from '@/components/BandPrivilege.vue'
 export default {
   name: 'home',
   components: { BandPrivilege },
-  props: ['band']
+  props: ['band', 'active-privileges'],
+  computed: {
+    visiblePrivileges () {
+      return this.band.privileges.filter(
+        (privilege) => this.activePrivileges.some(
+          (actPriv) => privilege.classes.includes(actPriv)
+        )
+      )
+    }
+  }
 }
 </script>
-
-<style>
-.band h2 {
-  font: 32px/32px sans-serif;
-  color: #444;
-  margin: 16px 0;
-}
-</style>

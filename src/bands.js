@@ -255,33 +255,153 @@ export default [
   },
   {
     name: '10 m',
-    from: 28000,
-    to: 29700,
-    units: 'KHz',
+    from: 28,
+    to: 29.7,
+    units: 'MHz',
     privileges: [
       {
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 28000, to: 28070, bw: 200, mode: 'yellow', startText: 3 },
-          { from: 28070, to: 28120, bw: 500, mode: 'orange', startText: 2 },
-          { from: 28120, to: 28150, bw: 500, mode: 'orange' },
-          { from: 28150, to: 28190, bw: 500, mode: 'orange' },
-          { from: 28190, to: 29199, bw: 0, mode: 'red', startText: 0 },
-          { from: 28199, to: 28201, bw: 0, mode: 'red' },
-          { from: 28201, to: 28225, bw: 0, mode: 'red', endText: 1 },
-          { from: 28225, to: 28300, bw: 2700, mode: 'blue' },
-          { from: 28300, to: 28320, bw: 2700, mode: 'blue' },
-          { from: 28320, to: 29000, bw: 2700, mode: 'blue' },
-          { from: 29000, to: 29100, bw: 6000, mode: 'green', startText: 2 },
-          { from: 29100, to: 29200, bw: 6000, mode: 'green' },
-          { from: 29200, to: 29300, bw: 6000, mode: 'green' },
-          { from: 29300, to: 29510, bw: 6000, mode: 'green' },
-          { from: 29510, to: 29520, bw: 0, mode: 'red', startText: -1, endText: -2 },
-          { from: 29520, to: 29590, bw: 6000, mode: 'green' },
-          { from: 29590, to: 29610, bw: 6000, mode: 'green' },
-          { from: 29610, to: 29620, bw: 6000, mode: 'green' },
-          { from: 29620, to: 29700, bw: 6000, mode: 'green', endText: -3 }
+          { from: 28.000, to: 28.070, bw: 200, mode: 'yellow', startText: 3 },
+          { from: 28.070, to: 28.120, bw: 500, mode: 'orange', startText: 2 },
+          { from: 28.120, to: 28.150, bw: 500, mode: 'orange' },
+          { from: 28.150, to: 28.190, bw: 500, mode: 'orange' },
+          { from: 28.190, to: 29.199, bw: 0, mode: 'red', startText: 0 },
+          { from: 28.199, to: 28.201, bw: 0, mode: 'red' },
+          { from: 28.201, to: 28.225, bw: 0, mode: 'red', endText: 1 },
+          { from: 28.225, to: 28.300, bw: 2700, mode: 'blue' },
+          { from: 28.300, to: 28.320, bw: 2700, mode: 'blue' },
+          { from: 28.320, to: 29.000, bw: 2700, mode: 'blue' },
+          { from: 29.000, to: 29.100, bw: 6000, mode: 'green', startText: 2 },
+          { from: 29.100, to: 29.200, bw: 6000, mode: 'green' },
+          { from: 29.200, to: 29.300, bw: 6000, mode: 'green' },
+          { from: 29.300, to: 29.510, bw: 6000, mode: 'green' },
+          { from: 29.510, to: 29.520, bw: 0, mode: 'red', startText: -1, endText: -2 },
+          { from: 29.520, to: 29.590, bw: 6000, mode: 'green' },
+          { from: 29.590, to: 29.610, bw: 6000, mode: 'green' },
+          { from: 29.610, to: 29.620, bw: 6000, mode: 'green' },
+          { from: 29.620, to: 29.700, bw: 6000, mode: 'green', endText: -3 }
+        ]
+      }
+    ]
+  },
+  {
+    name: '6 m',
+    from: 50,
+    to: 52,
+    units: 'MHz',
+    privileges: [
+      {
+        name: 'A, B',
+        classes: ['A', 'B'],
+        slices: [
+          { from: 50, to: 50.1, bw: 500, mode: 'yellow', startText: 3 },
+          { from: 50.1, to: 50.2, bw: 2700, mode: 'blue', startText: 2 },
+          { from: 50.2, to: 50.3, bw: 2700, mode: 'blue' },
+          { from: 50.3, to: 50.4, bw: 2700, mode: 'blue' },
+          { from: 50.4, to: 50.5, bw: 1000, mode: 'orange', startText: -1 },
+          { from: 50.5, to: 52.0, bw: 12000, mode: 'green', startText: 1, endText: -1 }
+        ]
+      }
+    ]
+  },
+  {
+    name: '4 m',
+    from: 70,
+    to: 70.5,
+    units: 'MHz',
+    privileges: [
+      {
+        name: 'A',
+        classes: ['A'],
+        slices: [
+          { from: 70.000, to: 70.090, bw: 500, mode: 'yellow', startText: 1 },
+          { from: 70.090, to: 70.100, bw: 500, mode: 'yellow' },
+          { from: 70.100, to: 70.250, bw: 2700, mode: 'blue', startText: 1 },
+          { from: 70.250, to: 70.249, bw: 12000, mode: 'green', startText: 1 },
+          { from: 70.249, to: 70.500, bw: 12000, mode: 'green', endText: -1 },
+        ]
+      }
+    ]
+  },
+  {
+    name: '2 m',
+    from: 144,
+    to: 146,
+    units: 'MHz',
+    privileges: [
+      {
+        name: 'A, B',
+        classes: ['A', 'B'],
+        slices: [
+          { from: 144, to: 144.025, bw: 2700, mode: 'blue', startText: 1 },
+          { from: 144.025, to: 144.100, bw: 500, mode: 'orange', startText: 2 },
+          { from: 144.100, to: 144.150, bw: 500, mode: 'orange' },
+          { from: 144.150, to: 144.400, bw: 2700, mode: 'blue', startText: 3 },
+          { from: 144.400, to: 144.490, bw: 500, mode: 'orange', startText: 2, endText: 0 },
+          { from: 144.491, to: 144.493, bw: 500, mode: 'orange', startText: 0, endText: 0 },
+          { from: 144.500, to: 144.794, bw: 20000, mode: 'purple', startText: 1 },
+          { from: 144.794, to: 144.9625, bw: 12000, mode: 'green', startText: 2, endText: 0 },
+          { from: 144.975, to: 145.194, bw: 12000, mode: 'green', startText: 1 },
+          { from: 145.194, to: 145.206, bw: 12000, mode: 'green' },
+          { from: 145.206, to: 145.5625, bw: 12000, mode: 'green', endText: -3 },
+          { from: 145.575, to: 145.7935, bw: 12000, mode: 'green', startText: 1 },
+          { from: 145.794, to: 145.806, bw: 12000, mode: 'green' },
+          { from: 145.806, to: 146, bw: 12000, mode: 'green', endText: -2 }
+        ]
+      },
+      {
+        name: 'C',
+        classes: ['C'],
+        slices: [
+          { from: 144.975, to: 145.194, bw: 12000, mode: 'green', startText: 1 },
+          { from: 145.194, to: 145.206, bw: 12000, mode: 'green' },
+          { from: 145.205, to: 145.5625, bw: 12000, mode: 'green', endText: -2 },
+          { from: 145.575, to: 145.7935, bw: 12000, mode: 'green', startText: 1 },
+          { from: 145.794, to: 145.806, bw: 12000, mode: 'green' },
+          { from: 145.806, to: 146, bw: 12000, mode: 'green', endText: -2 }
+        ]
+      }
+    ]
+  },
+  {
+    name: '70 cm',
+    from: 430,
+    to: 440,
+    units: 'MHz',
+    privileges: [
+      {
+        name: 'A, B',
+        classes: ['A', 'B'],
+        slices: [
+          { from: 430, to: 431.975, bw: 20000, mode: 'purple', startText: 1 },
+          { from: 431.975, to: 432.100, bw: 500, mode: 'orange', startText: -3 },
+          { from: 432.100, to: 432.400, bw: 2700, mode: 'blue', startText: 3 },
+          { from: 432.400, to: 432.490, bw: 500, mode: 'orange', startText: 2, endText: 0 },
+          { from: 432.491, to: 432.493, bw: 500, mode: 'orange', startText: 0, endText: 0 },
+          { from: 432.500, to: 432.975, bw: 12000, mode: 'green', startText: 1, endText: 0 },
+          { from: 433.000, to: 433.375, bw: 12000, mode: 'green', startText: 0, endText: 0 },
+          { from: 433.400, to: 433.575, bw: 12000, mode: 'green', startText: 0, endText: 0 },
+          { from: 433.600, to: 434.000, bw: 20000, mode: 'purple', startText: 0 },
+          { from: 434.000, to: 434.594, bw: 12000, mode: 'green', startText: 2 },
+          { from: 434.594, to: 434.981, bw: 12000, mode: 'green' },
+          { from: 435.000, to: 438.000, bw: 20000, mode: 'purple', startText: 1 },
+          { from: 438.000, to: 440.000, bw: 20000, mode: 'purple', endText: -1 },
+        ]
+      },
+      {
+        name: 'C',
+        classes: ['C'],
+        slices: [
+          { from: 430, to: 431.975, bw: 20000, mode: 'purple', startText: 1, endText: -2 },
+          { from: 432.500, to: 432.975, bw: 12000, mode: 'green', startText: 1, endText: 0 },
+          { from: 433.000, to: 433.375, bw: 12000, mode: 'green', startText: 0, endText: 0 },
+          { from: 433.400, to: 433.575, bw: 12000, mode: 'green', startText: 0, endText: 0 },
+          { from: 433.600, to: 434.000, bw: 20000, mode: 'purple', startText: 0 },
+          { from: 434.000, to: 434.594, bw: 12000, mode: 'green', startText: 2 },
+          { from: 434.594, to: 434.981, bw: 12000, mode: 'green', endText: 1 },
+          { from: 438.000, to: 440.000, bw: 20000, mode: 'purple', startText: 2, endText: -1 },
         ]
       }
     ]
