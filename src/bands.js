@@ -391,7 +391,7 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 144.025, to: 144.400, mode: 'orange', startText: 2, endText: 2},
+          { from: 144.025, to: 144.400, mode: 'yellow', startText: 2, endText: 2 },
           { from: 144.150, to: 144.400, show: 'bottom', mode: 'blue', endText: 0, startText: 1 },
           { from: 145.206, to: 145.562, mode: 'green', startText: 2, endText: 1 },
         ]
@@ -431,33 +431,16 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 430, to: 431.975, bw: 20000, mode: 'purple', startText: 1 },
-          { from: 431.975, to: 432.100, bw: 500, mode: 'orange', startText: -3 },
-          { from: 432.100, to: 432.400, bw: 2700, mode: 'blue', startText: 3 },
-          { from: 432.400, to: 432.490, bw: 500, mode: 'orange', startText: 2, endText: 0 },
-          { from: 432.491, to: 432.493, bw: 500, mode: 'orange', startText: 0, endText: 0 },
-          { from: 432.500, to: 432.975, bw: 12000, mode: 'green', startText: 1, endText: 0 },
-          { from: 433.000, to: 433.375, bw: 12000, mode: 'green', startText: 0, endText: 0 },
-          { from: 433.400, to: 433.575, bw: 12000, mode: 'green', startText: 0, endText: 0 },
-          { from: 433.600, to: 434.000, bw: 20000, mode: 'purple', startText: 0 },
-          { from: 434.000, to: 434.594, bw: 12000, mode: 'green', startText: 2 },
-          { from: 434.594, to: 434.981, bw: 12000, mode: 'green' },
-          { from: 435.000, to: 438.000, bw: 20000, mode: 'purple', startText: 1 },
-          { from: 438.000, to: 440.000, bw: 20000, mode: 'purple', endText: -1 }
+          { from: 432.000, to: 432.400, mode: 'yellow', startText: -1, endText: 0 },
+          { from: 432.100, to: 432.400, mode: 'blue', show: 'bottom', startText: -2, endText: 1 },
+          { from: 434.594, to: 434.981, mode: 'green', startText: 2, endText: 1 },
         ]
       },
       {
         name: 'C',
         classes: ['C'],
         slices: [
-          { from: 430, to: 431.975, bw: 20000, mode: 'purple', startText: 1, endText: -2 },
-          { from: 432.500, to: 432.975, bw: 12000, mode: 'green', startText: 1, endText: 0 },
-          { from: 433.000, to: 433.375, bw: 12000, mode: 'green', startText: 0, endText: 0 },
-          { from: 433.400, to: 433.575, bw: 12000, mode: 'green', startText: 0, endText: 0 },
-          { from: 433.600, to: 434.000, bw: 20000, mode: 'purple', startText: 0 },
-          { from: 434.000, to: 434.594, bw: 12000, mode: 'green', startText: 2 },
-          { from: 434.594, to: 434.981, bw: 12000, mode: 'green', endText: 1 },
-          { from: 438.000, to: 440.000, bw: 20000, mode: 'purple', startText: 2, endText: -1 }
+          { from: 434.594, to: 434.981, mode: 'green', startText: -1, endText: 1 },
         ]
       }
     ],

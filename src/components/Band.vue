@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="router.push({ name: 'band', params: { id: band.name } })">
     <div class="card-content card-content--nobottom">
       <h2>{{ band.name }}</h2>
       <BandPrivilege

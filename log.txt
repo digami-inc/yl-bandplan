@@ -1,10 +1,16 @@
 2019-07-17 12:30..12:45  00:15  Vue setup
 2019-07-17 12:52..13:10  00:18  About window, bandplan json
 2019-07-17 15:24..16:30  01:06  svg research
+  Total:  99m    (99m)
 2019-07-19 11:18..12:21  01:03  css responsive, problems with flexbox
 2019-07-19 12:40..13:58  01:18  checkboxes
 2019-07-19 13:58..14:05  00:07  svg viewbox browser bug
 2019-07-19 14:09..14:55  00:46  vhf+ json
 2019-07-19 14:55..15:26  00:31  publish
+  Total:  225m    (324m)
 2019-07-24 12:40..14:30  01:50  rework bands hf
 2019-07-24 15:40..16:20  00:40  rework bands vhf
+  Total:  150m    (474m)
+2019-07-25 08:00..08:20  00:20  rework bands vhf
+2019-07-25 14:10..14:32  00:22  rework bands vhf
+2019-07-25 14:32..--:--  --:--  need vuex
