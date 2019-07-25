@@ -13,4 +13,4 @@
   Total:  150m    (474m)
 2019-07-25 08:00..08:20  00:20  rework bands vhf
 2019-07-25 14:10..14:32  00:22  rework bands vhf
-2019-07-25 14:32..--:--  --:--  need vuex
+2019-07-25 14:32..15:25  00:53  convertet app to vuex

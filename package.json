@@ -1,5 +1,5 @@
 {
-  "name": "hamapp",
+  "name": "hamapp2",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,15 +10,14 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-cli-plugin-s3-deploy": "^3.0.0",
-    "vue-router": "^3.0.3"
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-eslint": "^3.9.0",
-    "@vue/cli-plugin-pwa": "^3.9.0",
     "@vue/cli-service": "^3.9.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",

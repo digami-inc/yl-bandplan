@@ -16,13 +16,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import BandPrivilege from '@/components/BandPrivilege.vue'
 
 export default {
   name: 'home',
   components: { BandPrivilege },
-  props: ['band', 'active-privileges'],
+  props: ['band'],
   computed: {
+    ...mapState({
+      activePrivileges: (state, getters) => getters.activePrivileges
+    }),
     visiblePrivileges () {
       return this.band.privileges.filter(
         (privilege) => this.activePrivileges.some(

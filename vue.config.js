@@ -6,7 +6,7 @@ module.exports = {
       region: 'eu-west-1',
       bucket: 'bandplan.yl2.lv',
       createBucket: false,
-      staticHosting: false,
+      staticHosting: true,
       assetPath: 'dist',
       assetMatch: '**',
       deployPath: '/',
@@ -14,7 +14,9 @@ module.exports = {
       pwa: false,
       enableCloudfront: false,
       uploadConcurrency: 5,
-      pluginVersion: '3.0.0'
+      pluginVersion: '3.0.0',
+      staticIndexPage: 'index.html',
+      staticErrorPage: 'index.html'
     }
   }
 }
