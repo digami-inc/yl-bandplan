@@ -5,11 +5,13 @@
       <div class="col">
         <div class="card">
           <div class="card-content">
-            <h2>Apzīmējumi</h2>
+            <h2>Uzstādījumi</h2>
             <div
               v-for="(privilege, id) in privileges"
               :key="privilege.name"
-              @click="$store.commit(privilege.active ? 'deactivatePrivilege' : 'activatePrivilege', id)">
+              @click="$store.commit(privilege.active ? 'deactivatePrivilege' : 'activatePrivilege', id)"
+              class="menu"
+              :class="{active: privilege.active}">
               {{ privilege.description }}
             </div>
           </div>
@@ -21,6 +23,17 @@
     </div>
   </div>
 </template>
+
+<style>
+.menu {
+  margin: 8px -8px;
+  padding: 4px 8px;
+  color: #9e9e9e;
+}
+.menu.active {
+  color: #000;
+}
+</style>
 
 <script>
 import { mapState } from 'vuex'
