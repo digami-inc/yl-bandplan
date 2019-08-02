@@ -6,32 +6,42 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    settings: {
+      activePrivileges: ['A', 'B', 'C']
+    },
     bands,
     privileges: [
-      { name: 'A', description: 'A klasses stacijas', active: true },
-      { name: 'B', description: 'B klasses stacijas', active: true },
-      { name: 'C', description: 'C klasses stacijas', active: true }
+      { name: 'A', description: 'A klasses stacijas' },
+      { name: 'B', description: 'B klasses stacijas' },
+      { name: 'C', description: 'C klasses stacijas' }
     ]
   },
   getters: {
-    activePrivileges: state => {
-      return state.privileges.filter((el) => el.active)
-        .map(el => el.name)
-    },
-    activeBands: (state, getters) => {
-      return state.bands.filter((band) => band.privileges.some(
-        (privilege) => getters.activePrivileges.some(
-          (activePrivilege) => privilege.classes.includes(activePrivilege)
+    activeBands: (state) => {
+      return state.bands.filter(band => band.privileges.some(
+        privilege => state.settings.activePrivileges.some(
+          activePrivilege => privilege.classes.includes(activePrivilege)
         )
       ))
     }
   },
   mutations: {
-    activatePrivilege (state, id) {
-      state.privileges[id].active = true
+    initialiseStore (state) {
+      if (!localStorage.getItem('settings')) return
+      state.settings = JSON.parse(localStorage.getItem('settings'))
     },
-    deactivatePrivilege (state, id) {
-      state.privileges[id].active = false
+    activatePrivilege (state, name) {
+      if (!state.settings.activePrivileges.includes(name)) {
+        state.settings.activePrivileges.push(name)
+        localStorage.setItem('settings', JSON.stringify(state.settings))
+      }
+    },
+    deactivatePrivilege (state, name) {
+      let i = state.settings.activePrivileges.indexOf(name)
+      if (i !== -1) {
+        state.settings.activePrivileges.splice(i, 1)
+        localStorage.setItem('settings', JSON.stringify(state.settings))
+      }
     }
   },
   actions: {

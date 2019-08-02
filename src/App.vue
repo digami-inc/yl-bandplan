@@ -1,14 +1,37 @@
 <template>
   <div id="app">
-    <div>
-      <router-link to="/">Home</router-link> |
+    <div class="topbar">
+      <router-link to="/">Bands</router-link> |
       <router-link to="/about">About</router-link>
+      ...
+      <span
+        v-for="privilege in privileges"
+        :key="privilege.name"
+        @click="$store.commit(activePrivileges.includes(privilege.name) ? 'deactivatePrivilege' : 'activatePrivilege', privilege.name)"
+        class="menu"
+        :class="{active: activePrivileges.includes(privilege.name)}">
+        {{ privilege.description }}
+      </span>
     </div>
     <router-view/>
   </div>
 </template>
 
+<script>
+import { mapState } from 'vuex'
+
+export default {
+  computed: mapState({
+    privileges: state => state.privileges,
+    activePrivileges: state => state.settings.activePrivileges
+  })
+}
+</script>
+
 <style>
+.topbar {
+  margin-bottom: 16px;
+}
 body {
   font: 16px/24px sans-serif;
   background: #f5f5f5;
@@ -32,6 +55,13 @@ h1 {
   border-radius: 2px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
   background: #fff;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.clickable {
+  cursor: pointer;
+}
+.card.clickable:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .row--grow-cards .card {
   height: 100%;

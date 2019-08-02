@@ -1,5 +1,5 @@
 <template>
-  <div class="card" @click="router.push({ name: 'band', params: { id: band.name } })">
+  <div class="card" :class="{ clickable }" @click="clicked">
     <div class="card-content card-content--nobottom">
       <h2>{{ band.name }}</h2>
       <BandPrivilege
@@ -10,6 +10,7 @@
         :to="band.to"
         :units="band.units"
         :show-name="activePrivileges.length > 1"
+        :large="large"
       />
     </div>
   </div>
@@ -22,10 +23,23 @@ import BandPrivilege from '@/components/BandPrivilege.vue'
 export default {
   name: 'home',
   components: { BandPrivilege },
-  props: ['band'],
+  props: {
+    'band': Object,
+    'large': Boolean,
+    'clickable': {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+    clicked () {
+      if (!this.clickable) return
+      this.$router.push({ name: 'band', params: { id: this.band.route } })
+    }
+  },
   computed: {
     ...mapState({
-      activePrivileges: (state, getters) => getters.activePrivileges
+      activePrivileges: state => state.settings.activePrivileges
     }),
     visiblePrivileges () {
       return this.band.privileges.filter(

@@ -14,3 +14,6 @@
 2019-07-25 08:00..08:20  00:20  rework bands vhf
 2019-07-25 14:10..14:32  00:22  rework bands vhf
 2019-07-25 14:32..15:25  00:53  convertet app to vuex
+  Total:   95m    (569m)
+2019-08-02 13:00..15:02  01:02  zoom view, vuex-route-sync, localstorage
+  Total:  122m    (691m)

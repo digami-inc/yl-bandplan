@@ -1,5 +1,6 @@
 export default [
   {
+    route: '2200m',
     name: '2 200 m',
     from: 135.7,
     to: 137.8,
@@ -9,7 +10,7 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 135.7, to: 137.8, mode: 'yellow' }
+          { from: 135.7, to: 137.8, mode: 'cw' }
         ]
       }
     ],
@@ -18,6 +19,7 @@ export default [
     ]
   },
   {
+    route: '630m',
     name: '630 m',
     from: 472,
     to: 479,
@@ -27,7 +29,7 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 472, to: 479, mode: 'yellow' }
+          { from: 472, to: 479, mode: 'cw' }
         ]
       }
     ],
@@ -38,6 +40,7 @@ export default [
     iaruNotes: '(**) If a frequency is to be selected, particular attention must be paid to still existing Non Directional Beacons (NDB) of the radio navigation service! (#) maximum bandwidth not specified, 500 Hz suggested.'
   },
   {
+    route: '160m',
     name: '160 m',
     from: 1810,
     to: 2000,
@@ -47,9 +50,8 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 1810, to: 1838, mode: 'yellow', endText: -1 },
-          { from: 1840, to: 1843, mode: 'blue', startText: 0 },
-          { from: 1843, to: 2000, mode: 'blue', startText: 1 }
+          { from: 1810, to: 1838, mode: 'cw', endText: -1 },
+          { from: 1843, to: 2000, mode: 'lsb', startText: 1 }
         ]
       }
     ],
@@ -61,6 +63,7 @@ export default [
     ]
   },
   {
+    route: '80m',
     name: '80 m',
     from: 3500,
     to: 3800,
@@ -70,18 +73,16 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 3500, to: 3570, mode: 'yellow', endText: -1 },
-          { from: 3600, to: 3603, mode: 'blue', startText: 0 },
-          { from: 3603, to: 3800, mode: 'blue', startText: 1 }
+          { from: 3500, to: 3570, mode: 'cw', endText: -1 },
+          { from: 3603, to: 3800, mode: 'lsb', startText: 1 }
         ]
       },
       {
         name: 'B',
         classes: ['B'],
         slices: [
-          { from: 3510, to: 3570, mode: 'yellow', startText: 1, endText: -2 },
-          { from: 3600, to: 3603, mode: 'blue', startText: 0 },
-          { from: 3603, to: 3750, mode: 'blue', startText: 1, endText: -1 }
+          { from: 3510, to: 3570, mode: 'cw', startText: 1, endText: -2 },
+          { from: 3603, to: 3750, mode: 'lsb', startText: 1, endText: -1 }
         ]
       }
     ],
@@ -109,6 +110,7 @@ export default [
     ]
   },
   {
+    route: '60m',
     name: '60 m',
     from: 5351.5,
     to: 5366.5,
@@ -118,9 +120,8 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 5351.5, to: 5354, mode: 'yellow', startText: 2 },
-          { from: 5354, to: 5363, mode: 'blue', startText: 1, endText: -1 },
-          { from: 5363, to: 5366, mode: 'blue', endText: 0 }
+          { from: 5351.5, to: 5354, mode: 'cw', startText: 2 },
+          { from: 5354, to: 5363, mode: 'usb', startText: 1, endText: -1 }
         ]
       }
     ],
@@ -131,6 +132,7 @@ export default [
     ]
   },
   {
+    route: '40m',
     name: '40 m',
     from: 7000,
     to: 7200,
@@ -140,16 +142,15 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 7000, to: 7040, mode: 'yellow', endText: -1 },
-          { from: 7050, to: 7053, mode: 'blue', startText: 0 },
-          { from: 7053, to: 7200, mode: 'blue', startText: 1, endText: -1 }
+          { from: 7000, to: 7040, mode: 'cw', endText: -1 },
+          { from: 7053, to: 7200, mode: 'lsb', startText: 1, endText: -1 }
         ]
       },
       {
         name: 'B',
         classes: ['B'],
         slices: [
-          { from: 7010, to: 7040, bw: 200, mode: 'yellow', startText: 1, endText: 1 }
+          { from: 7010, to: 7040, bw: 200, mode: 'cw', startText: 1, endText: 1 }
         ]
       }
     ],
@@ -174,6 +175,7 @@ export default [
     ]
   },
   {
+    route: '30m',
     name: '30 m',
     from: 10100,
     to: 10150,
@@ -183,7 +185,7 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 10100, to: 10130, bw: 200, mode: 'yellow', endText: -1 }
+          { from: 10100, to: 10130, bw: 200, mode: 'cw', endText: -1 }
         ]
       }
     ],
@@ -193,6 +195,7 @@ export default [
     ]
   },
   {
+    route: '20m',
     name: '20 m',
     from: 14000,
     to: 14350,
@@ -202,8 +205,8 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 14000, to: 14070, mode: 'yellow', endText: -1 },
-          { from: 14112, to: 14350, bw: 2700, mode: 'blue', startText: 1 }
+          { from: 14000, to: 14070, mode: 'cw', endText: -1 },
+          { from: 14112, to: 14350, bw: 2700, mode: 'usb', startText: 1 }
         ]
       }
     ],
@@ -220,6 +223,7 @@ export default [
     ]
   },
   {
+    route: '17m',
     name: '17 m',
     from: 18068,
     to: 18168,
@@ -229,8 +233,8 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 18068, to: 18095, mode: 'yellow', endText: -1 },
-          { from: 18120, to: 18168, bw: 2700, mode: 'blue', startText: 1 }
+          { from: 18068, to: 18095, mode: 'cw', endText: -1 },
+          { from: 18120, to: 18168, bw: 2700, mode: 'usb', startText: 1 }
         ]
       }
     ],
@@ -244,6 +248,7 @@ export default [
     ]
   },
   {
+    route: '15m',
     name: '15 m',
     from: 21000,
     to: 21450,
@@ -253,8 +258,8 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 21000, to: 21070, mode: 'yellow', endText: -1 },
-          { from: 21151, to: 21450, mode: 'blue', startText: 1 }
+          { from: 21000, to: 21070, mode: 'cw', endText: -1 },
+          { from: 21151, to: 21450, mode: 'usb', startText: 1 }
         ]
       }
     ],
@@ -269,6 +274,7 @@ export default [
     ]
   },
   {
+    route: '12m',
     name: '12 m',
     from: 24890,
     to: 24990,
@@ -278,8 +284,8 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 24890, to: 24915, mode: 'yellow', endText: -1 },
-          { from: 24940, to: 24990, mode: 'blue', startText: -1 }
+          { from: 24890, to: 24915, mode: 'cw', endText: -1 },
+          { from: 24940, to: 24990, mode: 'usb', startText: -1 }
         ]
       }
     ],
@@ -293,6 +299,7 @@ export default [
     ]
   },
   {
+    route: '10m',
     name: '10 m',
     from: 28,
     to: 29.7,
@@ -302,9 +309,9 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 28.000, to: 28.070, mode: 'yellow', endText: 1 },
-          { from: 28.320, to: 29.100, mode: 'blue', startText: 1, endText: -1 },
-          { from: 29.520, to: 29.620, mode: 'green', startText: 2, endText: 1 }
+          { from: 28.000, to: 28.070, mode: 'cw', endText: 1 },
+          { from: 28.320, to: 29.100, mode: 'usb', startText: 1, endText: -1 },
+          { from: 29.520, to: 29.620, mode: 'fm', startText: -1, endText: -2 }
         ]
       }
     ],
@@ -331,6 +338,7 @@ export default [
     ]
   },
   {
+    route: '6m',
     name: '6 m',
     from: 50,
     to: 52,
@@ -340,9 +348,9 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 50, to: 50.4, mode: 'yellow', endText: 1 },
-          { from: 50.1, to: 50.3, show: 'bottom', mode: 'blue', startText: 1, endText: 2 },
-          { from: 51.210, to: 51.590, mode: 'green', startText: -1, endText: -1 }
+          { from: 50, to: 50.4, mode: 'cw', endText: 1 },
+          { from: 50.1, to: 50.3, show: 'bottom', mode: 'usb', startText: 1, endText: 2 },
+          { from: 51.210, to: 51.590, mode: 'fm', startText: -1, endText: -1 }
         ]
       }
     ],
@@ -356,6 +364,7 @@ export default [
     ]
   },
   {
+    route: '4m',
     name: '4 m',
     from: 70,
     to: 70.5,
@@ -365,11 +374,10 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 70.000, to: 70.090, mode: 'yellow', endText: -1 },
-          { from: 70.100, to: 70.250, mode: 'yellow', startText: 1, endText: -1 },
-          { from: 70.100, to: 70.250, show: 'bottom', mode: 'blue', startText: 1, endText: -1 },
-          { from: 70.250, to: 70.294, mode: 'green', endText: 1 },
-          { from: 70.294, to: 70.500, mode: 'green' }
+          { from: 70.000, to: 70.090, mode: 'cw', endText: -1 },
+          { from: 70.100, to: 70.250, mode: 'cw', startText: 1, endText: -1 },
+          { from: 70.100, to: 70.250, show: 'bottom', mode: 'usb', startText: 1, endText: -1 },
+          { from: 70.294, to: 70.500, mode: 'fm', startText: 1 }
         ]
       }
     ],
@@ -382,6 +390,7 @@ export default [
     ]
   },
   {
+    route: '2m',
     name: '2 m',
     from: 144,
     to: 146,
@@ -391,16 +400,16 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 144.025, to: 144.400, mode: 'yellow', startText: 2, endText: 2 },
-          { from: 144.150, to: 144.400, show: 'bottom', mode: 'blue', endText: 0, startText: 1 },
-          { from: 145.206, to: 145.562, mode: 'green', startText: 2, endText: 1 }
+          { from: 144.025, to: 144.400, mode: 'cw', startText: 2, endText: 2 },
+          { from: 144.150, to: 144.400, show: 'bottom', mode: 'usb', endText: 0, startText: 1 },
+          { from: 145.206, to: 145.562, mode: 'fm', startText: 2, endText: 1 }
         ]
       },
       {
         name: 'C',
         classes: ['C'],
         slices: [
-          { from: 145.206, to: 145.562, mode: 'green', startText: 2, endText: 1 }
+          { from: 145.206, to: 145.562, mode: 'fm', startText: 2, endText: 1 }
         ]
       }
     ],
@@ -422,6 +431,7 @@ export default [
     ]
   },
   {
+    route: '70cm',
     name: '70 cm',
     from: 430,
     to: 440,
@@ -431,16 +441,16 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 432.000, to: 432.400, mode: 'yellow', startText: -1, endText: 0 },
-          { from: 432.100, to: 432.400, mode: 'blue', show: 'bottom', startText: -2, endText: 1 },
-          { from: 434.594, to: 434.981, mode: 'green', startText: 2, endText: 1 }
+          { from: 432.000, to: 432.400, mode: 'cw', startText: -1, endText: 0 },
+          { from: 432.100, to: 432.400, mode: 'usb', show: 'bottom', startText: -2, endText: 1 },
+          { from: 434.594, to: 434.981, mode: 'fm', startText: 2, endText: 1 }
         ]
       },
       {
         name: 'C',
         classes: ['C'],
         slices: [
-          { from: 434.594, to: 434.981, mode: 'green', startText: -1, endText: 1 }
+          { from: 434.594, to: 434.981, mode: 'fm', startText: -1, endText: 1 }
         ]
       }
     ],

@@ -18,6 +18,9 @@
         :width="(slice.to - slice.from) / bandwidth * width"
         :class="slice.mode"
       />
+      <text class="bandmode" :class="slice.mode" :y="slice.show == 'bottom' ? 19 : 13" :x="(slice.from -  from) / bandwidth * width + 1.250">
+      {{ slice.mode.toUpperCase() }}
+      </text>
       <line
         :y1="slice.show == 'bottom' ? 14 : 8"
         :y2="slice.show == 'bottom' ? 14 : 8"
@@ -50,7 +53,6 @@
         :y2="20 + Math.abs(slice.endText) * 8"
         :x1="(slice.to - from) / bandwidth * width"
         :x2="(slice.to - from) / bandwidth * width"
-        :alt="`hello ${slice.endText} world`"
       />
       <text
         v-if="typeof(slice.endText) !== 'undefined' && slice.endText != 0"
@@ -96,29 +98,37 @@ export default {
 .bandprivilege .slice text {
   fill: #222
 }
-.bandprivilege .slice .title {
-  fill: #222;
-  font-size: 6px;
-}
+.bandprivilege .cw { fill: #fff9c4; }
+.bandprivilege .lsb { fill: #b3e5fc; }
+.bandprivilege .usb { fill: #b3e5fc; }
+.bandprivilege .fm { fill: #c5e1a5; }
+.bandprivilege .grey { fill: #eeeeee; }
+.bandprivilege .bandmode { font-size: 6px; font-weight: bold; }
+.bandprivilege .bandmode.cw { fill: #fdd835 }
+.bandprivilege .bandmode.lsb { fill: #039be5 }
+.bandprivilege .bandmode.usb { fill: #039be5 }
+.bandprivilege .bandmode.fm { fill: #7cb342}
+/*
 .bandprivilege .yellow {
-  fill: #fff9c4; /* yellow lighten 4 */
+  fill: #fff9c4; -- yellow lighten 4 --
 }
 .bandprivilege .orange {
-  fill: #ffe0b2; /* orange lighten 4 */
+  fill: #ffe0b2; -- orange lighten 4 --
 }
 .bandprivilege .blue {
-  fill: #b3e5fc; /* light blue lighten 4 */
+  fill: #b3e5fc; -- light blue lighten 4 --
 }
 .bandprivilege .red {
-  fill: #ef5350; /* red lighten 1 */
+  fill: #ef5350; -- red lighten 1 --
 }
 .bandprivilege .green {
-  fill: #c5e1a5; /* light green lighen 3 */
+  fill: #c5e1a5; -- light green lighen 3 --
 }
 .bandprivilege .purple {
   fill: #e1bee7;
 }
 .bandprivilege .grey {
-  fill: #eeeeee; /* grey lighten-3 */
+  fill: #eeeeee; -- grey lighten-3 --
 }
+*/
 </style>
