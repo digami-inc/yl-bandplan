@@ -29,7 +29,8 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 472, to: 479, mode: 'cw' }
+          { from: 472, to: 479, mode: 'cw' },
+          { from: 475, to: 479, mode: 'digi', show: 'bottom', startText: 1 }
         ]
       }
     ],
@@ -51,7 +52,8 @@ export default [
         classes: ['A'],
         slices: [
           { from: 1810, to: 1838, mode: 'cw', endText: -1 },
-          { from: 1843, to: 2000, mode: 'lsb', startText: 1 }
+          { from: 1838, to: 1840, mode: 'digi' },
+          { from: 1840, to: 2000, mode: 'lsb', startText: 1 }
         ]
       }
     ],
@@ -74,7 +76,8 @@ export default [
         classes: ['A'],
         slices: [
           { from: 3500, to: 3570, mode: 'cw', endText: -1 },
-          { from: 3603, to: 3800, mode: 'lsb', startText: 1 }
+          { from: 3570, to: 3600, mode: 'digi' },
+          { from: 3600, to: 3800, mode: 'lsb', startText: 1 }
         ]
       },
       {
@@ -82,7 +85,8 @@ export default [
         classes: ['B'],
         slices: [
           { from: 3510, to: 3570, mode: 'cw', startText: 1, endText: -2 },
-          { from: 3603, to: 3750, mode: 'lsb', startText: 1, endText: -1 }
+          { from: 3570, to: 3600, mode: 'digi' },
+          { from: 3600, to: 3750, mode: 'lsb', startText: 1, endText: -1 }
         ]
       }
     ],
@@ -121,7 +125,8 @@ export default [
         classes: ['A'],
         slices: [
           { from: 5351.5, to: 5354, mode: 'cw', startText: 2 },
-          { from: 5354, to: 5363, mode: 'usb', startText: 1, endText: -1 }
+          { from: 5354, to: 5366, mode: 'usb', startText: 1 },
+          { from: 5366, to: 5366.5, mode: 'digi', startText: -1 }
         ]
       }
     ],
@@ -143,7 +148,8 @@ export default [
         classes: ['A'],
         slices: [
           { from: 7000, to: 7040, mode: 'cw', endText: -1 },
-          { from: 7053, to: 7200, mode: 'lsb', startText: 1, endText: -1 }
+          { from: 7040, to: 7060, mode: 'digi' },
+          { from: 7060, to: 7200, mode: 'lsb', startText: 1, endText: -1 }
         ]
       },
       {
@@ -185,7 +191,8 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 10100, to: 10130, bw: 200, mode: 'cw', endText: -1 }
+          { from: 10100, to: 10130, mode: 'cw', endText: -1 },
+          { from: 10130, to: 10150, mode: 'digi' }
         ]
       }
     ],
@@ -206,6 +213,8 @@ export default [
         classes: ['A'],
         slices: [
           { from: 14000, to: 14070, mode: 'cw', endText: -1 },
+          { from: 14070, to: 14112, mode: 'digi' },
+          { from: 14099, to: 14101, mode: 'block' },
           { from: 14112, to: 14350, bw: 2700, mode: 'usb', startText: 1 }
         ]
       }
@@ -234,6 +243,8 @@ export default [
         classes: ['A'],
         slices: [
           { from: 18068, to: 18095, mode: 'cw', endText: -1 },
+          { from: 18095, to: 18120, mode: 'digi' },
+          { from: 18109, to: 18111, mode: 'block' },
           { from: 18120, to: 18168, bw: 2700, mode: 'usb', startText: 1 }
         ]
       }
@@ -259,6 +270,8 @@ export default [
         classes: ['A', 'B'],
         slices: [
           { from: 21000, to: 21070, mode: 'cw', endText: -1 },
+          { from: 21070, to: 21151, mode: 'digi' },
+          { from: 21149, to: 21151, mode: 'block' },
           { from: 21151, to: 21450, mode: 'usb', startText: 1 }
         ]
       }
@@ -285,6 +298,8 @@ export default [
         classes: ['A'],
         slices: [
           { from: 24890, to: 24915, mode: 'cw', endText: -1 },
+          { from: 24915, to: 24940, mode: 'digi' },
+          { from: 24929, to: 24931, mode: 'block' },
           { from: 24940, to: 24990, mode: 'usb', startText: -1 }
         ]
       }
@@ -309,9 +324,12 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 28.000, to: 28.070, mode: 'cw', endText: 1 },
-          { from: 28.320, to: 29.100, mode: 'usb', startText: 1, endText: -1 },
-          { from: 29.520, to: 29.620, mode: 'fm', startText: -1, endText: -2 }
+          { from: 28.000, to: 28.070, mode: 'cw', endText: 2 },
+          { from: 28.070, to: 28.320, mode: 'digi' },
+          { from: 28.190, to: 28.225, mode: 'block' },
+          { from: 28.225, to: 29.100, mode: 'usb', startText: 1, endText: -1 },
+          { from: 29.100, to: 29.700, mode: 'fm' },
+          { from: 29.510, to: 29.520, mode: 'block' },
         ]
       }
     ],

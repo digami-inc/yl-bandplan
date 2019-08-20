@@ -18,7 +18,7 @@
         :width="(slice.to - slice.from) / bandwidth * width"
         :class="slice.mode"
       />
-      <text class="bandmode" :class="slice.mode" :y="slice.show == 'bottom' ? 19 : 13" :x="(slice.from -  from) / bandwidth * width + 1.250">
+      <text v-if="slice.mode != 'block'" class="bandmode" :class="slice.mode" :y="slice.show == 'bottom' ? 19 : 13" :x="(slice.from -  from) / bandwidth * width + 1.250">
       {{ slice.mode.toUpperCase() }}
       </text>
       <line
@@ -99,15 +99,24 @@ export default {
   fill: #222
 }
 .bandprivilege .cw { fill: #fff9c4; }
+.bandprivilege .digi { fill: #ffe0b2; }
 .bandprivilege .lsb { fill: #b3e5fc; }
 .bandprivilege .usb { fill: #b3e5fc; }
 .bandprivilege .fm { fill: #c5e1a5; }
+.bandprivilege .sat { fill: #c5e1a5; }
+.bandprivilege .in { fill: #c5e1a5; }
+.bandprivilege .out { fill: #c5e1a5; }
 .bandprivilege .grey { fill: #eeeeee; }
+.bandprivilege .block { fill: #ef5350; }
 .bandprivilege .bandmode { font-size: 6px; font-weight: bold; }
 .bandprivilege .bandmode.cw { fill: #fdd835 }
+.bandprivilege .bandmode.digi { fill: #ffa726 }
 .bandprivilege .bandmode.lsb { fill: #039be5 }
 .bandprivilege .bandmode.usb { fill: #039be5 }
 .bandprivilege .bandmode.fm { fill: #7cb342}
+.bandprivilege .bandmode.sat { fill: #7cb342}
+.bandprivilege .bandmode.in { fill: #7cb342}
+.bandprivilege .bandmode.out { fill: #7cb342}
 /*
 .bandprivilege .yellow {
   fill: #fff9c4; -- yellow lighten 4 --
