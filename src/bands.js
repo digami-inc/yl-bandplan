@@ -87,24 +87,24 @@ export default [
       }
     ],
     iaru: [
-      { from: 3500, to: 3510, bw: 200, mode: 'yellow', desc: '' },
-      { from: 3510, to: 3560, bw: 200, mode: 'yellow', desc: '' },
-      { from: 3560, to: 3570, bw: 200, mode: 'yellow', desc: '' },
-      { from: 3570, to: 3580, bw: 200, mode: 'yellow', desc: '' },
-      { from: 3580, to: 3590, bw: 500, mode: 'orange', desc: '' },
-      { from: 3590, to: 3600, bw: 500, mode: 'orange', desc: '' },
-      { from: 3600, to: 3620, bw: 2700, mode: 'blue', desc: '' },
-      { from: 3600, to: 3620, bw: 2700, mode: 'blue', desc: '' },
-      { from: 3620, to: 3650, bw: 2700, mode: 'blue', desc: '' },
-      { from: 3650, to: 3700, bw: 2700, mode: 'blue', desc: '' },
-      { from: 3700, to: 3775, bw: 2700, mode: 'blue', desc: '' },
-      { from: 3775, to: 3800, bw: 2700, mode: 'blue', desc: '' }
+      { from: 3500, to: 3510, bw: 200, mode: 'yellow', desc: 'CW, priority for intercontinental operation' },
+      { from: 3510, to: 3560, bw: 200, mode: 'yellow', desc: 'CW, contest preferred' },
+      { from: 3560, to: 3570, bw: 200, mode: 'yellow', desc: 'CW' },
+      { from: 3570, to: 3580, bw: 200, mode: 'yellow', desc: 'Narrow band modes – digimodes' },
+      { from: 3580, to: 3590, bw: 500, mode: 'orange', desc: 'Narrow band modes – digimodes' },
+      { from: 3590, to: 3600, bw: 500, mode: 'orange', desc: 'Narrow band modes – digimodes, automatically controlled data stations (unattended)' },
+      { from: 3600, to: 3620, bw: 2700, mode: 'blue', desc: 'All modes - digimodes, automatically controlled data station (unattended), (*)', note: '(*) Lowest dial setting for LSB Voice mode: 3603' },
+      { from: 3600, to: 3650, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred, (*)', note: '(*) Lowest dial setting for LSB Voice mode: 3603' },
+      { from: 3650, to: 3700, bw: 2700, mode: 'blue', desc: 'All modes' },
+      { from: 3700, to: 3775, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred' },
+      { from: 3775, to: 3800, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred, priority for intercontinental operation' }
     ],
     bookmarks: [
       { pos: 3555, name: 'QRS centre of activity' },
       { pos: 3560, name: 'QRP centre of activity' },
       { pos: 3573, name: 'FT8' },
-      { pos: 3690, name: 'SSB centre of activity' },
+      { pos: 3630, name: 'Digital Voice Centre of Activity' },
+      { pos: 3690, name: 'SSB QRP centre of activity' },
       { pos: 3735, name: 'Image centre of activity' },
       { pos: 3760, name: 'Region 1 emergency centre of activity' }
     ]

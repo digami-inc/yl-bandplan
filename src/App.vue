@@ -75,7 +75,10 @@ h1 {
 .card-content h2 {
   font: 28px/32px sans-serif;
   color: #444;
-  margin: 0 0 16px;
+  margin: 16px 0;
+}
+.card-content h2:first-child {
+  margin-top: 0;
 }
 label { display: block }
 #app { margin: 0 auto; }
