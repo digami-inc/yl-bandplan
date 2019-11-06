@@ -14,6 +14,15 @@ export default [
         ]
       }
     ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '135,7–137,8 kHz',
+        'cat': 'sek',
+        'pwr': 'pZ ≤ 1 W e.i.r.p.',
+        'notes': 'Atļauti izstarojumi ar joslas platumu līdz 200 Hz'
+      }
+    ],
     iaru: [
       { from: 135.7, to: 137.8, bw: 200, mode: 'yellow', desc: 'CW, QRSS and narrow band digital modes' }
     ]
@@ -32,6 +41,15 @@ export default [
           { from: 472, to: 479, mode: 'cw' },
           { from: 475, to: 479, mode: 'digi', show: 'bottom', startText: 1 }
         ]
+      }
+    ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '472–479 kHz',
+        'cat': 'sek',
+        'pwr': 'pX ≤ 1 W e.i.r.p.',
+        'notes': 'Stājas spēkā pēc atbilstošiem grozījumiem Nacionālajā radiofrekvenču plānā. Atļauti izstarojumi ar joslas platumu līdz 800 Hz'
       }
     ],
     iaru: [
@@ -55,6 +73,20 @@ export default [
           { from: 1838, to: 1840, mode: 'digi' },
           { from: 1840, to: 2000, mode: 'lsb', startText: 1 }
         ]
+      }
+    ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '1 810–1 850 kHz',
+        'cat': 'PRIM',
+        'pwr': 'pX ≤ 1000 W'
+      },
+      {
+        'class': 'A',
+        'band': '1 850–2 000 kHz',
+        'cat': 'sek',
+        'pwr': 'pX ≤ 10 W'
       }
     ],
     iaru: [
@@ -88,6 +120,14 @@ export default [
           { from: 3570, to: 3600, mode: 'digi' },
           { from: 3600, to: 3750, mode: 'lsb', startText: 1, endText: -1 }
         ]
+      }
+    ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '3 500–3 800 kHz',
+        'cat': 'PRIM',
+        'pwr': 'pX ≤ 1000 W'
       }
     ],
     iaru: [
@@ -130,6 +170,15 @@ export default [
         ]
       }
     ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '5 351,5–5 366,5 kHz',
+        'cat': 'sek',
+        'pwr': 'pX ≤ 15 W e.i.r.p.',
+        'notes': 'Stājas spēkā pēc atbilstošiem grozījumiem Nacionālajā radiofrekvenču plānā. Atļauti izstarojumi ar joslas platumu līdz 800 Hz'
+      }
+    ],
     iaru: [
       { from: 5351.5, to: 5354, bw: 200, mode: 'yellow', desc: '' },
       { from: 5354, to: 5366, bw: 2700, mode: 'blue', desc: '' },
@@ -158,6 +207,14 @@ export default [
         slices: [
           { from: 7010, to: 7040, bw: 200, mode: 'cw', startText: 1, endText: 1 }
         ]
+      }
+    ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '7 000–7 200 kHz',
+        'cat': 'PRIM',
+        'pwr': 'pX ≤ 1000 W'
       }
     ],
     iaru: [
@@ -196,6 +253,15 @@ export default [
         ]
       }
     ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '10 100–10 150 kHz',
+        'cat': 'sek',
+        'pwr': 'pX ≤ 1000 W',
+        'notes': 'Atļauti izstarojumi ar joslas platumu līdz 500 Hz'
+      }
+    ],
     iaru: [
       { from: 10100, to: 10130, bw: 200, mode: 'yellow', desc: '' },
       { from: 10130, to: 10150, bw: 500, mode: 'orange', desc: '' }
@@ -217,6 +283,20 @@ export default [
           { from: 14099, to: 14101, mode: 'block' },
           { from: 14112, to: 14350, bw: 2700, mode: 'usb', startText: 1 }
         ]
+      }
+    ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '14 000–14 250 kHz',
+        'cat': 'PRIMeks',
+        'pwr': 'pX ≤ 1000 W'
+      },
+      {
+        'class': 'A',
+        'band': '14 250–14 350 kHz',
+        'cat': 'PRIM',
+        'pwr': 'pX ≤ 1000 W'
       }
     ],
     iaru: [
@@ -249,6 +329,14 @@ export default [
         ]
       }
     ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '18 068–18 168 kHz',
+        'cat': 'PRIM',
+        'pwr': 'pX ≤ 1000 W'
+      }
+    ],
     iaru: [
       { from: 18068, to: 18095, bw: 200, mode: 'yellow', desc: '' },
       { from: 18095, to: 18105, bw: 500, mode: 'orange', desc: '' },
@@ -274,6 +362,14 @@ export default [
           { from: 21149, to: 21151, mode: 'block' },
           { from: 21151, to: 21450, mode: 'usb', startText: 1 }
         ]
+      }
+    ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '21 000–21 450 kHz',
+        'cat': 'PRIMeks',
+        'pwr': 'pX ≤ 1000 W'
       }
     ],
     iaru: [
@@ -304,6 +400,14 @@ export default [
         ]
       }
     ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '24 890–24 990 kHz',
+        'cat': 'PRIMeks',
+        'pwr': 'pX ≤ 1000 W'
+      }
+    ],
     iaru: [
       { from: 24890, to: 24915, bw: 200, mode: 'yellow', desc: '' },
       { from: 24915, to: 24925, bw: 500, mode: 'orange', desc: '' },
@@ -329,8 +433,16 @@ export default [
           { from: 28.190, to: 28.225, mode: 'block' },
           { from: 28.225, to: 29.100, mode: 'usb', startText: 1, endText: -1 },
           { from: 29.100, to: 29.700, mode: 'fm' },
-          { from: 29.510, to: 29.520, mode: 'block' },
+          { from: 29.510, to: 29.520, mode: 'block' }
         ]
+      }
+    ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '28 000–29 700 kHz',
+        'cat': 'PRIMeks',
+        'pwr': 'pX ≤ 1000 W'
       }
     ],
     iaru: [
@@ -372,6 +484,14 @@ export default [
         ]
       }
     ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '50–52 MHz',
+        'cat': 'sek',
+        'pwr': 'pX ≤ 800 W'
+      }
+    ],
     iaru: [
       { from: 50, to: 50.1, bw: 500, mode: 'yellow', desc: '' },
       { from: 50.1, to: 50.2, bw: 2700, mode: 'blue', desc: '' },
@@ -397,6 +517,15 @@ export default [
           { from: 70.100, to: 70.250, show: 'bottom', mode: 'usb', startText: 1, endText: -1 },
           { from: 70.294, to: 70.500, mode: 'fm', startText: 1 }
         ]
+      }
+    ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '70–70,5 MHz',
+        'cat': 'sek',
+        'pwr': 'pX ≤ 100 W',
+        'notes': 'Nav atļauts raidīt to Latvijas un kaimiņvalstu robežu virzienā frekvenču joslās, kas kaimiņvalstīs nav piešķirtas amatieru dienestam'
       }
     ],
     iaru: [
@@ -429,6 +558,21 @@ export default [
         slices: [
           { from: 145.206, to: 145.562, mode: 'fm', startText: 2, endText: 1 }
         ]
+      }
+    ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '144–146 MHz',
+        'cat': 'PRIMeks',
+        'pwr': 'pX ≤ 100 W'
+      },
+      {
+        'class': 'A',
+        'band': '144–144,400 MHz',
+        'cat': 'PRIMeks',
+        'pwr': 'pX ≤ 1000 W',
+        'notes': 'EME, MS sakari, darbs starptautiskās sacensībās, darba veidi CW, SSB, MGM'
       }
     ],
     iaru: [
@@ -470,6 +614,21 @@ export default [
         slices: [
           { from: 434.594, to: 434.981, mode: 'fm', startText: -1, endText: 1 }
         ]
+      }
+    ],
+    rules: [
+      {
+        'class': 'A',
+        'band': '430–440 MHz',
+        'cat': 'PRIM',
+        'pwr': 'pX ≤ 100 W'
+      },
+      {
+        'class': 'A',
+        'band': '432–432,400 MHz',
+        'cat': 'PRIM',
+        'pwr': 'pX ≤ 1000 W',
+        'notes': 'EME, MS sakari, darbs starptautiskās sacensībās, darba veidi CW, SSB, MGM'
       }
     ],
     iaru: [

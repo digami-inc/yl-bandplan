@@ -1,6 +1,27 @@
 <template>
   <div>
-    <Band :band="band" :large="true" :clickable="false" />
+    <Band :band="band" :clickable="false" />
+    <div class="card card--topmargin">
+      <div class="card-content">
+        <h2>MK Noteikumi Nr.529</h2>
+        <p>Radioamatieru radiostaciju būvēšanas, ierīkošanas un lietošanas, kā arī radioamatieru apliecības saņemšanas kārtība.</p>
+        <table>
+          <tr>
+            <th>Radiofrekvenču josla</th>
+            <th>Sadalījuma kategorija</th>
+            <th>Jauda</th>
+            <th>Piezīmes</th>
+          </tr>
+
+          <tr v-for="(rule, id) in band.rules" :key="id">
+            <td>{{ rule. band }}</td>
+            <td class="center">{{ rule.cat }}</td>
+            <td>{{ rule.pwr }}</td>
+            <td>{{ rule.notes }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
     <div class="card card--topmargin">
       <div class="card-content">
         <h2>IARU {{ band.name }} bandplan</h2>
