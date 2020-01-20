@@ -9,20 +9,6 @@
   </div>
 </template>
 
-<style>
-.menu {
-  padding: 4px 8px;
-  margin: 0 4px 0;
-  background: #9e9e9e;
-  color: #000;;
-  border-radius: 3px;
-}
-.menu.active {
-  color: #9e9e9e;
-  background: #000;
-}
-</style>
-
 <script>
 import { mapState } from 'vuex'
 import Band from '@/components/Band.vue'

@@ -5,6 +5,7 @@
       <div class="card-content">
         <h2>MK Noteikumi Nr.529</h2>
         <p>Radioamatieru radiostaciju būvēšanas, ierīkošanas un lietošanas, kā arī radioamatieru apliecības saņemšanas kārtība.</p>
+        <div class="scrolltable">
         <table>
           <tr>
             <th>Radiofrekvenču josla</th>
@@ -17,31 +18,33 @@
             <td>{{ rule. band }}</td>
             <td class="center">{{ rule.cat }}</td>
             <td>{{ rule.pwr }}</td>
-            <td>{{ rule.notes }}</td>
+            <td><span class="mw16em">{{ rule.notes }}</span></td>
           </tr>
         </table>
+        </div>
       </div>
     </div>
     <div class="card card--topmargin">
       <div class="card-content">
         <h2>IARU {{ band.name }} bandplan</h2>
+        <div class="scrolltable">
         <table  class="iaru">
           <tr>
-            <th>{{ band.units }}</th>
-            <th class="right">Bandwidth</th>
-            <th>Description</th>
+            <th>{{ band.units }}, Bandwidth</th>
+            <th><span class="mw16em">Description</span></th>
           </tr>
           <tr v-for="(slice, id) in band.iaru" :key="id" class="iarucolor" :class="slice.mode">
-            <td class="nw">{{ slice.from}} - {{ slice.to}}</td>
-            <td class="right">{{ slice.bw }}</td>
+            <td class="nw">{{ slice.from}} - {{ slice.to}} {{band.units}}<div class="note text-right">{{ slice.bw }}K</div></td>
             <td>{{ slice.desc }}<div v-if="slice.note" class="note">{{ slice.note }}</div></td>
           </tr>
         </table>
+        </div>
       </div>
     </div>
     <div class="card card--topmargin">
       <div class="card-content">
         <h2>Bookmarks</h2>
+        <div class="scrolltable">
         <table  class="iaru">
           <tr>
             <th>{{ band.units }}</th>
@@ -52,6 +55,7 @@
             <td>{{ mark.name }}</td>
           </tr>
         </table>
+        </div>
       </div>
     </div>
   </div>
@@ -80,12 +84,12 @@ export default {
   width: 100%;
   box-sizing: border-box;
   border-collapse: collapse;
-  border: 1px solid #9e9e9e;
+  border: 1px solid #e0e0e0;
 }
 .right { text-align: right }
 .nw { white-space: nowrap }
 .note { font-size: 80% }
-.iaru td, .iaru th { padding: 4px 8px; border-bottom: 1px solid #9e9e9e; vertical-align: top }
+.iaru td, .iaru th { border-bottom: 1px solid #e0e0e0; }
 .iaru th { text-align: left }
 .iarucolor.yellow { background: #fff9c4; }
 .iarucolor.yellow td { border-color: #fbc02d; }

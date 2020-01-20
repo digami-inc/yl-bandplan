@@ -1,6 +1,7 @@
 <template>
   <svg
     :view-box.camel="'-0.5 -0.5 ' + (windowWidth+0.5) + ' 40.5'"
+    ref="picture"
     width="100%"
     class="bandprivilege"
   >
@@ -76,12 +77,28 @@ export default {
     'to': Number,
     'units': String,
     'show-name': Boolean,
-    'large': Boolean
+  },
+  data: function () {
+      return {
+          windowWidth: 580
+      }
+  },
+  mounted: function () {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
+  },
+  beforeDestroy: function () {
+    window.removeEventListener('resize', this.handleResize)
   },
   computed: {
     bandwidth () { return this.to - this.from },
     width () { return this.windowWidth - (this.showName ? 20 : 0) },
-    windowWidth () { return this.large ? 580 : 180 }
+  },
+  methods: {
+      handleResize () {
+          this.windowWidth = this.$refs.picture.clientWidth / 2;
+          if (this.windowWidth < 200) this.windowWidth = 200;
+      }
   }
 }
 </script>
@@ -102,6 +119,7 @@ export default {
 .bandprivilege .digi { fill: #ffe0b2; }
 .bandprivilege .lsb { fill: #b3e5fc; }
 .bandprivilege .usb { fill: #b3e5fc; }
+.bandprivilege .all { fill: #b3e5fc; }
 .bandprivilege .fm { fill: #c5e1a5; }
 .bandprivilege .sat { fill: #c5e1a5; }
 .bandprivilege .in { fill: #c5e1a5; }
@@ -113,31 +131,9 @@ export default {
 .bandprivilege .bandmode.digi { fill: #ffa726 }
 .bandprivilege .bandmode.lsb { fill: #039be5 }
 .bandprivilege .bandmode.usb { fill: #039be5 }
+.bandprivilege .bandmode.all { fill: #039be5 }
 .bandprivilege .bandmode.fm { fill: #7cb342}
 .bandprivilege .bandmode.sat { fill: #7cb342}
 .bandprivilege .bandmode.in { fill: #7cb342}
 .bandprivilege .bandmode.out { fill: #7cb342}
-/*
-.bandprivilege .yellow {
-  fill: #fff9c4; -- yellow lighten 4 --
-}
-.bandprivilege .orange {
-  fill: #ffe0b2; -- orange lighten 4 --
-}
-.bandprivilege .blue {
-  fill: #b3e5fc; -- light blue lighten 4 --
-}
-.bandprivilege .red {
-  fill: #ef5350; -- red lighten 1 --
-}
-.bandprivilege .green {
-  fill: #c5e1a5; -- light green lighen 3 --
-}
-.bandprivilege .purple {
-  fill: #e1bee7;
-}
-.bandprivilege .grey {
-  fill: #eeeeee; -- grey lighten-3 --
-}
-*/
 </style>

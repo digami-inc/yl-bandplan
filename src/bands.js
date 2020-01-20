@@ -547,16 +547,26 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 144.025, to: 144.400, mode: 'cw', startText: 2, endText: 2 },
-          { from: 144.150, to: 144.400, show: 'bottom', mode: 'usb', endText: 0, startText: 1 },
-          { from: 145.206, to: 145.562, mode: 'fm', startText: 2, endText: 1 }
+          { from: 144.000, to: 144.025, mode: 'sat', startText: 0, endText: 0 },
+          { from: 144.025, to: 144.400, mode: 'cw', startText: 2, endText: 0 },
+          { from: 144.150, to: 144.400, show: 'bottom', mode: 'usb', startText: 1, endText: 0 },
+          { from: 144.400, to: 144.500, mode: 'digi', startText: 2, endText: 0 },
+          { from: 144.500, to: 144.794, mode: 'all', startText: 1, endText: 0 },
+          { from: 144.794, to: 144.975, mode: 'digi', startText: 1, endText: 0 },
+          { from: 144.975, to: 145.806, mode: 'fm', startText: 0, endText: 0 },
+          { from: 144.975, to: 145.206, show: 'bottom', mode: 'in', startText: 0, endText: 2 },
+          { from: 145.5625, to: 145.793, show: 'bottom', mode: 'out', startText: 1, endText: 0 },
+          { from: 145.806, to: 146.000, mode: 'sat', startText: 0, endText: 0 }
         ]
       },
       {
         name: 'C',
         classes: ['C'],
         slices: [
-          { from: 145.206, to: 145.562, mode: 'fm', startText: 2, endText: 1 }
+          { from: 144.975, to: 145.806, mode: 'fm', startText: -1, endText: 0 },
+          { from: 144.975, to: 145.206, show: 'bottom', mode: 'in', startText: 0, endText: 2 },
+          { from: 145.5625, to: 145.793, show: 'bottom', mode: 'out', startText: 1, endText: 0 },
+          { from: 145.806, to: 146.000, mode: 'sat', startText: 0, endText: 0 }
         ]
       }
     ],
@@ -576,20 +586,20 @@ export default [
       }
     ],
     iaru: [
-      { from: 144, to: 144.025, bw: 2700, mode: 'blue', desc: '' },
-      { from: 144.025, to: 144.100, bw: 500, mode: 'orange', desc: '' },
-      { from: 144.100, to: 144.150, bw: 500, mode: 'orange', desc: '' },
-      { from: 144.150, to: 144.400, bw: 2700, mode: 'blue', desc: '' },
-      { from: 144.400, to: 144.490, bw: 500, mode: 'orange', desc: '' },
-      { from: 144.491, to: 144.493, bw: 500, mode: 'orange', desc: '' },
-      { from: 144.500, to: 144.794, bw: 20000, mode: 'purple', desc: '' },
-      { from: 144.794, to: 144.9625, bw: 12000, mode: 'green', desc: '' },
-      { from: 144.975, to: 145.194, bw: 12000, mode: 'green', desc: '' },
-      { from: 145.194, to: 145.206, bw: 12000, mode: 'green', desc: '' },
-      { from: 145.206, to: 145.5625, bw: 12000, mode: 'green', desc: '' },
-      { from: 145.575, to: 145.7935, bw: 12000, mode: 'green', desc: '' },
-      { from: 145.794, to: 145.806, bw: 12000, mode: 'green', desc: '' },
-      { from: 145.806, to: 146, bw: 12000, mode: 'green', desc: '' }
+      { from: 144, to: 144.025, bw: 2700, mode: 'blue', desc: 'All mode, Satelite (downlink only)' },
+      { from: 144.025, to: 144.100, bw: 500, mode: 'orange', desc: 'Telegraphy (EME)' },
+      { from: 144.100, to: 144.150, bw: 500, mode: 'orange', desc: 'Telegraphy & MGM' },
+      { from: 144.150, to: 144.400, bw: 2700, mode: 'blue', desc: 'Telegraphy, MGM & SSB' },
+      { from: 144.400, to: 144.490, bw: 500, mode: 'orange', desc: 'Telegrapy & MGM, Beacons only' },
+      { from: 144.491, to: 144.493, bw: 500, mode: 'orange', desc: 'Experimental MGM' },
+      { from: 144.500, to: 144.794, bw: 20000, mode: 'purple', desc: 'All Mode' },
+      { from: 144.794, to: 144.9625, bw: 12000, mode: 'green', desc: 'MGM, Digital communication' },
+      { from: 144.975, to: 145.194, bw: 12000, mode: 'green', desc: 'FM / DIgital Voice, Repeater input exclusive' },
+      { from: 145.194, to: 145.206, bw: 12000, mode: 'green', desc: 'FM / Digital Voice, Space communication' },
+      { from: 145.206, to: 145.5625, bw: 12000, mode: 'green', desc: 'FM / Digital Voice' },
+      { from: 145.575, to: 145.7935, bw: 12000, mode: 'green', desc: 'FM / Digital Voice, Repeater output exclusive' },
+      { from: 145.794, to: 145.806, bw: 12000, mode: 'green', desc: 'FM / DIgital Voice, Space communication' },
+      { from: 145.806, to: 146, bw: 12000, mode: 'green', desc: 'All Mode, Satellite exclusive' }
     ]
   },
   {

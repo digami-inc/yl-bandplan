@@ -9,8 +9,7 @@
         :from="band.from"
         :to="band.to"
         :units="band.units"
-        :show-name="activePrivileges.length > 1"
-        :large="large"
+        :show-name="activePrivilege == null"
       />
     </div>
   </div>
@@ -25,7 +24,6 @@ export default {
   components: { BandPrivilege },
   props: {
     'band': Object,
-    'large': Boolean,
     'clickable': {
       type: Boolean,
       default: true
@@ -39,13 +37,13 @@ export default {
   },
   computed: {
     ...mapState({
-      activePrivileges: state => state.settings.activePrivileges
+      activePrivilege: state => state.settings.activePrivilege
     }),
     visiblePrivileges () {
+      if (!this.activePrivilege) return this.band.privileges
+
       return this.band.privileges.filter(
-        (privilege) => this.activePrivileges.some(
-          (actPriv) => privilege.classes.includes(actPriv)
-        )
+        (privilege) => privilege.classes.includes(this.activePrivilege)
       )
     }
   }

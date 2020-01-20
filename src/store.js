@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     settings: {
-      activePrivileges: ['A', 'B', 'C']
+      activePrivilege: null
     },
     bands,
     privileges: [
@@ -18,30 +18,21 @@ export default new Vuex.Store({
   },
   getters: {
     activeBands: (state) => {
+      if (!state.settings.activePrivilege) return state.bands
+
       return state.bands.filter(band => band.privileges.some(
-        privilege => state.settings.activePrivileges.some(
-          activePrivilege => privilege.classes.includes(activePrivilege)
-        )
+        privilege => privilege.classes.includes(state.settings.activePrivilege)
       ))
-    }
+   }
   },
   mutations: {
     initialiseStore (state) {
       if (!localStorage.getItem('settings')) return
       state.settings = JSON.parse(localStorage.getItem('settings'))
     },
-    activatePrivilege (state, name) {
-      if (!state.settings.activePrivileges.includes(name)) {
-        state.settings.activePrivileges.push(name)
-        localStorage.setItem('settings', JSON.stringify(state.settings))
-      }
-    },
-    deactivatePrivilege (state, name) {
-      let i = state.settings.activePrivileges.indexOf(name)
-      if (i !== -1) {
-        state.settings.activePrivileges.splice(i, 1)
-        localStorage.setItem('settings', JSON.stringify(state.settings))
-      }
+    activatePrivilege (state, priv) {
+      state.settings.activePrivilege = priv
+      localStorage.setItem('settings', JSON.stringify(state.settings))
     }
   },
   actions: {
