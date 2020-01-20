@@ -117,6 +117,9 @@ label { display: block }
   margin: 0 -24px;
   overflow-x: scroll;
 }
+.scrolltable:last-child {
+  margin-bottom: -24px;
+}
 .scrolltable table {
   border-left: none;
   border-right: none;
