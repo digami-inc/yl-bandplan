@@ -124,7 +124,7 @@ label { display: block }
 .scrolltable td, .scrolltable th {
   padding: 4px 8px;
   text-align: left;
-  vertical-align: top 
+  vertical-align: top
 }
 
 .text-right { text-align: right }

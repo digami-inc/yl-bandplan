@@ -76,12 +76,12 @@ export default {
     'from': Number,
     'to': Number,
     'units': String,
-    'show-name': Boolean,
+    'show-name': Boolean
   },
   data: function () {
-      return {
-          windowWidth: 580
-      }
+    return {
+      windowWidth: 580
+    }
   },
   mounted: function () {
     window.addEventListener('resize', this.handleResize)
@@ -92,13 +92,13 @@ export default {
   },
   computed: {
     bandwidth () { return this.to - this.from },
-    width () { return this.windowWidth - (this.showName ? 20 : 0) },
+    width () { return this.windowWidth - (this.showName ? 20 : 0) }
   },
   methods: {
-      handleResize () {
-          this.windowWidth = this.$refs.picture.clientWidth / 2;
-          if (this.windowWidth < 200) this.windowWidth = 200;
-      }
+    handleResize () {
+      this.windowWidth = this.$refs.picture.clientWidth / 2
+      if (this.windowWidth < 200) this.windowWidth = 200
+    }
   }
 }
 </script>

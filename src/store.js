@@ -23,7 +23,7 @@ export default new Vuex.Store({
       return state.bands.filter(band => band.privileges.some(
         privilege => privilege.classes.includes(state.settings.activePrivilege)
       ))
-   }
+    }
   },
   mutations: {
     initialiseStore (state) {
