@@ -4,7 +4,7 @@ export default [
     name: '2 200 m',
     from: 135.7,
     to: 137.8,
-    units: 'KHz',
+    units: 'kHz',
     privileges: [
       {
         name: 'A',
@@ -17,12 +17,13 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '135,7–137,8 kHz',
+        'band': '135.7-137.8 kHz',
         'cat': 'sek',
         'pwr': 'pZ ≤ 1 W e.i.r.p.',
         'notes': 'Atļauti izstarojumi ar joslas platumu līdz 200 Hz'
       }
     ],
+    iaruUnits: 'kHz',
     iaru: [
       { from: 135.7, to: 137.8, bw: 200, mode: 'yellow', desc: 'CW, QRSS and narrow band digital modes' }
     ]
@@ -32,7 +33,7 @@ export default [
     name: '630 m',
     from: 472,
     to: 479,
-    units: 'KHz',
+    units: 'kHz',
     privileges: [
       {
         name: 'A',
@@ -46,24 +47,28 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '472–479 kHz',
+        'band': '472-479 kHz',
         'cat': 'sek',
         'pwr': 'pX ≤ 1 W e.i.r.p.',
         'notes': 'Stājas spēkā pēc atbilstošiem grozījumiem Nacionālajā radiofrekvenču plānā. Atļauti izstarojumi ar joslas platumu līdz 800 Hz'
       }
     ],
+    iaruUnits: 'kHz',
     iaru: [
-      { from: 472, to: 475, bw: 200, mode: 'yellow', desc: 'CW, See NOTES (**)' },
-      { from: 475, to: 479, bw: 0, mode: 'yellow', desc: 'CW, digimodes, See NOTES' }
+      { from: 472, to: 475, bw: 200, mode: 'yellow', desc: 'CW' },
+      { from: 475, to: 479, bw: 0, mode: 'yellow', desc: 'CW, digimodes', note: 'maximum bandwidth not specified, 500 Hz suggested' }
     ],
-    iaruNotes: '(**) If a frequency is to be selected, particular attention must be paid to still existing Non Directional Beacons (NDB) of the radio navigation service! (#) maximum bandwidth not specified, 500 Hz suggested.'
+    iaruNotes: [
+      'Details shown in band plan above should be understood as "proposed usage"  (VA14_C4_Rec_02)',
+      'If a frequency is to be selected, particular attention must be paid to still existing Non Directional Beacons (NDB) of the radionavigaton service!'
+    ]
   },
   {
     route: '160m',
     name: '160 m',
     from: 1810,
     to: 2000,
-    units: 'KHz',
+    units: 'kHz',
     privileges: [
       {
         name: 'A',
@@ -78,22 +83,26 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '1 810–1 850 kHz',
+        'band': '1810-1850 kHz',
         'cat': 'PRIM',
         'pwr': 'pX ≤ 1000 W'
       },
       {
         'class': 'A',
-        'band': '1 850–2 000 kHz',
+        'band': '1850-2000 kHz',
         'cat': 'sek',
         'pwr': 'pX ≤ 10 W'
       }
     ],
+    iaruUnits: 'kHz',
     iaru: [
-      { from: 1810, to: 1838, bw: 200, mode: 'yellow', desc: '' },
-      { from: 1838, to: 1840, bw: 500, mode: 'orange', desc: '' },
-      { from: 1840, to: 1843, bw: 2700, mode: 'blue', desc: '' },
-      { from: 1843, to: 2000, bw: 2700, mode: 'blue', desc: '' }
+      { from: 1810, to: 1838, bw: 200, mode: 'yellow', desc: 'CW' },
+      { from: 1838, to: 1840, bw: 500, mode: 'orange', desc: 'CW, Digimodes' },
+      { from: 1840, to: 1843, bw: 2700, mode: 'blue', desc: 'All modes, digimodes', note: '* Lowest dial setting for LSB Voice mode: 1843' },
+      { from: 1843, to: 2000, bw: 2700, mode: 'blue', desc: 'All modes' }
+    ],
+    bookmarks: [
+      { pos: 1836, name: 'CW QRP centre of activity' }
     ]
   },
   {
@@ -101,7 +110,7 @@ export default [
     name: '80 m',
     from: 3500,
     to: 3800,
-    units: 'KHz',
+    units: 'kHz',
     privileges: [
       {
         name: 'A',
@@ -125,20 +134,21 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '3 500–3 800 kHz',
+        'band': '3500-3800 kHz',
         'cat': 'PRIM',
         'pwr': 'pX ≤ 1000 W'
       }
     ],
+    iaruUnits: 'kHz',
     iaru: [
       { from: 3500, to: 3510, bw: 200, mode: 'yellow', desc: 'CW, priority for intercontinental operation' },
       { from: 3510, to: 3560, bw: 200, mode: 'yellow', desc: 'CW, contest preferred' },
       { from: 3560, to: 3570, bw: 200, mode: 'yellow', desc: 'CW' },
-      { from: 3570, to: 3580, bw: 200, mode: 'yellow', desc: 'Narrow band modes – digimodes' },
-      { from: 3580, to: 3590, bw: 500, mode: 'orange', desc: 'Narrow band modes – digimodes' },
-      { from: 3590, to: 3600, bw: 500, mode: 'orange', desc: 'Narrow band modes – digimodes, automatically controlled data stations (unattended)' },
-      { from: 3600, to: 3620, bw: 2700, mode: 'blue', desc: 'All modes - digimodes, automatically controlled data station (unattended), (*)', note: '(*) Lowest dial setting for LSB Voice mode: 3603' },
-      { from: 3600, to: 3650, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred, (*)', note: '(*) Lowest dial setting for LSB Voice mode: 3603' },
+      { from: 3570, to: 3580, bw: 200, mode: 'yellow', desc: 'Narrow band modes - digimodes' },
+      { from: 3580, to: 3590, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes' },
+      { from: 3590, to: 3600, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 3600, to: 3620, bw: 2700, mode: 'blue', desc: 'All modes - digimodes, automatically controlled data station (unattended)', note: '* Lowest dial setting for LSB Voice mode: 3603' },
+      { from: 3600, to: 3650, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred', note: '* Lowest dial setting for LSB Voice mode: 3603' },
       { from: 3650, to: 3700, bw: 2700, mode: 'blue', desc: 'All modes' },
       { from: 3700, to: 3775, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred' },
       { from: 3775, to: 3800, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred, priority for intercontinental operation' }
@@ -158,7 +168,7 @@ export default [
     name: '60 m',
     from: 5351.5,
     to: 5366.5,
-    units: 'KHz',
+    units: 'kHz',
     privileges: [
       {
         name: 'A',
@@ -173,16 +183,17 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '5 351,5–5 366,5 kHz',
+        'band': '5351.5-5366.5 kHz',
         'cat': 'sek',
         'pwr': 'pX ≤ 15 W e.i.r.p.',
         'notes': 'Stājas spēkā pēc atbilstošiem grozījumiem Nacionālajā radiofrekvenču plānā. Atļauti izstarojumi ar joslas platumu līdz 800 Hz'
       }
     ],
+    iaruUnits: 'kHz',
     iaru: [
-      { from: 5351.5, to: 5354, bw: 200, mode: 'yellow', desc: '' },
-      { from: 5354, to: 5366, bw: 2700, mode: 'blue', desc: '' },
-      { from: 5366, to: 5366.5, bw: 20, mode: 'yellow', desc: '' }
+      { from: 5351.5, to: 5354, bw: 200, mode: 'yellow', desc: 'CW, Narrow band modes' },
+      { from: 5354, to: 5366, bw: 2700, mode: 'blue', desc: 'USB recommended for voice operation' },
+      { from: 5366, to: 5366.5, bw: 20, mode: 'yellow', desc: 'Weak signal narrow band modes' }
     ]
   },
   {
@@ -190,7 +201,7 @@ export default [
     name: '40 m',
     from: 7000,
     to: 7200,
-    units: 'KHz',
+    units: 'kHz',
     privileges: [
       {
         name: 'A',
@@ -212,24 +223,25 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '7 000–7 200 kHz',
+        'band': '7000-7200 kHz',
         'cat': 'PRIM',
         'pwr': 'pX ≤ 1000 W'
       }
     ],
+    iaruUnits: 'kHz',
     iaru: [
-      { from: 7000, to: 7040, bw: 200, mode: 'yellow', desc: '' },
-      { from: 7040, to: 7047, bw: 500, mode: 'orange', desc: '' },
-      { from: 7047, to: 7050, bw: 500, mode: 'orange', desc: '' },
-      { from: 7050, to: 7053, bw: 2700, mode: 'orange', desc: '' },
-      { from: 7053, to: 7060, bw: 2700, mode: 'orange', desc: '' },
-      { from: 7060, to: 7100, bw: 2700, mode: 'orange', desc: '' },
-      { from: 7100, to: 7130, bw: 2700, mode: 'orange', desc: '' },
-      { from: 7130, to: 7175, bw: 2700, mode: 'orange', desc: '' },
-      { from: 7175, to: 7200, bw: 2700, mode: 'orange', desc: '' }
+      { from: 7000, to: 7040, bw: 200, mode: 'yellow', desc: 'CW' },
+      { from: 7040, to: 7047, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes' },
+      { from: 7047, to: 7050, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 7050, to: 7053, bw: 2700, mode: 'orange', desc: 'All modes - digimodes, automatically controlled data stations (unattended)', note: '* Lowest dial setting for LSB Voice mode: 7053' },
+      { from: 7053, to: 7060, bw: 2700, mode: 'orange', desc: 'All modes - digimodes' },
+      { from: 7060, to: 7100, bw: 2700, mode: 'orange', desc: 'All modes, SSB contest preferred' },
+      { from: 7100, to: 7130, bw: 2700, mode: 'orange', desc: 'All modes' },
+      { from: 7130, to: 7175, bw: 2700, mode: 'orange', desc: 'All modes, SSB contest preferred' },
+      { from: 7175, to: 7200, bw: 2700, mode: 'orange', desc: 'All modes, SSB contest preferred, priority for intercontinental activity' }
     ],
     bookmarks: [
-      { pos: 7030, name: 'QRP centre of activity' },
+      { pos: 7030, name: 'CW QRP centre of activity' },
       { pos: 7070, name: 'Digital voice centre of activity' },
       { pos: 7074, name: 'FT8' },
       { pos: 7090, name: 'SSB QRP centre of activity' },
@@ -242,7 +254,7 @@ export default [
     name: '30 m',
     from: 10100,
     to: 10150,
-    units: 'KHz',
+    units: 'kHz',
     privileges: [
       {
         name: 'A',
@@ -256,15 +268,19 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '10 100–10 150 kHz',
+        'band': '10100-10150 kHz',
         'cat': 'sek',
         'pwr': 'pX ≤ 1000 W',
         'notes': 'Atļauti izstarojumi ar joslas platumu līdz 500 Hz'
       }
     ],
+    iaruUnits: 'kHz',
     iaru: [
-      { from: 10100, to: 10130, bw: 200, mode: 'yellow', desc: '' },
-      { from: 10130, to: 10150, bw: 500, mode: 'orange', desc: '' }
+      { from: 10100, to: 10130, bw: 200, mode: 'yellow', desc: 'CW' },
+      { from: 10130, to: 10150, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes' }
+    ],
+    bookmarks: [
+      { pos: 10116, name: 'CW QRP centre of activity' }
     ]
   },
   {
@@ -272,7 +288,7 @@ export default [
     name: '20 m',
     from: 14000,
     to: 14350,
-    units: 'KHz',
+    units: 'kHz',
     privileges: [
       {
         name: 'A',
@@ -288,27 +304,38 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '14 000–14 250 kHz',
+        'band': '14000-14250 kHz',
         'cat': 'PRIMeks',
         'pwr': 'pX ≤ 1000 W'
       },
       {
         'class': 'A',
-        'band': '14 250–14 350 kHz',
+        'band': '14250-14350 kHz',
         'cat': 'PRIM',
         'pwr': 'pX ≤ 1000 W'
       }
     ],
+    iaruUnits: 'kHz',
     iaru: [
-      { from: 14000, to: 14060, bw: 200, mode: 'yellow', desc: '' },
-      { from: 14060, to: 14070, bw: 200, mode: 'yellow', desc: '' },
-      { from: 14070, to: 14089, bw: 500, mode: 'orange', desc: '' },
-      { from: 14089, to: 14099, bw: 500, mode: 'orange', desc: '' },
-      { from: 14099, to: 14101, bw: 0, mode: 'red', desc: '' },
-      { from: 14101, to: 14112, bw: 2700, mode: 'blue', desc: '' },
-      { from: 14112, to: 14125, bw: 2700, mode: 'blue', desc: '' },
-      { from: 14125, to: 14300, bw: 2700, mode: 'blue', desc: '' },
-      { from: 14300, to: 14350, bw: 2700, mode: 'blue', desc: '' }
+      { from: 14000, to: 14060, bw: 200, mode: 'yellow', desc: 'CW, contest preferred' },
+      { from: 14060, to: 14070, bw: 200, mode: 'yellow', desc: 'CW' },
+      { from: 14070, to: 14089, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes' },
+      { from: 14089, to: 14099, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 14099, to: 14101, bw: 0, mode: 'red', desc: 'International beacon project - beacons exclusively' },
+      { from: 14101, to: 14112, bw: 2700, mode: 'blue', desc: 'All modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 14112, to: 14125, bw: 2700, mode: 'blue', desc: 'All modes' },
+      { from: 14125, to: 14190, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred' },
+      { from: 14190, to: 14200, bw: 2700, mode: 'blue', desc: 'All modes, priority for DX-peditions' },
+      { from: 14200, to: 14300, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred' },
+      { from: 14300, to: 14350, bw: 2700, mode: 'blue', desc: 'All modes', note: '* Highest dial setting for USB voice mode: 14347' }
+    ],
+    bookmarks: [
+      { pos: 14055, name: 'QRS centre of activity' },
+      { pos: 14060, name: 'CW QRP centre of activity' },
+      { pos: 14130, name: 'Digital voice centre of activity' },
+      { pos: 14230, name: 'Image centre of activity' },
+      { pos: 14285, name: 'SSB QRP centre of activity' },
+      { pos: 14300, name: 'Global emergency centre of activity' }
     ]
   },
   {
@@ -316,7 +343,7 @@ export default [
     name: '17 m',
     from: 18068,
     to: 18168,
-    units: 'KHz',
+    units: 'kHz',
     privileges: [
       {
         name: 'A',
@@ -332,18 +359,19 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '18 068–18 168 kHz',
+        'band': '18068-18168 kHz',
         'cat': 'PRIM',
         'pwr': 'pX ≤ 1000 W'
       }
     ],
+    iaruUnits: 'kHz',
     iaru: [
-      { from: 18068, to: 18095, bw: 200, mode: 'yellow', desc: '' },
-      { from: 18095, to: 18105, bw: 500, mode: 'orange', desc: '' },
-      { from: 18105, to: 18109, bw: 500, mode: 'orange', desc: '' },
-      { from: 18109, to: 18111, bw: 0, mode: 'red', desc: '' },
-      { from: 18111, to: 18120, bw: 2700, mode: 'blue', desc: '' },
-      { from: 18120, to: 18168, bw: 2700, mode: 'blue', desc: '' }
+      { from: 18068, to: 18095, bw: 200, mode: 'yellow', desc: 'CW' },
+      { from: 18095, to: 18105, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes' },
+      { from: 18105, to: 18109, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 18109, to: 18111, bw: 0, mode: 'red', desc: 'International beacon project - beacons exclusively' },
+      { from: 18111, to: 18120, bw: 2700, mode: 'blue', desc: 'All modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 18120, to: 18168, bw: 2700, mode: 'blue', desc: 'All modes', note: '* Highest dial setting for USB voice mode: 18165' }
     ]
   },
   {
@@ -351,7 +379,7 @@ export default [
     name: '15 m',
     from: 21000,
     to: 21450,
-    units: 'KHz',
+    units: 'kHz',
     privileges: [
       {
         name: 'A, B',
@@ -367,19 +395,20 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '21 000–21 450 kHz',
+        'band': '21000-21450 kHz',
         'cat': 'PRIMeks',
         'pwr': 'pX ≤ 1000 W'
       }
     ],
+    iaruUnits: 'kHz',
     iaru: [
-      { from: 21000, to: 21070, bw: 200, mode: 'yellow', desc: '' },
-      { from: 21070, to: 21090, bw: 500, mode: 'orange', desc: '' },
-      { from: 21090, to: 21110, bw: 500, mode: 'orange', desc: '' },
-      { from: 21110, to: 21120, bw: 2700, mode: 'blue', desc: '' },
-      { from: 21120, to: 21149, bw: 500, mode: 'orange', desc: '' },
-      { from: 21149, to: 21151, bw: 0, mode: 'red', desc: '' },
-      { from: 21151, to: 21450, bw: 2700, mode: 'blue', desc: '' }
+      { from: 21000, to: 21070, bw: 200, mode: 'yellow', desc: 'CW' },
+      { from: 21070, to: 21090, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes' },
+      { from: 21090, to: 21110, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 21110, to: 21120, bw: 2700, mode: 'blue', desc: 'All modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 21120, to: 21149, bw: 500, mode: 'orange', desc: 'Narrow band modes' },
+      { from: 21149, to: 21151, bw: 0, mode: 'red', desc: 'International beacon project - beacons exclusively' },
+      { from: 21151, to: 21450, bw: 2700, mode: 'blue', desc: 'All modes', note: '* Highest dial setting for USB voice mode: 21447' }
     ]
   },
   {
@@ -387,7 +416,7 @@ export default [
     name: '12 m',
     from: 24890,
     to: 24990,
-    units: 'KHz',
+    units: 'kHz',
     privileges: [
       {
         name: 'A',
@@ -403,18 +432,19 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '24 890–24 990 kHz',
+        'band': '24890-24990 kHz',
         'cat': 'PRIMeks',
         'pwr': 'pX ≤ 1000 W'
       }
     ],
+    iaruUnits: 'kHz',
     iaru: [
-      { from: 24890, to: 24915, bw: 200, mode: 'yellow', desc: '' },
-      { from: 24915, to: 24925, bw: 500, mode: 'orange', desc: '' },
-      { from: 24925, to: 24929, bw: 500, mode: 'orange', desc: '' },
-      { from: 24929, to: 24931, bw: 0, mode: 'red', desc: '' },
-      { from: 24931, to: 24940, bw: 2700, mode: 'blue', desc: '' },
-      { from: 24940, to: 24990, bw: 2700, mode: 'blue', desc: '' }
+      { from: 24890, to: 24915, bw: 200, mode: 'yellow', desc: 'CW' },
+      { from: 24915, to: 24925, bw: 500, mode: 'orange', desc: 'Narrow band modes' },
+      { from: 24925, to: 24929, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 24929, to: 24931, bw: 0, mode: 'red', desc: 'International beacon project - beacons exclusively' },
+      { from: 24931, to: 24940, bw: 2700, mode: 'blue', desc: 'All modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 24940, to: 24990, bw: 2700, mode: 'blue', desc: 'All modes', note: '* Highest dial setting for USB voice mode: 24987' }
     ]
   },
   {
@@ -440,31 +470,32 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '28 000–29 700 kHz',
+        'band': '28000-29700 kHz',
         'cat': 'PRIMeks',
         'pwr': 'pX ≤ 1000 W'
       }
     ],
+    iaruUnits: 'kHz',
     iaru: [
-      { from: 28.000, to: 28.070, bw: 200, mode: 'yellow', desc: '' },
-      { from: 28.070, to: 28.120, bw: 500, mode: 'orange', desc: '' },
-      { from: 28.120, to: 28.150, bw: 500, mode: 'orange', desc: '' },
-      { from: 28.150, to: 28.190, bw: 500, mode: 'orange', desc: '' },
-      { from: 28.190, to: 29.199, bw: 0, mode: 'red', desc: '' },
-      { from: 28.199, to: 28.201, bw: 0, mode: 'red', desc: '' },
-      { from: 28.201, to: 28.225, bw: 0, mode: 'red', desc: '' },
-      { from: 28.225, to: 28.300, bw: 2700, mode: 'blue', desc: '' },
-      { from: 28.300, to: 28.320, bw: 2700, mode: 'blue', desc: '' },
-      { from: 28.320, to: 29.000, bw: 2700, mode: 'blue', desc: '' },
-      { from: 29.000, to: 29.100, bw: 6000, mode: 'green', desc: '' },
-      { from: 29.100, to: 29.200, bw: 6000, mode: 'green', desc: '' },
-      { from: 29.200, to: 29.300, bw: 6000, mode: 'green', desc: '' },
-      { from: 29.300, to: 29.510, bw: 6000, mode: 'green', desc: '' },
-      { from: 29.510, to: 29.520, bw: 0, mode: 'red', desc: '' },
-      { from: 29.520, to: 29.590, bw: 6000, mode: 'green', desc: '' },
-      { from: 29.590, to: 29.610, bw: 6000, mode: 'green', desc: '' },
-      { from: 29.610, to: 29.620, bw: 6000, mode: 'green', desc: '' },
-      { from: 29.620, to: 29.700, bw: 6000, mode: 'green', desc: '' }
+      { from: 28000, to: 28070, bw: 200, mode: 'yellow', desc: 'CW' },
+      { from: 28070, to: 28120, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes' },
+      { from: 28120, to: 28150, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 28150, to: 28190, bw: 500, mode: 'orange', desc: 'Narrow band modes' },
+      { from: 28190, to: 28199, bw: 0, mode: 'red', desc: 'International beacon project - regional time shared beacons, exclusively' },
+      { from: 28199, to: 28201, bw: 0, mode: 'red', desc: 'International beacon project - worldwide time shared beacons, exclusively' },
+      { from: 28201, to: 28225, bw: 0, mode: 'red', desc: 'International beacon project - continuous duty beacons, exclusively' },
+      { from: 28225, to: 28300, bw: 2700, mode: 'blue', desc: 'All modes - beacons' },
+      { from: 28300, to: 28320, bw: 2700, mode: 'blue', desc: 'All modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 28320, to: 29000, bw: 2700, mode: 'blue', desc: 'All modes' },
+      { from: 29000, to: 29100, bw: 6000, mode: 'green', desc: 'All modes' },
+      { from: 29100, to: 29200, bw: 6000, mode: 'green', desc: 'All modes - FM simplex, 10 kHz channels' },
+      { from: 29200, to: 29300, bw: 6000, mode: 'green', desc: 'All modes - digimodes, automatically controlled data stations (unattended)' },
+      { from: 29300, to: 29510, bw: 6000, mode: 'green', desc: 'Satellite links' },
+      { from: 29510, to: 29520, bw: 0, mode: 'red', desc: 'Guard channel' },
+      { from: 29520, to: 29590, bw: 6000, mode: 'green', desc: 'All modes - FM repeater input (RH1-RH8)' },
+      { from: 29590, to: 29610, bw: 6000, mode: 'green', desc: 'All modes - FM calling channel' },
+      { from: 29610, to: 29620, bw: 6000, mode: 'green', desc: 'All modes - FM simplex-repeater (parrot, input+output)' },
+      { from: 29620, to: 29700, bw: 6000, mode: 'green', desc: 'All modes - FM repeater output (RH1-RH8)' }
     ]
   },
   {
@@ -487,11 +518,12 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '50–52 MHz',
+        'band': '50-52 MHz',
         'cat': 'sek',
         'pwr': 'pX ≤ 800 W'
       }
     ],
+    iaruUnits: 'MHz',
     iaru: [
       { from: 50, to: 50.1, bw: 500, mode: 'yellow', desc: '' },
       { from: 50.1, to: 50.2, bw: 2700, mode: 'blue', desc: '' },
@@ -522,12 +554,13 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '70–70,5 MHz',
+        'band': '70-70.5 MHz',
         'cat': 'sek',
         'pwr': 'pX ≤ 100 W',
         'notes': 'Nav atļauts raidīt to Latvijas un kaimiņvalstu robežu virzienā frekvenču joslās, kas kaimiņvalstīs nav piešķirtas amatieru dienestam'
       }
     ],
+    iaruUnits: 'MHz',
     iaru: [
       { from: 70.000, to: 70.090, bw: 500, mode: 'yellow', desc: '' },
       { from: 70.090, to: 70.100, bw: 500, mode: 'yellow', desc: '' },
@@ -573,18 +606,19 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '144–146 MHz',
+        'band': '144-146 MHz',
         'cat': 'PRIMeks',
         'pwr': 'pX ≤ 100 W'
       },
       {
         'class': 'A',
-        'band': '144–144,400 MHz',
+        'band': '144-144.400 MHz',
         'cat': 'PRIMeks',
         'pwr': 'pX ≤ 1000 W',
         'notes': 'EME, MS sakari, darbs starptautiskās sacensībās, darba veidi CW, SSB, MGM'
       }
     ],
+    iaruUnits: 'MHz',
     iaru: [
       { from: 144, to: 144.025, bw: 2700, mode: 'blue', desc: 'All mode, Satelite (downlink only)' },
       { from: 144.025, to: 144.100, bw: 500, mode: 'orange', desc: 'Telegraphy (EME)' },
@@ -629,18 +663,19 @@ export default [
     rules: [
       {
         'class': 'A',
-        'band': '430–440 MHz',
+        'band': '430-440 MHz',
         'cat': 'PRIM',
         'pwr': 'pX ≤ 100 W'
       },
       {
         'class': 'A',
-        'band': '432–432,400 MHz',
+        'band': '432-432.400 MHz',
         'cat': 'PRIM',
         'pwr': 'pX ≤ 1000 W',
         'notes': 'EME, MS sakari, darbs starptautiskās sacensībās, darba veidi CW, SSB, MGM'
       }
     ],
+    iaruUnits: 'MHz',
     iaru: [
       { from: 430, to: 431.975, bw: 20000, mode: 'purple', desc: '' },
       { from: 431.975, to: 432.100, bw: 500, mode: 'orange', desc: '' },

@@ -1,7 +1,7 @@
 <template>
-  <div class="card" :class="{ clickable }" @click="clicked">
-    <div class="card-content card-content--nobottom">
-      <h2>{{ band.name }}</h2>
+    <div class="card-content card-content--nobottom" @click="clicked">
+      <h2 v-if="clickable">{{ band.name }}</h2>
+      <h1 v-else>{{ band.name }}</h1>
       <BandPrivilege
         v-for="privilege in visiblePrivileges"
         :key="privilege.name"
@@ -12,7 +12,6 @@
         :show-name="activePrivilege == null"
       />
     </div>
-  </div>
 </template>
 
 <script>

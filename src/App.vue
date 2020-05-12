@@ -38,16 +38,30 @@ export default {
 
 <style>
 .topbar {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 8px;
 }
 a { color: #039be5 }
 body {
-  font: 16px/24px sans-serif;
-  background: #f5f5f5;
+  margin: 0 8px;
+  font-size: 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.4;
+  background: #f8f8f8;
+  color: #333;
 }
+.sm { font-size: 14px; color: #444; }
 h1 {
-  font: 32px/40px sans-serif;
-  color: #444;
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+  margin: 16px 0;
+}
+h2 {
+  font-size: 24px;
+  font-weight: normal;
+  color: #000;
   margin: 16px 0;
 }
 .row {
@@ -61,10 +75,27 @@ h1 {
   padding-bottom: 16px;
 }
 .card {
+  position: relative;
   border-radius: 2px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
   background: #fff;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+a.card-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  text-align: center;
+  line-height: 32px;
+  font-size: 32px;
+  color: #888;
+  text-decoration: none;
+}
+a.card-close:hover {
+  color: #333;
 }
 .clickable {
   cursor: pointer;
@@ -77,23 +108,24 @@ h1 {
 }
 .card-content {
   padding: 24px;
+  border-bottom: 1px solid #d6d6d6;
 }
-.card-content--nobottom {
-  padding-bottom: 0
-}
-.card-content h2 {
-  font: 28px/32px sans-serif;
-  color: #444;
-  margin: 16px 0;
-}
+.card-content h1:first-child,
 .card-content h2:first-child {
   margin-top: 0;
+}
+.card-content:last-child {
+  border-bottom: none;
+}
+.card-content--nobottom {
+  padding-bottom: 0;
+  border-bottom: none;
 }
 .toolbar {
   display: inline-block;
   box-shadow: inset 0 2px 2px 0 rgba(0,0,0,0.14),inset 0 3px 1px -2px rgba(0,0,0,0.12), inset 0 1px 5px 0 rgba(0,0,0,0.2);
   padding: 2px;
-  background: #f5f5f5;
+  background: #f0f0f0;
   border-radius: 3px;
   color: #444;
   margin: 0 8px;
@@ -111,27 +143,38 @@ h1 {
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
 }
 label { display: block }
-#app { margin: 0 auto; }
+#app { margin: 0 auto; padding: 10px 0}
 
-.scrolltable {
+.table-container {
+  border-top: 1px solid #d6d6d6;
   margin: 0 -24px;
-  overflow-x: scroll;
 }
-.scrolltable:last-child {
-  margin-bottom: -24px;
+.table-row {
+  padding: 4px 4px 4px 23px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #d6d6d6;
 }
-.scrolltable table {
-  border-left: none;
-  border-right: none;
+.table-row>div {
+  width: 140px;
+  flex-grow: 1;
+  padding: 0 4px;
 }
-.scrolltable td, .scrolltable th {
-  padding: 4px 8px;
-  text-align: left;
-  vertical-align: top
+.table-row.header { background: #f0f0f0 }
+.table-row>div.wide { width: 260px; flex-grow: 3; }
+.table-row>div.narrow { flex-grow: 1; }
+table {
+  border: 1px solid #d6d6d6;
+  width: 100%;
+  box-sizing: border-box;
+  border-collapse: collapse;
 }
-
+td, th { text-align: left; font-weight: normal; padding: 2px 8px; border-bottom: 1px solid #d6d6d6}
+th { background-color: #f0f0f0 }
 .text-right { text-align: right }
-span.mw16em { display: block; min-width: 16em }
+.text-center { text-align: center }
 
 @media (min-width: 576px) {
   #app {

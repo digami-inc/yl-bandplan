@@ -3,7 +3,9 @@
     <h1>IARU Region 1 joslu plāns YL stacijām</h1>
     <div class="row row--grow-cards">
       <div class="col" v-for="band in activeBands" :key="band.name">
-        <Band :band="band"/>
+        <div class="card clickable">
+          <Band :band="band"/>
+        </div>
       </div>
     </div>
   </div>

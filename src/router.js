@@ -25,5 +25,8 @@ export default new Router({
       name: 'about',
       component: About
     }
-  ]
+  ],
+  scrollBehavior () {
+    document.getElementById('app').scrollIntoView()
+  }
 })
