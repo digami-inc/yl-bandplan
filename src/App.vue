@@ -164,6 +164,7 @@ label { display: block }
 }
 .table-row.header { background: #f0f0f0 }
 .table-row>div.wide { width: 260px; flex-grow: 3; }
+.table-row>div.digit { width: 30px; flex-grow: 0; }
 .table-row>div.narrow { flex-grow: 1; }
 table {
   border: 1px solid #d6d6d6;

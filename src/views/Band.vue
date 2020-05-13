@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card card--topmargin">
+    <div class="card card--topmargin" v-if="rules.length > 0">
       <router-link to="/" class="card-close">✕</router-link>
       <Band :band="band" :clickable="false" />
 
@@ -44,19 +44,28 @@
         <p class="sm">Radioamatieru radiostaciju būvēšanas, ierīkošanas un lietošanas, kā arī radioamatieru apliecības saņemšanas kārtība.</p>
         <div class="table-container">
           <div class="table-row header">
+            <div v-if="!activePrivilege" class="digit"></div>
             <div>Radiofrekvenču josla</div>
             <div class="narrow">Sadalījuma kategorija</div>
             <div class="narrow">Jauda</div>
             <div class="wide sm">Piezīmes</div>
           </div>
 
-          <div v-for="(rule, id) in band.rules" :key="id" class="table-row">
-            <div>{{ rule. band }}</div>
+          <div v-for="(rule, id) in rules" :key="id" class="table-row">
+            <div v-if="!activePrivilege" class="digit">{{ rule.class }}</div>
+            <div>{{ rule.band }}</div>
             <div class="narrow">{{ rule.cat }}</div>
             <div class="narrow">{{ rule.pwr }}</div>
             <div class="wide sm">{{ rule.notes }}</div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="card card--topmargin" v-else>
+      <router-link to="/" class="card-close">✕</router-link>
+      <div class="card-content">
+        <h2>{{ band.name }}</h2>
+        <p>This band is not available for "{{activePrivilege}}" staticons. <a href="" @click.prevent="$store.commit('activatePrivilege', null)">Activate all privileges, to view</a></p>
       </div>
     </div>
   </div>
@@ -70,8 +79,14 @@ export default {
   name: 'band',
   components: { Band },
   computed: {
+    rules () {
+      return this.band.rules.filter(
+        (rule) => !this.activePrivilege || rule.class === this.activePrivilege
+      )
+    },
     ...mapState({
-      band: (state) => state.bands.find(obj => obj.route === state.route.params.id)
+      band: state => state.bands.find(obj => obj.route === state.route.params.id),
+      activePrivilege: state => state.settings.activePrivilege
     })
   }
 }

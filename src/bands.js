@@ -132,12 +132,8 @@ export default [
       }
     ],
     rules: [
-      {
-        'class': 'A',
-        'band': '3500-3800 kHz',
-        'cat': 'PRIM',
-        'pwr': 'pX ≤ 1000 W'
-      }
+      { 'class': 'A', 'band': '3500-3800 kHz', 'cat': 'PRIM', 'pwr': 'pX ≤ 1000 W' },
+      { 'class': 'B', 'band': '3510-3750 kHz', 'cat': 'PRIM', 'pwr': 'pX ≤ 100 W' }
     ],
     iaruUnits: 'kHz',
     iaru: [
@@ -221,24 +217,20 @@ export default [
       }
     ],
     rules: [
-      {
-        'class': 'A',
-        'band': '7000-7200 kHz',
-        'cat': 'PRIM',
-        'pwr': 'pX ≤ 1000 W'
-      }
+      { 'class': 'A', 'band': '7000-7200 kHz', 'cat': 'PRIM', 'pwr': 'pX ≤ 1000 W' },
+      { 'class': 'B', 'band': '7010-7040 kHz', 'cat': 'PRIM', 'pwr': 'pX ≤ 100 W', 'notes': 'Atļauta izstarojuma klase A1A – Morzes kods uztveršanai ar dzirdi' }
     ],
     iaruUnits: 'kHz',
     iaru: [
       { from: 7000, to: 7040, bw: 200, mode: 'yellow', desc: 'CW' },
       { from: 7040, to: 7047, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes' },
       { from: 7047, to: 7050, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes, automatically controlled data stations (unattended)' },
-      { from: 7050, to: 7053, bw: 2700, mode: 'orange', desc: 'All modes - digimodes, automatically controlled data stations (unattended)', note: '* Lowest dial setting for LSB Voice mode: 7053' },
-      { from: 7053, to: 7060, bw: 2700, mode: 'orange', desc: 'All modes - digimodes' },
-      { from: 7060, to: 7100, bw: 2700, mode: 'orange', desc: 'All modes, SSB contest preferred' },
-      { from: 7100, to: 7130, bw: 2700, mode: 'orange', desc: 'All modes' },
-      { from: 7130, to: 7175, bw: 2700, mode: 'orange', desc: 'All modes, SSB contest preferred' },
-      { from: 7175, to: 7200, bw: 2700, mode: 'orange', desc: 'All modes, SSB contest preferred, priority for intercontinental activity' }
+      { from: 7050, to: 7053, bw: 2700, mode: 'blue', desc: 'All modes - digimodes, automatically controlled data stations (unattended)', note: '* Lowest dial setting for LSB Voice mode: 7053' },
+      { from: 7053, to: 7060, bw: 2700, mode: 'blue', desc: 'All modes - digimodes' },
+      { from: 7060, to: 7100, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred' },
+      { from: 7100, to: 7130, bw: 2700, mode: 'blue', desc: 'All modes' },
+      { from: 7130, to: 7175, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred' },
+      { from: 7175, to: 7200, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred, priority for intercontinental activity' }
     ],
     bookmarks: [
       { pos: 7030, name: 'CW QRP centre of activity' },
@@ -393,12 +385,8 @@ export default [
       }
     ],
     rules: [
-      {
-        'class': 'A',
-        'band': '21000-21450 kHz',
-        'cat': 'PRIMeks',
-        'pwr': 'pX ≤ 1000 W'
-      }
+      { 'class': 'A', 'band': '21000-21450 kHz', 'cat': 'PRIMeks', 'pwr': 'pX ≤ 1000 W' },
+      { 'class': 'B', 'band': '21000-21450 kHz', 'cat': 'PRIMeks', 'pwr': 'pX ≤ 100 W' }
     ],
     iaruUnits: 'kHz',
     iaru: [
@@ -430,12 +418,7 @@ export default [
       }
     ],
     rules: [
-      {
-        'class': 'A',
-        'band': '24890-24990 kHz',
-        'cat': 'PRIMeks',
-        'pwr': 'pX ≤ 1000 W'
-      }
+      { 'class': 'A', 'band': '24890-24990 kHz', 'cat': 'PRIMeks', 'pwr': 'pX ≤ 1000 W' }
     ],
     iaruUnits: 'kHz',
     iaru: [
@@ -468,12 +451,8 @@ export default [
       }
     ],
     rules: [
-      {
-        'class': 'A',
-        'band': '28000-29700 kHz',
-        'cat': 'PRIMeks',
-        'pwr': 'pX ≤ 1000 W'
-      }
+      { 'class': 'A', 'band': '28000-29700 kHz', 'cat': 'PRIMeks', 'pwr': 'pX ≤ 1000 W' },
+      { 'class': 'B', 'band': '28000-29700 kHz', 'cat': 'PRIMeks', 'pwr': 'pX ≤ 100 W' }
     ],
     iaruUnits: 'kHz',
     iaru: [
@@ -516,12 +495,8 @@ export default [
       }
     ],
     rules: [
-      {
-        'class': 'A',
-        'band': '50-52 MHz',
-        'cat': 'sek',
-        'pwr': 'pX ≤ 800 W'
-      }
+      { 'class': 'A', 'band': '50-52 MHz', 'cat': 'sek', 'pwr': 'pX ≤ 800 W' },
+      { 'class': 'B', 'band': '50-52 MHz', 'cat': 'sek', 'pwr': 'pX ≤ 100 W' }
     ],
     iaruUnits: 'MHz',
     iaru: [
@@ -552,13 +527,7 @@ export default [
       }
     ],
     rules: [
-      {
-        'class': 'A',
-        'band': '70-70.5 MHz',
-        'cat': 'sek',
-        'pwr': 'pX ≤ 100 W',
-        'notes': 'Nav atļauts raidīt to Latvijas un kaimiņvalstu robežu virzienā frekvenču joslās, kas kaimiņvalstīs nav piešķirtas amatieru dienestam'
-      }
+      { 'class': 'A', 'band': '70-70.5 MHz', 'cat': 'sek', 'pwr': 'pX ≤ 100 W', 'notes': 'Nav atļauts raidīt to Latvijas un kaimiņvalstu robežu virzienā frekvenču joslās, kas kaimiņvalstīs nav piešķirtas amatieru dienestam' }
     ],
     iaruUnits: 'MHz',
     iaru: [
@@ -604,19 +573,10 @@ export default [
       }
     ],
     rules: [
-      {
-        'class': 'A',
-        'band': '144-146 MHz',
-        'cat': 'PRIMeks',
-        'pwr': 'pX ≤ 100 W'
-      },
-      {
-        'class': 'A',
-        'band': '144-144.400 MHz',
-        'cat': 'PRIMeks',
-        'pwr': 'pX ≤ 1000 W',
-        'notes': 'EME, MS sakari, darbs starptautiskās sacensībās, darba veidi CW, SSB, MGM'
-      }
+      { 'class': 'A', 'band': '144-146 MHz', 'cat': 'PRIMeks', 'pwr': 'pX ≤ 100 W' },
+      { 'class': 'A', 'band': '144-144.400 MHz', 'cat': 'PRIMeks', 'pwr': 'pX ≤ 1000 W', 'notes': 'EME, MS sakari, darbs starptautiskās sacensībās, darba veidi CW, SSB, MGM' },
+      { 'class': 'B', 'band': '144-146 MHz', 'cat': 'PRIMeks', 'pwr': 'pX ≤ 50 W' },
+      { 'class': 'C', 'band': '144-146 MHz', 'cat': 'PRIMeks', 'pwr': 'pZ ≤ 10 W', 'notes': 'Izstarojuma klase F3E, G3E' }
     ],
     iaruUnits: 'MHz',
     iaru: [
@@ -661,19 +621,10 @@ export default [
       }
     ],
     rules: [
-      {
-        'class': 'A',
-        'band': '430-440 MHz',
-        'cat': 'PRIM',
-        'pwr': 'pX ≤ 100 W'
-      },
-      {
-        'class': 'A',
-        'band': '432-432.400 MHz',
-        'cat': 'PRIM',
-        'pwr': 'pX ≤ 1000 W',
-        'notes': 'EME, MS sakari, darbs starptautiskās sacensībās, darba veidi CW, SSB, MGM'
-      }
+      { 'class': 'A', 'band': '430-440 MHz', 'cat': 'PRIM', 'pwr': 'pX ≤ 100 W' },
+      { 'class': 'A', 'band': '432-432.400 MHz', 'cat': 'PRIM', 'pwr': 'pX ≤ 1000 W', 'notes': 'EME, MS sakari, darbs starptautiskās sacensībās, darba veidi CW, SSB, MGM' },
+      { 'class': 'B', 'band': '430-440 MHz', 'cat': 'PRIM', 'pwr': 'pX ≤ 20 W' },
+      { 'class': 'C', 'band': '430-440 MHz', 'cat': 'PRIM', 'pwr': 'pZ ≤ 10 W', 'notes': 'Izstarojuma klase F3E, G3E' }
     ],
     iaruUnits: 'MHz',
     iaru: [

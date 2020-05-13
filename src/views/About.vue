@@ -10,8 +10,9 @@
       </ul>
       <p>Author: YL3AME Kristaps <a href="https://ame.yl3.lv/">ame.yl3.lv</a></p>
       <h2>Kas Jauns</h2>
-      <p>v0.1.0 uzlabots izskats, pabeigtas visu HF joslu IARU un MK noteikumu tabulas.</p>
-      <p>v0.0.4 izlabota drukas kļūda bandplan tabulā.</p>
+      <p>2020-05-13 Pabeigti MK noteikumi 2. pielikums. Izlabots IARU tabulas krāsas 40m. Atvērta kartiņa aizveras pārslēdzot privilēģijas.</p>
+      <p>2020-05-12 Uzlabots izskats. Pabeigtas visu HF joslu IARU un MK noteikumu tabulas.</p>
+      <p>2020-05-08 Izlabota drukas kļūda bandplan tabulā.</p>
     </div>
   </div>
 </template>
