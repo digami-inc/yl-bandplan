@@ -10,6 +10,7 @@
       </ul>
       <p>Author: YL3AME Kristaps <a target="_blank" href="https://ame.yl3.lv/">ame.yl3.lv</a></p>
       <h2>Kas Jauns</h2>
+      <p>2020-05-14 Izveidota PWA applikācijas konfigurācija, pievienota ikona.</p>
       <p>2020-05-13 Pabeigti MK noteikumi 2. pielikums. Izlabots IARU tabulas krāsas 40m. Atvērta kartiņa aizveras pārslēdzot privilēģijas.</p>
       <p>2020-05-12 Uzlabots izskats. Pabeigtas visu HF joslu IARU un MK noteikumu tabulas.</p>
       <p>2020-05-08 Izlabota drukas kļūda bandplan tabulā.</p>
