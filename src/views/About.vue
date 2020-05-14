@@ -1,7 +1,7 @@
 <template>
   <div class="card card--topmargin">
     <div class="card-content">
-      <h1>Ham bandplan reference</h1>
+      <h1><img src="/img/icons/android-chrome-192x192.png" width="64" height="64">Ham bandplan reference</h1>
       <p>Programma ir izstrādes stadijā un dati var būt kļūdaini.</p>
       <p>Dati ņemti no:</p>
       <ul>
