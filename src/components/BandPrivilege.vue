@@ -19,8 +19,8 @@
         :width="(slice.to - slice.from) / bandwidth * width"
         :class="slice.mode"
       />
-      <text v-if="slice.mode != 'block'" class="bandmode" :class="slice.mode" :y="slice.show == 'bottom' ? 19 : 13" :x="(slice.from -  from) / bandwidth * width + 1.250">
-      {{ slice.mode.toUpperCase() }}
+      <text v-if="slice.text" class="bandmode" :class="slice.mode" :y="slice.show == 'bottom' ? 19 : 13" :x="(slice.from -  from) / bandwidth * width + 1.250">
+      {{ slice.text.toUpperCase() }}
       </text>
       <line
         :y1="slice.show == 'bottom' ? 14 : 8"
@@ -115,25 +115,20 @@ export default {
 .bandprivilege .slice text {
   fill: #222
 }
-.bandprivilege .cw { fill: #fff9c4; }
-.bandprivilege .digi { fill: #ffe0b2; }
-.bandprivilege .lsb { fill: #b3e5fc; }
-.bandprivilege .usb { fill: #b3e5fc; }
-.bandprivilege .all { fill: #b3e5fc; }
-.bandprivilege .fm { fill: #c5e1a5; }
-.bandprivilege .sat { fill: #c5e1a5; }
-.bandprivilege .in { fill: #c5e1a5; }
-.bandprivilege .out { fill: #c5e1a5; }
-.bandprivilege .grey { fill: #eeeeee; }
-.bandprivilege .block { fill: #ef5350; }
 .bandprivilege .bandmode { font-size: 6px; font-weight: bold; }
-.bandprivilege .bandmode.cw { fill: #fdd835 }
-.bandprivilege .bandmode.digi { fill: #ffa726 }
-.bandprivilege .bandmode.lsb { fill: #039be5 }
-.bandprivilege .bandmode.usb { fill: #039be5 }
-.bandprivilege .bandmode.all { fill: #039be5 }
-.bandprivilege .bandmode.fm { fill: #7cb342}
-.bandprivilege .bandmode.sat { fill: #7cb342}
-.bandprivilege .bandmode.in { fill: #7cb342}
-.bandprivilege .bandmode.out { fill: #7cb342}
+.bandprivilege .yellow { fill: #fff9c4; }
+.bandprivilege .bandmode.yellow { fill: #fbc02d; }
+.bandprivilege .orange { fill: #ffe0b2; }
+.bandprivilege .bandmode.orange { fill: #ffa726; }
+.bandprivilege .blue { fill: #b3e5fc; }
+.bandprivilege .bandmode.blue { fill: #29b6f6; }
+.bandprivilege .red { fill: #ef5350; }
+.bandprivilege .bandmode.red { fill: #d32f2f; }
+.bandprivilege .green { fill: #c5e1a5; }
+.bandprivilege .bandmode.green { fill: #8bc34a; }
+.bandprivilege .purple { fill: #e1bee7; }
+.bandprivilege .bandmode.purple { fill: #ab47bc; }
+.bandprivilege .grey { fill: #eeeeee; }
+.bandprivilege .bandmode.grey { fill: #9e9e9e; }
+
 </style>

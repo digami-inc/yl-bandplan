@@ -1,7 +1,6 @@
 <template>
     <div class="card-content card-content--nobottom" @click="clicked">
-      <h2 v-if="clickable">{{ band.name }}</h2>
-      <h1 v-else>{{ band.name }}</h1>
+      <h2>{{ band.name }}</h2>
       <BandPrivilege
         v-for="privilege in visiblePrivileges"
         :key="privilege.name"
@@ -22,11 +21,7 @@ export default {
   name: 'home',
   components: { BandPrivilege },
   props: {
-    'band': Object,
-    'clickable': {
-      type: Boolean,
-      default: true
-    }
+    'band': Object
   },
   methods: {
     clicked () {

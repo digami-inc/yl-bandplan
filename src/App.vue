@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div class="topbar">
-      <router-link to="/">Bands</router-link> |
-      <router-link to="/about">About</router-link>
-      Privileges
+      <router-link to="/">Joslas</router-link> |
+      <router-link to="/about">Par</router-link> |
+      Privilēģijas:
       <div class="toolbar">
       <span
         @click="$store.commit('activatePrivilege', null)"

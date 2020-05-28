@@ -5,7 +5,7 @@
       <Band :band="band" :clickable="false" />
 
       <div class="card-content" :class="{'card-content--nobottom': !band.iaruNotes}">
-        <h2>IARU {{ band.name }} bandplan</h2>
+        <h2>IARU {{ band.name }} joslas plāns</h2>
         <div class="table-container">
           <div class="table-row header">
             <div>{{ band.iaruUnits }}</div>
@@ -26,7 +26,7 @@
       </div>
 
       <div class="card-content" v-if="band.bookmarks">
-        <h2>Bookmarks</h2>
+        <h2>Grāmatzīmes</h2>
         <table>
           <tr>
             <th>{{ band.units }}</th>

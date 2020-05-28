@@ -10,7 +10,7 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 135.7, to: 137.8, mode: 'cw' }
+          { from: 135.7, to: 137.8, text: 'cw', mode: 'yellow' }
         ]
       }
     ],
@@ -39,8 +39,8 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 472, to: 479, mode: 'cw' },
-          { from: 475, to: 479, mode: 'digi', show: 'bottom', startText: 1 }
+          { from: 472, to: 479, text: 'cw', mode: 'yellow' },
+          { from: 475, to: 479, text: 'digi', mode: 'orange', show: 'bottom', startText: 1 }
         ]
       }
     ],
@@ -74,9 +74,9 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 1810, to: 1838, mode: 'cw', endText: -1 },
-          { from: 1838, to: 1840, mode: 'digi' },
-          { from: 1840, to: 2000, mode: 'lsb', startText: 1 }
+          { from: 1810, to: 1840, text: 'cw', mode: 'yellow' },
+          { from: 1840, to: 2000, text: 'all, lsb', mode: 'blue', startText: 2 },
+          { from: 1838, to: 1843, text: 'digi', show: 'bottom', startText: -1, endText: 1, mode: 'orange' }
         ]
       }
     ],
@@ -102,7 +102,7 @@ export default [
       { from: 1843, to: 2000, bw: 2700, mode: 'blue', desc: 'All modes' }
     ],
     bookmarks: [
-      { pos: 1836, name: 'CW QRP centre of activity' }
+      { pos: 1836, name: 'CW QRP aktivitāšu centrs' }
     ]
   },
   {
@@ -116,18 +116,18 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 3500, to: 3570, mode: 'cw', endText: -1 },
-          { from: 3570, to: 3600, mode: 'digi' },
-          { from: 3600, to: 3800, mode: 'lsb', startText: 1 }
+          { from: 3500, to: 3570, text: 'cw', mode: 'yellow', endText: -1 },
+          { from: 3570, to: 3620, text: 'digi', mode: 'orange' },
+          { from: 3620, to: 3800, text: 'all, lsb', mode: 'blue', startText: 1 }
         ]
       },
       {
         name: 'B',
         classes: ['B'],
         slices: [
-          { from: 3510, to: 3570, mode: 'cw', startText: 1, endText: -2 },
-          { from: 3570, to: 3600, mode: 'digi' },
-          { from: 3600, to: 3750, mode: 'lsb', startText: 1, endText: -1 }
+          { from: 3510, to: 3570, text: 'cw', mode: 'yellow', startText: 1, endText: -2 },
+          { from: 3570, to: 3620, text: 'digi', mode: 'orange' },
+          { from: 3620, to: 3750, text: 'all, lsb', mode: 'blue', startText: 1, endText: -1 }
         ]
       }
     ],
@@ -150,13 +150,14 @@ export default [
       { from: 3775, to: 3800, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred, priority for intercontinental operation' }
     ],
     bookmarks: [
-      { pos: 3555, name: 'QRS centre of activity' },
-      { pos: 3560, name: 'QRP centre of activity' },
+      { pos: 3555, name: 'CW QRS aktivitāšu centrs' },
+      { pos: 3560, name: 'CW QRP aktivitāšu centrs' },
       { pos: 3573, name: 'FT8' },
-      { pos: 3630, name: 'Digital Voice Centre of Activity' },
-      { pos: 3690, name: 'SSB QRP centre of activity' },
-      { pos: 3735, name: 'Image centre of activity' },
-      { pos: 3760, name: 'Region 1 emergency centre of activity' }
+      { pos: 3630, name: 'Digitālās balss aktivitāšu centrs' },
+      { pos: 3677, name: 'YL Apaļais galds (sestdienu rītos 9:00 pēc Latvijas laika)' },
+      { pos: 3690, name: 'SSB QRP aktivitāšu centrs' },
+      { pos: 3735, name: 'Attēlu aktivitāšu centrs' },
+      { pos: 3760, name: 'Region 1 emergency aktivitāšu centrs' }
     ]
   },
   {
@@ -170,9 +171,9 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 5351.5, to: 5354, mode: 'cw', startText: 2 },
-          { from: 5354, to: 5366, mode: 'usb', startText: 1 },
-          { from: 5366, to: 5366.5, mode: 'digi', startText: -1 }
+          { from: 5351.5, to: 5354, text: 'cw', mode: 'yellow', startText: 2 },
+          { from: 5354, to: 5366, text: 'all, usb', mode: 'blue', startText: 1 },
+          { from: 5366, to: 5366.5, text: 'digi', mode: 'yellow', startText: -1 }
         ]
       }
     ],
@@ -188,7 +189,7 @@ export default [
     iaruUnits: 'kHz',
     iaru: [
       { from: 5351.5, to: 5354, bw: 200, mode: 'yellow', desc: 'CW, Narrow band modes' },
-      { from: 5354, to: 5366, bw: 2700, mode: 'blue', desc: 'USB recommended for voice operation' },
+      { from: 5354, to: 5366, bw: 2700, mode: 'blue', desc: 'All modes, USB recommended for voice operation' },
       { from: 5366, to: 5366.5, bw: 20, mode: 'yellow', desc: 'Weak signal narrow band modes' }
     ]
   },
@@ -203,16 +204,16 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 7000, to: 7040, mode: 'cw', endText: -1 },
-          { from: 7040, to: 7060, mode: 'digi' },
-          { from: 7060, to: 7200, mode: 'lsb', startText: 1, endText: -1 }
+          { from: 7000, to: 7040, text: 'cw', mode: 'yellow', endText: -1 },
+          { from: 7040, to: 7060, text: 'digi', mode: 'orange' },
+          { from: 7060, to: 7200, text: 'all, lsb', mode: 'blue', startText: 1, endText: -1 }
         ]
       },
       {
         name: 'B',
         classes: ['B'],
         slices: [
-          { from: 7010, to: 7040, bw: 200, mode: 'cw', startText: 1, endText: 1 }
+          { from: 7010, to: 7040, bw: 200, text: 'cw', mode: 'yellow', startText: 1, endText: 1 }
         ]
       }
     ],
@@ -233,12 +234,12 @@ export default [
       { from: 7175, to: 7200, bw: 2700, mode: 'blue', desc: 'All modes, SSB contest preferred, priority for intercontinental activity' }
     ],
     bookmarks: [
-      { pos: 7030, name: 'CW QRP centre of activity' },
-      { pos: 7070, name: 'Digital voice centre of activity' },
-      { pos: 7074, name: 'FT8' },
-      { pos: 7090, name: 'SSB QRP centre of activity' },
-      { pos: 7110, name: 'Region 1 Emergency centre of activity' },
-      { pos: 7165, name: 'Image centre of activity' }
+      { pos: 7030, name: 'CW QRP aktivitāšu centrs' },
+      { pos: 7047.5, name: 'FT8' },
+      { pos: 7070, name: 'Digitālās balss aktivitāšu centrs' },
+      { pos: 7090, name: 'SSB QRP aktivitāšu centrs' },
+      { pos: 7110, name: 'Region 1 Emergency aktivitāšu centrs' },
+      { pos: 7165, name: 'Attēlu aktivitāšu centrs' }
     ]
   },
   {
@@ -252,8 +253,8 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 10100, to: 10130, mode: 'cw', endText: -1 },
-          { from: 10130, to: 10150, mode: 'digi' }
+          { from: 10100, to: 10130, text: 'cw', mode: 'yellow', endText: -1 },
+          { from: 10130, to: 10150, text: 'digi', mode: 'orange' }
         ]
       }
     ],
@@ -272,7 +273,8 @@ export default [
       { from: 10130, to: 10150, bw: 500, mode: 'orange', desc: 'Narrow band modes - digimodes' }
     ],
     bookmarks: [
-      { pos: 10116, name: 'CW QRP centre of activity' }
+      { pos: 10116, name: 'CW QRP aktivitāšu centrs' },
+      { pos: 10140, name: 'FT8' }
     ]
   },
   {
@@ -286,10 +288,10 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 14000, to: 14070, mode: 'cw', endText: -1 },
-          { from: 14070, to: 14112, mode: 'digi' },
-          { from: 14099, to: 14101, mode: 'block' },
-          { from: 14112, to: 14350, bw: 2700, mode: 'usb', startText: 1 }
+          { from: 14000, to: 14070, text: 'cw', mode: 'yellow', endText: -1 },
+          { from: 14070, to: 14112, text: 'digi', mode: 'orange' },
+          { from: 14099, to: 14101, mode: 'red' },
+          { from: 14112, to: 14350, bw: 2700, text: 'all, usb', mode: 'blue', startText: 1 }
         ]
       }
     ],
@@ -322,12 +324,13 @@ export default [
       { from: 14300, to: 14350, bw: 2700, mode: 'blue', desc: 'All modes', note: '* Highest dial setting for USB voice mode: 14347' }
     ],
     bookmarks: [
-      { pos: 14055, name: 'QRS centre of activity' },
-      { pos: 14060, name: 'CW QRP centre of activity' },
-      { pos: 14130, name: 'Digital voice centre of activity' },
-      { pos: 14230, name: 'Image centre of activity' },
-      { pos: 14285, name: 'SSB QRP centre of activity' },
-      { pos: 14300, name: 'Global emergency centre of activity' }
+      { pos: 14055, name: 'CW QRS aktivitāšu centrs' },
+      { pos: 14060, name: 'CW QRP aktivitāšu centrs' },
+      { pos: 14080, name: 'FT8' },
+      { pos: 14130, name: 'Digitālās balss aktivitāšu centrs' },
+      { pos: 14230, name: 'Attēlu aktivitāšu centrs' },
+      { pos: 14285, name: 'SSB QRP aktivitāšu centrs' },
+      { pos: 14300, name: 'Global emergency aktivitāšu centrs' }
     ]
   },
   {
@@ -341,10 +344,10 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 18068, to: 18095, mode: 'cw', endText: -1 },
-          { from: 18095, to: 18120, mode: 'digi' },
-          { from: 18109, to: 18111, mode: 'block' },
-          { from: 18120, to: 18168, bw: 2700, mode: 'usb', startText: 1 }
+          { from: 18068, to: 18095, text: 'cw', mode: 'yellow', endText: -1 },
+          { from: 18095, to: 18120, text: 'digi', mode: 'orange' },
+          { from: 18109, to: 18111, mode: 'red' },
+          { from: 18120, to: 18168, bw: 2700, text: 'all, usb', mode: 'blue', startText: 1 }
         ]
       }
     ],
@@ -364,6 +367,13 @@ export default [
       { from: 18109, to: 18111, bw: 0, mode: 'red', desc: 'International beacon project - beacons exclusively' },
       { from: 18111, to: 18120, bw: 2700, mode: 'blue', desc: 'All modes - digimodes, automatically controlled data stations (unattended)' },
       { from: 18120, to: 18168, bw: 2700, mode: 'blue', desc: 'All modes', note: '* Highest dial setting for USB voice mode: 18165' }
+    ],
+    bookmarks: [
+      { pos: 18086, name: 'CW QRP aktivitāšu centrs' },
+      { pos: 18104, name: 'FT8' },
+      { pos: 18130, name: 'SSB QRP aktivitāšu centrs' },
+      { pos: 18150, name: 'Digitālās balss aktivitāšu centrs' },
+      { pos: 18160, name: 'Emergency aktivitāšu centrs' }
     ]
   },
   {
@@ -377,10 +387,10 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 21000, to: 21070, mode: 'cw', endText: -1 },
-          { from: 21070, to: 21151, mode: 'digi' },
-          { from: 21149, to: 21151, mode: 'block' },
-          { from: 21151, to: 21450, mode: 'usb', startText: 1 }
+          { from: 21000, to: 21070, text: 'cw', mode: 'yellow', endText: -1 },
+          { from: 21070, to: 21151, text: 'digi', mode: 'orange' },
+          { from: 21149, to: 21151, mode: 'red' },
+          { from: 21151, to: 21450, text: 'all, usb', mode: 'blue', startText: 1 }
         ]
       }
     ],
@@ -397,6 +407,15 @@ export default [
       { from: 21120, to: 21149, bw: 500, mode: 'orange', desc: 'Narrow band modes' },
       { from: 21149, to: 21151, bw: 0, mode: 'red', desc: 'International beacon project - beacons exclusively' },
       { from: 21151, to: 21450, bw: 2700, mode: 'blue', desc: 'All modes', note: '* Highest dial setting for USB voice mode: 21447' }
+    ],
+    bookmarks: [
+      { pos: 21055, name: 'CW QRS aktivitāšu centrs' },
+      { pos: 21060, name: 'CW QRP aktivitāšu centrs' },
+      { pos: 21140, name: 'FT8' },
+      { pos: 21180, name: 'Digitālās balss aktivitāšu centrs' },
+      { pos: 21285, name: 'SSB QRP aktivitāšu centrs' },
+      { pos: 21340, name: 'Attēlu aktivitāšu centrs' },
+      { pos: 21360, name: 'Global emergency aktivitāšu centrs' }
     ]
   },
   {
@@ -410,10 +429,10 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 24890, to: 24915, mode: 'cw', endText: -1 },
-          { from: 24915, to: 24940, mode: 'digi' },
-          { from: 24929, to: 24931, mode: 'block' },
-          { from: 24940, to: 24990, mode: 'usb', startText: -1 }
+          { from: 24890, to: 24915, text: 'cw', mode: 'yellow', endText: -1 },
+          { from: 24915, to: 24940, text: 'digi', mode: 'orange' },
+          { from: 24929, to: 24931, mode: 'red' },
+          { from: 24940, to: 24990, text: 'all, usb', mode: 'blue', startText: -1 }
         ]
       }
     ],
@@ -428,6 +447,12 @@ export default [
       { from: 24929, to: 24931, bw: 0, mode: 'red', desc: 'International beacon project - beacons exclusively' },
       { from: 24931, to: 24940, bw: 2700, mode: 'blue', desc: 'All modes - digimodes, automatically controlled data stations (unattended)' },
       { from: 24940, to: 24990, bw: 2700, mode: 'blue', desc: 'All modes', note: '* Highest dial setting for USB voice mode: 24987' }
+    ],
+    bookmarks: [
+      { pos: 24906, name: 'CW QRP aktivitāšu centrs' },
+      { pos: 24919, name: 'FT8' },
+      { pos: 24950, name: 'SSB QRP aktivitāšu centrs' },
+      { pos: 24960, name: 'Digitālās balss aktivitāšu centrs' }
     ]
   },
   {
@@ -441,12 +466,13 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 28.000, to: 28.070, mode: 'cw', endText: 2 },
-          { from: 28.070, to: 28.320, mode: 'digi' },
-          { from: 28.190, to: 28.225, mode: 'block' },
-          { from: 28.225, to: 29.100, mode: 'usb', startText: 1, endText: -1 },
-          { from: 29.100, to: 29.700, mode: 'fm' },
-          { from: 29.510, to: 29.520, mode: 'block' }
+          { from: 28.000, to: 28.070, text: 'cw', mode: 'yellow', endText: 2 },
+          { from: 28.070, to: 28.320, text: 'digi', mode: 'orange' },
+          { from: 28.190, to: 28.225, mode: 'red' },
+          { from: 28.320, to: 29.100, text: 'all, usb', mode: 'blue', startText: 1 },
+          { from: 29.000, to: 29.100, mode: 'green' },
+          { from: 29.100, to: 29.700, text: 'all, fm', mode: 'green', startText: -1 },
+          { from: 29.300, to: 29.520, mode: 'red', startText: 1, endText: 1 }
         ]
       }
     ],
@@ -475,6 +501,15 @@ export default [
       { from: 29590, to: 29610, bw: 6000, mode: 'green', desc: 'All modes - FM calling channel' },
       { from: 29610, to: 29620, bw: 6000, mode: 'green', desc: 'All modes - FM simplex-repeater (parrot, input+output)' },
       { from: 29620, to: 29700, bw: 6000, mode: 'green', desc: 'All modes - FM repeater output (RH1-RH8)' }
+    ],
+    bookmarks: [
+      { pos: 28055, name: 'CW QRS aktivitāšu centrs' },
+      { pos: 28060, name: 'CW QRP aktivitāšu centrs' },
+      { pos: 28180, name: 'FT8' },
+      { pos: 28330, name: 'Digitālās balss aktivitāšu centrs' },
+      { pos: 28360, name: 'SSB QRP aktivitāšu centrs' },
+      { pos: 28680, name: 'Attēlu aktivitāšu centrs' },
+      { pos: 29600, name: 'FM CQ kanāls' }
     ]
   },
   {
@@ -488,9 +523,11 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 50, to: 50.4, mode: 'cw', endText: 1 },
-          { from: 50.1, to: 50.3, show: 'bottom', mode: 'usb', startText: 1, endText: 2 },
-          { from: 51.210, to: 51.590, mode: 'fm', startText: -1, endText: -1 }
+          { from: 50, to: 50.03, mode: 'red' },
+          { from: 50.03, to: 50.3, text: 'cw', mode: 'yellow', startText: 2 },
+          { from: 50.1, to: 50.3, show: 'bottom', text: 'usb', mode: 'blue', startText: 1 },
+          { from: 50.3, to: 50.5, text: 'digi', mode: 'orange', startText: 2 },
+          { from: 50.5, to: 52, text: 'all', mode: 'green', startText: 1 }
         ]
       }
     ],
@@ -498,14 +535,16 @@ export default [
       { 'class': 'A', 'band': '50-52 MHz', 'cat': 'sek', 'pwr': 'pX ≤ 800 W' },
       { 'class': 'B', 'band': '50-52 MHz', 'cat': 'sek', 'pwr': 'pX ≤ 100 W' }
     ],
-    iaruUnits: 'MHz',
+    iaruUnits: 'KHz',
     iaru: [
-      { from: 50, to: 50.1, bw: 500, mode: 'yellow', desc: '' },
-      { from: 50.1, to: 50.2, bw: 2700, mode: 'blue', desc: '' },
-      { from: 50.2, to: 50.3, bw: 2700, mode: 'blue', desc: '' },
-      { from: 50.3, to: 50.4, bw: 2700, mode: 'blue', desc: '' },
-      { from: 50.4, to: 50.5, bw: 1000, mode: 'orange', desc: '' },
-      { from: 50.5, to: 52.0, bw: 12000, mode: 'green', desc: '' }
+      { from: 50000, to: 50030, bw: 0, mode: 'red', desc: 'Coordinated Beacon Project', note: '000 - 010 Region 1, 010-020 Region 2, 020-030 Region 3' },
+      { from: 50030, to: 50100, bw: 500, mode: 'yellow', desc: 'Telegraphy' },
+      { from: 50100, to: 50130, bw: 2700, mode: 'blue', desc: 'SSB & Telegraphy, Intercontinental' },
+      { from: 50130, to: 50200, bw: 2700, mode: 'blue', desc: 'SSB & Telegraphy, International' },
+      { from: 50200, to: 50300, bw: 2700, mode: 'blue', desc: 'SSB & Telegraphy' },
+      { from: 50300, to: 50400, bw: 2700, mode: 'blue', desc: 'Narrow band modes, MGM' },
+      { from: 50400, to: 50500, bw: 1000, mode: 'orange', desc: 'MGM & Telegraphy', note: 'Beacons exclusive (50.401 MHz +/- 500Hz WSPR Beacons' },
+      { from: 50500, to: 52000, bw: 12000, mode: 'green', desc: 'All mode' }
     ]
   },
   {
@@ -519,23 +558,23 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 70.000, to: 70.090, mode: 'cw', endText: -1 },
-          { from: 70.100, to: 70.250, mode: 'cw', startText: 1, endText: -1 },
-          { from: 70.100, to: 70.250, show: 'bottom', mode: 'usb', startText: 1, endText: -1 },
-          { from: 70.294, to: 70.500, mode: 'fm', startText: 1 }
+          { from: 70.000, to: 70.250, text: 'cw', mode: 'yellow', endText: -1 },
+          { from: 70.100, to: 70.250, show: 'bottom', text: 'usb', mode: 'blue', startText: 1 },
+          { from: 70.250, to: 70.294, text: 'am, fm', mode: 'green', startText: 2 },
+          { from: 70.294, to: 70.500, text: 'fm', mode: 'green', startText: 1 }
         ]
       }
     ],
     rules: [
       { 'class': 'A', 'band': '70-70.5 MHz', 'cat': 'sek', 'pwr': 'pX ≤ 100 W', 'notes': 'Nav atļauts raidīt to Latvijas un kaimiņvalstu robežu virzienā frekvenču joslās, kas kaimiņvalstīs nav piešķirtas amatieru dienestam' }
     ],
-    iaruUnits: 'MHz',
+    iaruUnits: 'KHz',
     iaru: [
-      { from: 70.000, to: 70.090, bw: 500, mode: 'yellow', desc: '' },
-      { from: 70.090, to: 70.100, bw: 500, mode: 'yellow', desc: '' },
-      { from: 70.100, to: 70.250, bw: 2700, mode: 'blue', desc: '' },
-      { from: 70.250, to: 70.249, bw: 12000, mode: 'green', desc: '' },
-      { from: 70.249, to: 70.500, bw: 12000, mode: 'green', desc: '' }
+      { from: 70000, to: 70090, bw: 500, mode: 'yellow', desc: 'MGM & Telegraphy - Coordinated beacons' },
+      { from: 70090, to: 70100, bw: 500, mode: 'yellow', desc: 'MGM & Telegraphy - Temporary and personal beacons', note: '70.091 Personal WSPR beacons' },
+      { from: 70100, to: 70250, bw: 2700, mode: 'blue', desc: 'SSB, Telegraphy, MGM' },
+      { from: 70250, to: 70294, bw: 12000, mode: 'green', desc: 'AM, FM' },
+      { from: 70294, to: 70500, bw: 12000, mode: 'green', desc: 'FM Channels 12.5 KHz spacing' }
     ]
   },
   {
@@ -549,26 +588,29 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 144.000, to: 144.025, mode: 'sat', startText: 0, endText: 0 },
-          { from: 144.025, to: 144.400, mode: 'cw', startText: 2, endText: 0 },
-          { from: 144.150, to: 144.400, show: 'bottom', mode: 'usb', startText: 1, endText: 0 },
-          { from: 144.400, to: 144.500, mode: 'digi', startText: 2, endText: 0 },
-          { from: 144.500, to: 144.794, mode: 'all', startText: 1, endText: 0 },
-          { from: 144.794, to: 144.975, mode: 'digi', startText: 1, endText: 0 },
-          { from: 144.975, to: 145.806, mode: 'fm', startText: 0, endText: 0 },
-          { from: 144.975, to: 145.206, show: 'bottom', mode: 'in', startText: 0, endText: 2 },
-          { from: 145.5625, to: 145.793, show: 'bottom', mode: 'out', startText: 1, endText: 0 },
-          { from: 145.806, to: 146.000, mode: 'sat', startText: 0, endText: 0 }
+          { from: 144.000, to: 144.025, mode: 'red', startText: 0, endText: 0 },
+          { from: 144.025, to: 144.400, text: 'cw', mode: 'yellow', startText: 2, endText: 0 },
+          { from: 144.150, to: 144.400, show: 'bottom', text: 'usb', mode: 'blue', startText: 1, endText: 0 },
+          { from: 144.400, to: 144.500, mode: 'red', startText: 2, endText: 0 },
+          { from: 144.500, to: 144.794, text: 'all', mode: 'purple', startText: 0, endText: 0 },
+          { from: 144.794, to: 144.975, text: 'digi', mode: 'orange', startText: 0, endText: 0 },
+          { from: 144.975, to: 145.806, text: 'fm', mode: 'green', startText: 0, endText: 0 },
+          { from: 144.975, to: 145.206, show: 'bottom', text: 'in', mode: 'green', startText: 0, endText: 2 },
+          { from: 145.5625, to: 145.793, show: 'bottom', text: 'out', mode: 'green', startText: 1, endText: 0 },
+          { from: 145.806, to: 146.000, text: 'sat', mode: 'red', startText: 0, endText: 0 }
         ]
       },
       {
         name: 'C',
         classes: ['C'],
         slices: [
-          { from: 144.975, to: 145.806, mode: 'fm', startText: -1, endText: 0 },
-          { from: 144.975, to: 145.206, show: 'bottom', mode: 'in', startText: 0, endText: 2 },
-          { from: 145.5625, to: 145.793, show: 'bottom', mode: 'out', startText: 1, endText: 0 },
-          { from: 145.806, to: 146.000, mode: 'sat', startText: 0, endText: 0 }
+          { from: 144.000, to: 144.025, mode: 'red', startText: 0, endText: 0 },
+          { from: 144.400, to: 144.500, mode: 'red', startText: 0, endText: 0 },
+          { from: 144.500, to: 144.794, text: 'fm', mode: 'green', startText: -1, endText: -2 },
+          { from: 144.975, to: 145.806, text: 'fm', mode: 'green', startText: 0, endText: 0 },
+          { from: 144.975, to: 145.206, show: 'bottom', text: 'in', mode: 'green', startText: 0, endText: 2 },
+          { from: 145.5625, to: 145.793, show: 'bottom', text: 'out', mode: 'green', startText: 1, endText: 0 },
+          { from: 145.806, to: 146.000, text: 'fm', mode: 'red', startText: 0, endText: 0 }
         ]
       }
     ],
@@ -580,12 +622,12 @@ export default [
     ],
     iaruUnits: 'MHz',
     iaru: [
-      { from: 144, to: 144.025, bw: 2700, mode: 'blue', desc: 'All mode, Satelite (downlink only)' },
-      { from: 144.025, to: 144.100, bw: 500, mode: 'orange', desc: 'Telegraphy (EME)' },
-      { from: 144.100, to: 144.150, bw: 500, mode: 'orange', desc: 'Telegraphy & MGM' },
-      { from: 144.150, to: 144.400, bw: 2700, mode: 'blue', desc: 'Telegraphy, MGM & SSB' },
-      { from: 144.400, to: 144.490, bw: 500, mode: 'orange', desc: 'Telegrapy & MGM, Beacons only' },
-      { from: 144.491, to: 144.493, bw: 500, mode: 'orange', desc: 'Experimental MGM' },
+      { from: 144, to: 144.025, bw: 2700, mode: 'red', desc: 'All mode, Satelite downlink only' },
+      { from: 144.025, to: 144.100, bw: 500, mode: 'orange', desc: 'Telegraphy' },
+      { from: 144.100, to: 144.150, bw: 500, mode: 'orange', desc: 'MGM & Telegraphy' },
+      { from: 144.150, to: 144.400, bw: 2700, mode: 'blue', desc: 'SSB, Telegraphy, MGM' },
+      { from: 144.400, to: 144.490, bw: 500, mode: 'red', desc: 'Telegrapy & MGM, Beacons only' },
+      { from: 144.491, to: 144.493, bw: 500, mode: 'red', desc: 'Experimental MGM' },
       { from: 144.500, to: 144.794, bw: 20000, mode: 'purple', desc: 'All Mode' },
       { from: 144.794, to: 144.9625, bw: 12000, mode: 'green', desc: 'MGM, Digital communication' },
       { from: 144.975, to: 145.194, bw: 12000, mode: 'green', desc: 'FM / DIgital Voice, Repeater input exclusive' },
@@ -594,6 +636,9 @@ export default [
       { from: 145.575, to: 145.7935, bw: 12000, mode: 'green', desc: 'FM / Digital Voice, Repeater output exclusive' },
       { from: 145.794, to: 145.806, bw: 12000, mode: 'green', desc: 'FM / DIgital Voice, Space communication' },
       { from: 145.806, to: 146, bw: 12000, mode: 'green', desc: 'All Mode, Satellite exclusive' }
+    ],
+    bookmarks: [
+      { pos: 145.500, name: 'FM CQ kanāls' }
     ]
   },
   {
@@ -607,16 +652,27 @@ export default [
         name: 'A, B',
         classes: ['A', 'B'],
         slices: [
-          { from: 432.000, to: 432.400, mode: 'cw', startText: -1, endText: 0 },
-          { from: 432.100, to: 432.400, mode: 'usb', show: 'bottom', startText: -2, endText: 1 },
-          { from: 434.594, to: 434.981, mode: 'fm', startText: 2, endText: 1 }
+          { from: 430.000, to: 431.975, text: 'all', mode: 'purple' },
+          { from: 431.975, to: 432.400, text: 'cw', mode: 'yellow', startText: -1, endText: 0 },
+          { from: 432.100, to: 432.400, text: 'usb', mode: 'blue', show: 'bottom', startText: -2, endText: 1 },
+          { from: 432.400, to: 432.500, mode: 'red', startText: 0, endText: 0 },
+          { from: 432.500, to: 435.000, text: 'all', mode: 'green' },
+          { from: 433.000, to: 433.400, text: 'rep', show: 'bottom', mode: 'green', startText: 0 },
+          { from: 433.400, to: 433.600, text: 'fm', show: 'bottom', mode: 'green', startText: 0, endText: 0 },
+          { from: 435.000, to: 438.000, text: 'sat', mode: 'purple', startText: 0, endText: 0 },
+          { from: 438.000, to: 440.000, text: 'all', mode: 'purple', startText: 0, endText: 0 }
         ]
       },
       {
         name: 'C',
         classes: ['C'],
         slices: [
-          { from: 434.594, to: 434.981, mode: 'fm', startText: -1, endText: 1 }
+          { from: 430.000, to: 431.975, text: 'fm', mode: 'green', endText: 0 },
+          { from: 432.400, to: 432.500, mode: 'red', startText: 0, endText: 0 },
+          { from: 432.500, to: 435.000, text: 'fm', mode: 'green', endText: 0 },
+          { from: 433.000, to: 433.400, text: 'rep', show: 'bottom', mode: 'green', startText: 0 },
+          { from: 433.400, to: 433.600, text: 'fm', show: 'bottom', mode: 'green', startText: 2, endText: 1 },
+          { from: 438.000, to: 440.000, text: 'fm', mode: 'green', startText: 0, endText: 0 }
         ]
       }
     ],
@@ -628,19 +684,22 @@ export default [
     ],
     iaruUnits: 'MHz',
     iaru: [
-      { from: 430, to: 431.975, bw: 20000, mode: 'purple', desc: '' },
-      { from: 431.975, to: 432.100, bw: 500, mode: 'orange', desc: '' },
-      { from: 432.100, to: 432.400, bw: 2700, mode: 'blue', desc: '' },
-      { from: 432.400, to: 432.490, bw: 500, mode: 'orange', desc: '' },
-      { from: 432.491, to: 432.493, bw: 500, mode: 'orange', desc: '' },
-      { from: 432.500, to: 432.975, bw: 12000, mode: 'green', desc: '' },
-      { from: 433.000, to: 433.375, bw: 12000, mode: 'green', desc: '' },
-      { from: 433.400, to: 433.575, bw: 12000, mode: 'green', desc: '' },
-      { from: 433.600, to: 434.000, bw: 20000, mode: 'purple', desc: '' },
-      { from: 434.000, to: 434.594, bw: 12000, mode: 'green', desc: '' },
-      { from: 434.594, to: 434.981, bw: 12000, mode: 'green', desc: '' },
-      { from: 435.000, to: 438.000, bw: 20000, mode: 'purple', desc: '' },
-      { from: 438.000, to: 440.000, bw: 20000, mode: 'purple', desc: '' }
+      { from: 430, to: 431.975, bw: 20000, mode: 'purple', desc: 'All mode' },
+      { from: 431.975, to: 432.100, bw: 500, mode: 'orange', desc: 'MGM & Telegraphy' },
+      { from: 432.100, to: 432.400, bw: 2700, mode: 'blue', desc: 'MGM, Telegraphy & SSB' },
+      { from: 432.400, to: 432.490, bw: 500, mode: 'red', desc: 'MGM & Telegraphy, beacons exclusive' },
+      { from: 432.491, to: 432.493, bw: 500, mode: 'red', desc: 'Experimental MGM' },
+      { from: 432.500, to: 432.975, bw: 12000, mode: 'green', desc: 'All mode' },
+      { from: 433.000, to: 433.375, bw: 12000, mode: 'green', desc: 'FM / Digital voice repeaters' },
+      { from: 433.400, to: 433.575, bw: 12000, mode: 'green', desc: 'FM / Digital voice' },
+      { from: 433.600, to: 434.000, bw: 20000, mode: 'purple', desc: 'All mode' },
+      { from: 434.000, to: 434.594, bw: 12000, mode: 'green', desc: 'All mode, ATV' },
+      { from: 434.594, to: 434.981, bw: 12000, mode: 'green', desc: 'All mode' },
+      { from: 435.000, to: 438.000, bw: 20000, mode: 'purple', desc: 'Satellite service & ATV' },
+      { from: 438.000, to: 440.000, bw: 20000, mode: 'purple', desc: 'All mode' }
+    ],
+    bookmarks: [
+      { pos: 433.500, name: 'FM CQ kanāls' }
     ]
   }
 ]
