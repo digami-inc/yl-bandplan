@@ -3,6 +3,7 @@
     <div class="card-content">
       <h1><img src="/img/icons/android-chrome-192x192.png" width="64" height="64">Ham bandplan reference</h1>
       <p>Programma ir izstrādes stadijā un dati var būt kļūdaini.</p>
+      <h3>Versija 2020-06-02 <a href="/">🔄</a></h3>
       <p>Dati ņemti no:</p>
       <ul>
           <li><a target="_blank" href="https://www.iaru-r1.org/reference/band-plans/">IARU R1 Band Plans (www.iaru-r1.org)</a></li>
@@ -10,6 +11,9 @@
       </ul>
       <p>Autors: YL3AME Kristaps <a target="_blank" href="https://ame.yl3.lv/">ame.yl3.lv</a></p>
       <h2>Kas Jauns</h2>
+      <p>2022-07-24 Kods publicēts <a target="_blank" href="https://gitea.kecom.lv/enkrs/bandplan.yl2.lv">gitea.kecom.lv</a> un dažas nepublicētās izmaiņas pieliktas.</p>
+      <p>2020-06-02 23cm bands.</p>
+      <p>2020-05-30 Dažādi datu labojumi, paldies komentētājiem soc tīklos.</p>
       <p>2020-05-28 Pievienotas grāmatzīmes Latviešu valodā HF plāniem.</p>
       <p>2020-05-22 Pabeigti VHF un UHF IARU komentāri, nelielas precizitātes vizuālajās kartēs</p>
       <p>2020-05-14 Izveidota PWA applikācijas konfigurācija, pievienota ikona.</p>

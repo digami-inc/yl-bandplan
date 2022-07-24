@@ -10,7 +10,8 @@ export default [
         name: 'A',
         classes: ['A'],
         slices: [
-          { from: 135.7, to: 137.8, text: 'cw', mode: 'yellow' }
+          { from: 135.7, to: 137.8, text: 'cw', mode: 'yellow' },
+          { from: 135.7, to: 137.8, text: 'digi', mode: 'orange', show: 'bottom' }
         ]
       }
     ],
@@ -117,8 +118,9 @@ export default [
         classes: ['A'],
         slices: [
           { from: 3500, to: 3570, text: 'cw', mode: 'yellow', endText: -1 },
-          { from: 3570, to: 3620, text: 'digi', mode: 'orange' },
-          { from: 3620, to: 3800, text: 'all, lsb', mode: 'blue', startText: 1 }
+          { from: 3570, to: 3600, text: 'digi', mode: 'orange' },
+          { from: 3600, to: 3800, text: 'all, lsb', mode: 'blue', startText: 2 },
+          { from: 3600, to: 3620, text: 'digi', show: 'bottom', mode: 'blue', endText: 1 }
         ]
       },
       {
@@ -126,8 +128,9 @@ export default [
         classes: ['B'],
         slices: [
           { from: 3510, to: 3570, text: 'cw', mode: 'yellow', startText: 1, endText: -2 },
-          { from: 3570, to: 3620, text: 'digi', mode: 'orange' },
-          { from: 3620, to: 3750, text: 'all, lsb', mode: 'blue', startText: 1, endText: -1 }
+          { from: 3570, to: 3600, text: 'digi', mode: 'orange' },
+          { from: 3600, to: 3750, text: 'all, lsb', mode: 'blue', startText: 2, endText: 1 },
+          { from: 3600, to: 3620, text: 'digi', show: 'bottom', mode: 'blue', endText: 1 }
         ]
       }
     ],
@@ -700,6 +703,41 @@ export default [
     ],
     bookmarks: [
       { pos: 433.500, name: 'FM CQ kanāls' }
+    ]
+  },
+  {
+    route: '23cm',
+    name: '23 cm',
+    from: 1240,
+    to: 1300,
+    units: 'MHz',
+    privileges: [
+      {
+        name: 'A, B',
+        classes: ['A', 'B'],
+        slices: [
+          { from: 1240.000, to: 1300.000, mode: 'green' }
+        ]
+      }
+    ],
+    rules: [
+      { 'class': 'A', 'band': '1240-1300 MHz', 'cat': 'sek', 'pwr': 'pX ≤ 100 W' },
+      { 'class': 'A', 'band': '1296-1296.400 MHz', 'cat': 'sek', 'pwr': 'pX ≤ 300 W', 'notes': 'EME, MS sakari, darbs starptautiskās sacensībās, darba veidi CW, SSB, MGM' },
+      { 'class': 'B', 'band': '1240-1300 MHz', 'cat': 'sek', 'pwr': 'pX ≤ 10 W' }
+    ],
+    iaruUnits: 'MHz',
+    iaru: [
+      { from: 1240.000, to: 1240.500, bw: 2700, mode: 'red', desc: 'Reserved for the future' },
+      { from: 1240.500, to: 1240.750, bw: 500, mode: 'red', desc: 'MGM & Telegraphy beacons (reserved for the future)' },
+      { from: 1240.750, to: 1241.000, bw: 20000, mode: 'green', desc: 'FM/Digital Voice (reserved for the future)' },
+      { from: 1241.000, to: 1243.250, bw: 20000, mode: 'green', desc: 'All modes' },
+      { from: 1243.250, to: 1260.000, bw: '*', mode: 'green', desc: '(D)ATV' },
+      { from: 1260.000, to: 1270.000, bw: '*', mode: 'green', desc: 'Satellite service' },
+      { from: 1270.000, to: 1272.000, bw: 20000, mode: 'green', desc: 'All modes' },
+      { from: 1272.000, to: 1290.994, bw: '*', mode: 'green', desc: '(D)ATV' },
+      { from: 1290.994, to: 1291.481, bw: 20000, mode: 'green', desc: 'FM/Digital Voice' }
+    ],
+    bookmarks: [
     ]
   }
 ]

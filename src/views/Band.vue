@@ -14,7 +14,7 @@
           </div>
           <div v-for="(slice, id) in band.iaru" :key="id" class="table-row iarucolor" :class="slice.mode">
             <div>{{ slice.from}} - {{ slice.to}} {{band.iaruUnits}}</div>
-            <div class="narrow"><span v-if="slice.bw">{{ slice.bw }} kHz</span><span v-else>-</span></div>
+            <div class="narrow"><span v-if="slice.bw">{{ slice.bw }} Hz</span><span v-else>-</span></div>
             <div class="wide sm">
             {{ slice.desc }} <div v-if="slice.note">{{ slice.note }}</div>
             </div>
