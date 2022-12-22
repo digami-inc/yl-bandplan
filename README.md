@@ -2,28 +2,25 @@
 
 ## Project setup
 ```
-yarn install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn run serve
+NODE_OPTIONS=--openssl-legacy-provider npm run serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
+NODE_OPTIONS=--openssl-legacy-provider npm run build
 ```
 
 ### Lints and fixes files
 ```
-yarn run lint
+NODE_OPTIONS=--openssl-legacy-provider npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Info
+This app was created using [cli.vuejs.org](https://cli.vuejs.org/config/) which is now in maintenance mode.
+
+As shown in examples above, already some workarounds are needed to build it with Node version 18 and above.
