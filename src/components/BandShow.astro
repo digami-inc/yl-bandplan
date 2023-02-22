@@ -1,0 +1,15 @@
+---
+import BandFullInfo from "./BandFullInfo.vue";
+import { bands } from "../bandplan";
+
+export interface Props {
+  band: string;
+  priv: string;
+}
+
+const { band, priv } = Astro.props;
+
+const bandData = bands.find((b) => b.route == band);
+---
+
+{bandData && <BandFullInfo band={bandData} priv={priv} />}

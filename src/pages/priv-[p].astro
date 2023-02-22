@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BandList from "../components/BandList.astro";
+import { privileges } from "../bandplan";
+
+export function getStaticPaths() {
+  return privileges.map((priv) => ({ params: { p: priv.name.toLowerCase() } }));
+}
+
+const { p = "" } = Astro.params;
+---
+
+<Layout priv={p}>
+  <BandList priv={p} />
+</Layout>

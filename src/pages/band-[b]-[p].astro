@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BandShow from "../components/BandShow.astro";
+import { bands, privileges } from "../bandplan";
+
+export function getStaticPaths() {
+  let privs = privileges.map((priv) => priv.route).concat("all");
+
+  return privs.flatMap((priv) =>
+    bands.map((band) => ({ params: { p: priv, b: band.route } }))
+  );
+}
+
+const { p = "", b = "" } = Astro.params;
+---
+
+<Layout priv={p} band={b}>
+  <BandShow band={b} priv={p} />
+</Layout>
