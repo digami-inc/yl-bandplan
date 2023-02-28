@@ -716,7 +716,10 @@ export const bands: Band[] = [
       {
         name: "A, B",
         classes: ["a", "b"],
-        slices: [{ from: "1.240", to: "1.300", mode: "green" }],
+        slices: [
+            { from: "1.240", to: "1.24075", mode: "red" },
+            { from: "1.2405", to: "1.300", mode: "green" }
+        ],
       },
     ],
     rules: [
@@ -749,7 +752,9 @@ export const bands: Band[] = [
         name: "A",
         classes: ["a"],
         slices: [
-          { from: "2.300", to: "2.450", mode: "green" },
+          { from: "2.300", to: "2.320800", mode: "green" },
+          { from: "2.320800", to: "2.321", mode: "red" },
+          { from: "2.321", to: "2.450", mode: "green" },
         ],
       },
     ],
