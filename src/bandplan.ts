@@ -887,4 +887,135 @@ export const bands: Band[] = [
       { from: "24050.000", to: "24250.000", bw: 0, mode: "blue", desc: "All modes", },
     ],
   },
+  {
+    route: "6mm",
+    name: "6 mm",
+    from: "47.000",
+    to: "47.200",
+    units: "GHz",
+    privileges: [
+      {
+        name: "A",
+        classes: ["a"],
+        slices: [
+          { from: "47", to: "47.2", mode: "green" },
+        ],
+      },
+    ],
+    rules: [
+      { class: "A", band: "47-47.2 GHz", cat: "PRIMeks", pwr: "pX ≤ 50 W", },
+    ],
+    iaruUnits: "GHz",
+    iaru: [
+      { from: "47.000", to: "47.088", bw: 0, mode: "blue", desc: "All modes", },
+      { from: "47.088", to: "47.090", bw: 2700, mode: "yellow", desc: "All modes", },
+      { from: "47.090", to: "47.200", bw: 0, mode: "blue", desc: "All modes", },
+    ],
+  },
+  {
+    route: "4mm",
+    name: "4 mm",
+    from: "76.000",
+    to: "81.100",
+    units: "GHz",
+    privileges: [
+      {
+        name: "A",
+        classes: ["a"],
+        slices: [
+          { from: "76", to: "81.1", mode: "green" },
+        ],
+      },
+    ],
+    rules: [
+      { class: "A", band: "76-77.5 GHz", cat: "sek", pwr: "pX ≤ 50 W", },
+      { class: "A", band: "77.5-78 GHz", cat: "PRIM", pwr: "pX ≤ 50 W", },
+      { class: "A", band: "78-81.5 GHz", cat: "sek", pwr: "pX ≤ 50 W", },
+    ],
+    iaruUnits: "GHz",
+    iaru: [
+      { from: "75.500", to: "76.000", bw: 2700, mode: "red", desc: "All modes", note: "YL stacijām šī IARU diapazona daļa nav atļauta / AMATEUR SATELLITE SERVICE (Preferred) " },
+      { from: "76.000", to: "77.500", mode: "blue", desc: "All modes", },
+      { from: "77.500", to: "77.501", bw: 2700, mode: "yellow", desc: "All modes", note: "AMATEUR SATELLITE SERVICE"},
+      { from: "77.501", to: "78.000", mode: "blue", desc: "All modes", note: "preferred segment" },
+      { from: "78.000", to: "81.500", mode: "blue", desc: "All modes", note: "Not preferred segment" },
+    ],
+  },
+  {
+    route: "122G",
+    name: "122 GHz",
+    from: "122.250",
+    to: "123.000",
+    units: "GHz",
+    privileges: [
+      {
+        name: "A",
+        classes: ["a"],
+        slices: [
+          { from: "122.250", to: "123.000", mode: "green" },
+        ],
+      },
+    ],
+    rules: [
+      { class: "A", band: "122.25-123 GHz", cat: "sek", pwr: "pX ≤ 50 W", },
+    ],
+    iaruUnits: "GHz",
+    iaru: [
+      { from: "122.250", to: "122.251", bw: 2700, mode: "yellow", desc: "All modes", note: "Narrow band modes"},
+      { from: "122.251", to: "123.000", mode: "blue", desc: "All modes" },
+    ],
+  },
+  {
+    route: "134G",
+    name: "134 GHz",
+    from: "134",
+    to: "141",
+    units: "GHz",
+    privileges: [
+      {
+        name: "A",
+        classes: ["a"],
+        slices: [
+          { from: "134", to: "141", mode: "green" },
+        ],
+      },
+    ],
+    rules: [
+      { class: "A", band: "134-136 GHz", cat: "PRIM", pwr: "pX ≤ 50 W", },
+      { class: "A", band: "136-141 GHz", cat: "sek", pwr: "pX ≤ 50 W", },
+    ],
+    iaruUnits: "GHz",
+    iaru: [
+      { from: "134.000", to: "134.928", mode: "blue", desc: "All modes", note: "AMATEUR SATELLITE SERVICE" },
+      { from: "134.928", to: "134.930", bw: 2700, mode: "yellow", desc: "All modes", note: "Narrow band modes"},
+      { from: "134.930", to: "136.000", mode: "blue", desc: "All modes" },
+      { from: "136.000", to: "141.000", mode: "blue", desc: "All modes", note: "Not preferred segment" },
+    ],
+  },
+  {
+    route: "241G",
+    name: "241 GHz",
+    from: "241",
+    to: "250",
+    units: "GHz",
+    privileges: [
+      {
+        name: "A",
+        classes: ["a"],
+        slices: [
+          { from: "241", to: "250", mode: "green" },
+        ],
+      },
+    ],
+    rules: [
+      { class: "A", band: "241-248 GHz", cat: "sek", pwr: "pX ≤ 50 W", },
+      { class: "A", band: "248-250 GHz", cat: "PRIM", pwr: "pX ≤ 50 W", },
+    ],
+    iaruUnits: "GHz",
+    iaru: [
+      { from: "241.000", to: "248.000", mode: "blue", desc: "All modes", note: "Not preferred segment" },
+      { from: "248.000", to: "248.100", mode: "blue", desc: "All modes", note: "AMATEUR SATELLITE SERVICE & NARROW BAND MODES" },
+      { from: "248.100", to: "250.000", mode: "blue", desc: "All modes", note: "preferred segment" },
+    ],
+  },
 ];
