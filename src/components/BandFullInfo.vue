@@ -8,8 +8,9 @@ const props = defineProps<{
 }>();
 
 const rules = props.band.rules.filter(
-  (r) => props.priv == "all" || r.class == props.priv
+  (r) => props.priv == "all" || r.class == props.priv.toUpperCase()
 );
+
 </script>
 
 <template>
@@ -113,7 +114,7 @@ const rules = props.band.rules.filter(
       <div class="card-content">
         <h2>{{ band.name }}</h2>
         <p>
-          This band is not available for "{{ priv.toUpperCase() }}" staticons.
+          This band is not available for "{{ priv.name }}" staticons.
           <a href=""> Activate all privileges, to view </a>
         </p>
       </div>

@@ -1904,7 +1904,6 @@ export const bands: Band[] = [
         desc: "FM/Digital Voice",
       },
     ],
-    bookmarks: [],
   },
   {
     route: "13cm",
