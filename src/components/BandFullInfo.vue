@@ -114,60 +114,11 @@ const rules = props.band.rules.filter(
         <h2>{{ band.name }}</h2>
         <p>
           This band is not available for "{{ priv.toUpperCase() }}" staticons.
-          <a :href="`/band-${band.route}-all`"> Activate all privileges, to view </a>
+          <a :href="`/band-${band.route}-all`">
+            Activate all privileges to view
+          </a>
         </p>
       </div>
     </div>
   </div>
 </template>
-
-<style is:global>
-.card--topmargin {
-  margin-top: 16px;
-}
-.note {
-  font-size: 80%;
-}
-.iarucolor.yellow {
-  background: #fff9c4;
-}
-.iarucolor.yellow {
-  border-color: #fbc02d;
-}
-.iarucolor.orange {
-  background: #ffe0b2;
-}
-.iarucolor.orange {
-  border-color: #ffa726;
-}
-.iarucolor.blue {
-  background: #b3e5fc;
-}
-.iarucolor.blue {
-  border-color: #29b6f6;
-}
-.iarucolor.red {
-  background: #ef5350;
-}
-.iarucolor.red {
-  border-color: #d32f2f;
-}
-.iarucolor.green {
-  background: #c5e1a5;
-}
-.iarucolor.green {
-  border-color: #8bc34a;
-}
-.iarucolor.purple {
-  background: #e1bee7;
-}
-.iarucolor.purple {
-  border-color: #ab47bc;
-}
-.iarucolor.grey {
-  background: #eeeeee;
-}
-.iarucolor.grey {
-  border-color: #9e9e9e;
-}
-</style>
