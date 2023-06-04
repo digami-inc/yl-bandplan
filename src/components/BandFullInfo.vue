@@ -82,10 +82,11 @@ const rules = props.band.rules.filter(
       </div>
 
       <div class="card-content card-content--nobottom">
-        <h2>MK Noteikumi Nr.529</h2>
+        <h2>MK Noteikumi Nr.257</h2>
         <p class="sm">
-          Radioamatieru radiostaciju būvēšanas, ierīkošanas un lietošanas, kā
-          arī radioamatieru apliecības saņemšanas kārtība.
+          Radioamatieru eksaminācijas apliecību un radioamatieru radiostacijas
+          atļauju saņemšanas kārtība, kā arī radioamatieru radiostaciju
+          lietošanas kārtība
         </p>
         <div class="table-container">
           <div class="table-row header">

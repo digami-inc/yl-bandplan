@@ -126,8 +126,7 @@ export const bands: Band[] = [
         band: "472-479 kHz",
         cat: "sek",
         pwr: "pX ≤ 1 W e.i.r.p.",
-        notes:
-          "Stājas spēkā pēc atbilstošiem grozījumiem Nacionālajā radiofrekvenču plānā. Atļauti izstarojumi ar joslas platumu līdz 800 Hz",
+        notes: "Atļauti izstarojumi ar joslas platumu līdz 800 Hz",
       },
     ],
     iaruUnits: "kHz",
@@ -395,8 +394,7 @@ export const bands: Band[] = [
         band: "5351.5-5366.5 kHz",
         cat: "sek",
         pwr: "pX ≤ 15 W e.i.r.p.",
-        notes:
-          "Stājas spēkā pēc atbilstošiem grozījumiem Nacionālajā radiofrekvenču plānā. Atļauti izstarojumi ar joslas platumu līdz 800 Hz",
+        notes: "Atļauti izstarojumi ar joslas platumu līdz 800 Hz",
       },
     ],
     iaruUnits: "kHz",
@@ -466,11 +464,10 @@ export const bands: Band[] = [
       { class: "A", band: "7000-7200 kHz", cat: "PRIM", pwr: "pX ≤ 1000 W" },
       {
         class: "B",
-        band: "7010-7040 kHz",
+        band: "7010-7080 kHz",
         cat: "PRIM",
         pwr: "pX ≤ 100 W",
-        notes:
-          "Atļauta izstarojuma klase A1A – Morzes kods uztveršanai ar dzirdi",
+        notes: "Darba veidi CW un MGM",
       },
     ],
     iaruUnits: "kHz",
@@ -1183,8 +1180,10 @@ export const bands: Band[] = [
       },
     ],
     rules: [
-      { class: "A", band: "50-52 MHz", cat: "sek", pwr: "pX ≤ 800 W" },
-      { class: "B", band: "50-52 MHz", cat: "sek", pwr: "pX ≤ 100 W" },
+      { class: "A", band: "50-50.5 MHz", cat: "PRIM", pwr: "pX ≤ 800 W" },
+      { class: "A", band: "50.5-52 MHz", cat: "sek", pwr: "pX ≤ 800 W" },
+      { class: "B", band: "50-50.5 MHz", cat: "PRIM", pwr: "pX ≤ 100 W" },
+      { class: "B", band: "50.5-52 MHz", cat: "sek", pwr: "pX ≤ 100 W" },
     ],
     iaruUnits: "KHz",
     iaru: [
@@ -1496,7 +1495,7 @@ export const bands: Band[] = [
         band: "144-146 MHz",
         cat: "PRIMeks",
         pwr: "pZ ≤ 10 W",
-        notes: "Izstarojuma klase F3E, G3E",
+        notes: "Izstarojuma klase F3E, G3E, FXW",
       },
     ],
     iaruUnits: "MHz",
@@ -1725,7 +1724,7 @@ export const bands: Band[] = [
         band: "430-440 MHz",
         cat: "PRIM",
         pwr: "pZ ≤ 10 W",
-        notes: "Izstarojuma klase F3E, G3E",
+        notes: "Izstarojuma klase F3E, G3E, FXW",
       },
     ],
     iaruUnits: "MHz",
@@ -1980,8 +1979,6 @@ export const bands: Band[] = [
         band: "3400–3410 MHz",
         cat: "sek",
         pwr: "pX ≤ 50 W",
-        notes:
-          "Stājas spēkā pēc atbilstošiem grozījumiem Nacionālajā radiofrekvenču plānā",
       },
     ],
     iaruUnits: "MHz",
