@@ -27,7 +27,7 @@ defineProps<{
         :key="privilege.route"
         class="menu"
         :class="{ active: priv == privilege.route }"
-        :href="`band-${band}-${privilege.route}`"
+        :href="`/band-${band}-${privilege.route}`"
       >
         {{ privilege.name }}
       </a>
@@ -44,7 +44,7 @@ defineProps<{
         :key="privilege.route"
         class="menu"
         :class="{ active: priv == privilege.route }"
-        :href="`priv-${privilege.route}`"
+        :href="`/priv-${privilege.route}`"
       >
         {{ privilege.name }}
       </a>
