@@ -209,8 +209,17 @@ const { priv, band } = Astro.props;
   .text-center {
     text-align: center;
   }
+  .hide {
+    display: none;
+  }
 
   @media (min-width: 576px) {
+    .hide-md {
+      display: none;
+    }
+    .block-md {
+      display: block;
+    }
     #app {
       max-width: 540px;
     }

@@ -17,7 +17,20 @@ const rules = props.band.rules.filter(
     <div class="card card--topmargin" v-if="rules.length > 0">
       <a v-if="priv == 'all'" href="/" class="card-close">✕</a>
       <a v-else :href="`/priv-${priv}`" class="card-close">✕</a>
-      <BandCard :band="band" :priv="priv" :clickable="false" />
+      <BandCard
+        :band="band"
+        :priv="priv"
+        :clickable="false"
+        :width="580"
+        class="hide block-md"
+      />
+      <BandCard
+        :band="band"
+        :priv="priv"
+        :clickable="false"
+        :width="180"
+        class="hide-md"
+      />
 
       <div
         class="card-content"

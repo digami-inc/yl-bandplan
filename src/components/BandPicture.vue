@@ -85,7 +85,8 @@ const width = windowWidth - (props.showName ? 20 : 0);
       <text
         v-if="typeof slice.endText !== 'undefined' && slice.endText != 0"
         :x="
-          ((+slice.to - +from) / bandwidth) * width + (slice.endText < 0 ? -2 : 2)
+          ((+slice.to - +from) / bandwidth) * width +
+          (slice.endText < 0 ? -2 : 2)
         "
         :y="20 + Math.abs(slice.endText) * 8"
         :text-anchor="slice.endText < 0 ? 'end' : 'start'"

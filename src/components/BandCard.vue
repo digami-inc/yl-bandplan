@@ -7,6 +7,7 @@ const props = defineProps<{
   priv: string;
   clickable?: boolean;
   width?: number;
+  class?: string;
 }>();
 
 const visiblePrivileges = props.band.privileges.filter(
@@ -15,7 +16,7 @@ const visiblePrivileges = props.band.privileges.filter(
 </script>
 
 <template>
-  <div class="card-content card-content--nobottom">
+  <div :class="class" class="card-content card-content--nobottom">
     <h2>{{ band.name }}</h2>
     <BandPicture
       v-for="p in visiblePrivileges"
