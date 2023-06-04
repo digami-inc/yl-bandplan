@@ -6,3 +6,9 @@ New stack with astro
 
    bun install
    bun run dev
+   bun run prettier src/
+
+# deploying
+
+   bun run build
+   rsync -av --delete dist/ bandplan@everglade:public
