@@ -455,6 +455,13 @@ export const bands: Band[] = [
             text: "cw",
             mode: "yellow",
             startText: 1,
+            endText: 0,
+          },
+          {
+            from: "7040",
+            to: "7080",
+            text: "digi",
+            mode: "orange",
             endText: 1,
           },
         ],
