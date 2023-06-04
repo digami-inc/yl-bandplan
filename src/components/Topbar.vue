@@ -9,7 +9,9 @@ defineProps<{
 
 <template>
   <div class="topbar">
-    <a v-if="priv && priv!='all'" class="link" :href="`/priv-${priv}`">Joslas</a>
+    <a v-if="priv && priv != 'all'" class="link" :href="`/priv-${priv}`"
+      >Joslas</a
+    >
     <a v-else class="link" href="/">Joslas</a>
     |
     <a class="link" href="/about">Par</a> | Privilēģijas:

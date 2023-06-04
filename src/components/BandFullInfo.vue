@@ -10,7 +10,6 @@ const props = defineProps<{
 const rules = props.band.rules.filter(
   (r) => props.priv == "all" || r.class == props.priv.toUpperCase()
 );
-
 </script>
 
 <template>
