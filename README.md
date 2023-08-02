@@ -11,4 +11,4 @@ New stack with astro
 # deploying
 
     bun run build
-    rsync -av --delete dist/ bandplan@everglade:public
+    rsync -av --delete dist/ bandplan@squid:bandplan.yl2.lv/public
