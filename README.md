@@ -4,11 +4,10 @@ New stack with astro
 
 *TODO* add correct building, development instructions here, like:
 
-    bun install
-    bun run dev
-    bun run prettier src/
+    npm install
+    npm run dev
 
 # deploying
 
-    bun run build
+    npm run build
     rsync -av --delete dist/ bandplan@squid:bandplan.yl2.lv/public

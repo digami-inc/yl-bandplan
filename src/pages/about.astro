@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+const builtAt = new Date().toISOString().slice(0,10)
 ---
 
 <Layout>
@@ -9,7 +10,11 @@ import Layout from "../layouts/Layout.astro";
         <img src="/favicon.svg" width="64" height="64" />Ham bandplan reference
       </h1>
       <p>Programma ir izstrādes stadijā un dati var būt kļūdaini.</p>
-      <h3>Versija 2023-06-04 <a href="/">🔄</a></h3>
+      <h3>
+        Versija 2023-06-04
+        <small>(būvēta {builtAt})</small>
+        <a href="/">🔄</a>
+      </h3>
       <p>Dati ņemti no:</p>
       <ul>
         <li>
