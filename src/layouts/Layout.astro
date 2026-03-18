@@ -368,4 +368,20 @@ const { priv, band } = Astro.props;
   .iarucolor.grey {
     border-color: #9e9e9e;
   }
+  .table-row.iarucolor {
+    cursor: pointer;
+    transition: background-image 0s;
+  }
+  .table-container:has(.iarucolor:hover) .iarucolor:not(:hover),
+  .table-container:has(.iaru-selected):not(:has(.iarucolor:hover)) .iarucolor:not(.iaru-selected) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  }
+  .highlight-dim {
+    fill: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+  }
+  .bandprivilege .marker-line {
+    stroke: #e53935;
+    stroke-width: 1px;
+  }
 </style>

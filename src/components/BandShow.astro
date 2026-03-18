@@ -12,4 +12,4 @@ const { band, priv } = Astro.props;
 const bandData = bands.find((b) => b.route == band);
 ---
 
-{bandData && <BandFullInfo band={bandData} priv={priv} />}
+{bandData && <BandFullInfo band={bandData} priv={priv} client:load />}

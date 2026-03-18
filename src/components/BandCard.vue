@@ -8,6 +8,8 @@ const props = defineProps<{
   clickable?: boolean;
   width?: number;
   class?: string;
+  highlight?: { from: number; to: number; fromLabel: string; toLabel: string };
+  marker?: { freq: number; label: string };
 }>();
 
 const visiblePrivileges = props.band.privileges.filter(
@@ -27,6 +29,8 @@ const visiblePrivileges = props.band.privileges.filter(
       :units="band.units"
       :show-name="priv == 'all'"
       :window-width="width"
+      :highlight="highlight"
+      :marker="marker"
     />
   </div>
 </template>
