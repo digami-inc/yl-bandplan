@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import BandList from "../components/BandList.astro";
+import FrequencyLookup from "../components/FrequencyLookup.vue";
 ---
 
 <Layout>
+  <FrequencyLookup client:load />
   <BandList priv="all" />
 </Layout>
