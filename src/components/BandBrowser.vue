@@ -16,11 +16,18 @@ const props = defineProps<{
 }>();
 
 const MODE_STORAGE_KEY = "yl-bandplan-mode";
+const PRIV_STORAGE_KEY = "yl-bandplan-privilege";
+const PRIVILEGES = ["all", "a", "b", "c"] as const;
+
 const selectedMode = ref<ModeFilter>("all");
 
 const filteredBands = computed(() =>
   bands.filter((band) => bandMatchesMode(band, props.priv, selectedMode.value)),
 );
+
+function isPrivilege(value: string | null | undefined): value is (typeof PRIVILEGES)[number] {
+  return Boolean(value && PRIVILEGES.includes(value.toLowerCase() as (typeof PRIVILEGES)[number]));
+}
 
 function syncUrl(mode: ModeFilter) {
   const url = new URL(window.location.href);
@@ -37,11 +44,28 @@ function setMode(mode: ModeFilter) {
 
 onMounted(() => {
   const url = new URL(window.location.href);
+  const currentPriv = props.priv.toLowerCase();
+  const storedPriv = localStorage.getItem(PRIV_STORAGE_KEY)?.toLowerCase();
+
+  if (
+    url.pathname === "/" &&
+    currentPriv === "all" &&
+    isPrivilege(storedPriv) &&
+    storedPriv !== "all"
+  ) {
+    window.location.replace(`/priv-${storedPriv}${url.search}${url.hash}`);
+    return;
+  }
+
+  if (isPrivilege(currentPriv)) {
+    localStorage.setItem(PRIV_STORAGE_KEY, currentPriv);
+  }
+
   const fromUrl = url.searchParams.get("mode")?.toLowerCase();
-  const stored = localStorage.getItem(MODE_STORAGE_KEY)?.toLowerCase();
+  const storedMode = localStorage.getItem(MODE_STORAGE_KEY)?.toLowerCase();
 
   if (isModeFilter(fromUrl)) selectedMode.value = fromUrl;
-  else if (isModeFilter(stored)) selectedMode.value = stored;
+  else if (isModeFilter(storedMode)) selectedMode.value = storedMode;
 
   localStorage.setItem(MODE_STORAGE_KEY, selectedMode.value);
   syncUrl(selectedMode.value);
