@@ -31,11 +31,13 @@ export const sources: Record<string, DataSource> = {
   iaruR1Hf: {
     id: "iaru-r1-hf",
     title: "IARU Region 1 HF Band Plan",
-    url: "https://www.iaru-r1.org/wp-content/uploads/2019/08/hf_r1_bandplan.pdf",
-    revision: "Effective 2016-06-01",
+    url: "https://www.iaru-r1.org/about-us/committees-and-working-groups/hf-committee-c4/documents-hf/",
+    revision: "Effective 2020-10-16",
     verifiedOn: "2026-09-16",
     notes: [
       "IARU Region 1 rekomendētais HF joslu lietojums.",
+      "Oficiālā IARU Region 1 lapa norāda, ka pašreizējās HF bandplāna izmaiņas stājās spēkā 2020-10-16.",
+      "Legacy HF tabula tiek normalizēta un papildināta ar Novi Sad 2020 apstiprinātajām izmaiņām.",
       "Nav Latvijas juridisko raidīšanas tiesību avots.",
     ],
   },
@@ -44,9 +46,11 @@ export const sources: Record<string, DataSource> = {
     id: "iaru-r1-vhf-up",
     title: "IARU Region 1 VHF/UHF/SHF/Microwave Band Plans",
     url: "https://www.iaru-r1.org/about-us/committees-and-working-groups/vhf-uhf-shf-committee-c5/vhf-up-bandplanning/",
+    revision: "Current bandplan pages; VHF+ Handbook 10.03 (2026)",
     verifiedOn: "2026-09-16",
     notes: [
       "IARU Region 1 pašlaik spēkā esošie bandplāni no 50 MHz līdz 250 GHz.",
+      "VHF+ segmenti tiek verificēti joslu pa joslai; līdz pārbaudei legacy dati netiek marķēti kā autoritatīvi.",
       "Nav Latvijas juridisko raidīšanas tiesību avots.",
     ],
   },

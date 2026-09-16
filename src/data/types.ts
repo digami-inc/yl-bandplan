@@ -74,11 +74,16 @@ export interface IaruSegment extends FrequencyRange {
 
   maxBandwidthHz?: number;
 
+  /**
+   * Structured mode tags when known. During legacy migration the exact original
+   * IARU description is retained as a single entry so no information is lost.
+   */
   modes: string[];
   usage?: string[];
   notes?: string[];
 
   sourceId: string;
+  sourceReference?: string;
 }
 
 export interface ActivityMarker {
@@ -88,6 +93,7 @@ export interface ActivityMarker {
   name: string;
   category?: string;
   sourceId?: string;
+  sourceReference?: string;
 }
 
 export interface BandplanData {

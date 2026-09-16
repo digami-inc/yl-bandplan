@@ -5,6 +5,11 @@ import { cCategoryLegalRules } from "./lv/legal-c";
 import { sources } from "./sources";
 import { glossary } from "./glossary";
 import { legalConditions } from "./lv/legal-conditions";
+import {
+  iaruActivityMarkers,
+  iaruMigrationStats,
+  iaruSegments,
+} from "./iaru";
 
 function fail(message: string): never {
   throw new Error(`DATA VALIDATION FAILED: ${message}`);
@@ -118,9 +123,126 @@ function validateLegalRules(
   console.log(`OK: ${rules.length} ${name} legal rules validated`);
 }
 
+function validateIaruData(): void {
+  const seenSegmentIds = new Set<string>();
+
+  if (iaruMigrationStats.legacySegments !== 180) {
+    fail(
+      `IARU migration: expected 180 legacy segments, found ${iaruMigrationStats.legacySegments}`,
+    );
+  }
+
+  if (iaruSegments.length !== 181) {
+    fail(`IARU: expected 181 canonical segments, found ${iaruSegments.length}`);
+  }
+
+  for (const segment of iaruSegments) {
+    if (seenSegmentIds.has(segment.id)) {
+      fail(`IARU: duplicate segment id "${segment.id}"`);
+    }
+    seenSegmentIds.add(segment.id);
+
+    if (!Number.isSafeInteger(segment.fromHz) || !Number.isSafeInteger(segment.toHz)) {
+      fail(`${segment.id}: frequencies must be safe integer Hz values`);
+    }
+
+    if (segment.fromHz <= 0 || segment.toHz <= 0 || segment.fromHz >= segment.toHz) {
+      fail(`${segment.id}: invalid frequency range`);
+    }
+
+    if (
+      segment.maxBandwidthHz !== undefined &&
+      (!Number.isInteger(segment.maxBandwidthHz) || segment.maxBandwidthHz <= 0)
+    ) {
+      fail(`${segment.id}: invalid maxBandwidthHz`);
+    }
+
+    if (!segment.bandId.trim()) {
+      fail(`${segment.id}: missing bandId`);
+    }
+
+    if (segment.modes.length === 0 || segment.modes.some((mode) => !mode.trim())) {
+      fail(`${segment.id}: modes must contain non-empty values`);
+    }
+
+    if (!knownSourceIds.has(segment.sourceId)) {
+      fail(`${segment.id}: unknown sourceId "${segment.sourceId}"`);
+    }
+
+    if (!segment.sourceReference?.trim()) {
+      fail(`${segment.id}: missing sourceReference`);
+    }
+  }
+
+  const stale10mBandwidth = iaruSegments.filter(
+    (segment) =>
+      segment.bandId === "10m" &&
+      segment.fromHz >= 29_000_000 &&
+      segment.toHz <= 29_510_000 &&
+      segment.maxBandwidthHz !== undefined,
+  );
+
+  if (stale10mBandwidth.length !== 0) {
+    fail(
+      `IARU HF: ${stale10mBandwidth.length} segment(s) still carry the pre-2020 6 kHz bandwidth restriction`,
+    );
+  }
+
+  const satellite15m = iaruSegments.find(
+    (segment) => segment.id === "iaru-15m-satellite-2020",
+  );
+
+  if (
+    !satellite15m ||
+    satellite15m.fromHz !== 21_125_000 ||
+    satellite15m.toHz !== 21_450_000
+  ) {
+    fail("IARU HF: Novi Sad 2020 15 m amateur-satellite recommendation missing");
+  }
+
+  if (iaruMigrationStats.verifiedHfSegments !== 82) {
+    fail(
+      `IARU HF: expected 82 verified/current HF segments, found ${iaruMigrationStats.verifiedHfSegments}`,
+    );
+  }
+
+  if (iaruMigrationStats.pendingVhfUpSegments !== 99) {
+    fail(
+      `IARU VHF+: expected 99 legacy segments pending verification, found ${iaruMigrationStats.pendingVhfUpSegments}`,
+    );
+  }
+
+  const seenMarkerIds = new Set<string>();
+
+  for (const marker of iaruActivityMarkers) {
+    if (seenMarkerIds.has(marker.id)) {
+      fail(`activity marker: duplicate id "${marker.id}"`);
+    }
+    seenMarkerIds.add(marker.id);
+
+    if (!Number.isSafeInteger(marker.frequencyHz) || marker.frequencyHz <= 0) {
+      fail(`${marker.id}: invalid frequencyHz`);
+    }
+
+    if (!marker.name.trim()) {
+      fail(`${marker.id}: missing name`);
+    }
+
+    if (marker.sourceId && !knownSourceIds.has(marker.sourceId)) {
+      fail(`${marker.id}: unknown sourceId "${marker.sourceId}"`);
+    }
+  }
+
+  console.log(`OK: ${iaruSegments.length} canonical IARU segments validated`);
+  console.log(`OK: ${iaruMigrationStats.verifiedHfSegments} HF segments current/verified`);
+  console.log(`OK: ${iaruMigrationStats.pendingVhfUpSegments} VHF+ segments pending verification`);
+  console.log(`OK: ${iaruActivityMarkers.length} activity markers normalized`);
+}
+
 validateLegalRules("A-category", aCategoryLegalRules, 38);
 validateLegalRules("B-category", bCategoryLegalRules, 9);
 validateLegalRules("C-category", cCategoryLegalRules, 2);
+validateIaruData();
 
 console.log(`OK: ${seenIds.size} unique rule IDs`);
 console.log(`OK: ${knownSourceIds.size} registered data sources`);
