@@ -1,5 +1,6 @@
 import { bands } from "../bandplan";
 import { getIaruDisplayRowsForPrivilege } from "./iaru/licence-filter";
+import { MODE_FILTERS, bandMatchesMode } from "./mode-filter";
 import { getBandVisualModel } from "./visualization";
 
 function fail(message: string): never {
@@ -135,5 +136,25 @@ if (
   fail("2m/C: licence-filtered IARU rows must stay inside 144-146 MHz");
 }
 
+if (MODE_FILTERS.join(",") !== "all,cw,ssb,digi,fm,sat,rep,beacon") {
+  fail("mode filter set changed unexpectedly");
+}
+if (!bandMatchesMode(bandByRoute("30m"), "a", "cw")) {
+  fail("30m/A must be visible in CW mode filter");
+}
+if (bandMatchesMode(bandByRoute("30m"), "a", "fm")) {
+  fail("30m/A must not be visible in FM mode filter");
+}
+if (!bandMatchesMode(band2m, "a", "fm")) {
+  fail("2m/A must be visible in FM mode filter");
+}
+if (!bandMatchesMode(band2m, "a", "sat")) {
+  fail("2m/A must be visible in SAT mode filter");
+}
+if (!bandMatchesMode(band40m, "b", "cw")) {
+  fail("40m/B must be visible in CW mode filter");
+}
+
 console.log(`OK: ${bands.length} canonical band visualizations validated`);
 console.log("OK: licence-filtered IARU detail tables validated");
+console.log("OK: licence and mode filters validated");
