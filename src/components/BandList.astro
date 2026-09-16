@@ -1,31 +1,11 @@
 ---
-import BandCard from "./BandCard.vue";
-import BandLegend from "./BandLegend.vue";
-import { bands } from "../bandplan";
+import BandBrowser from "./BandBrowser.vue";
 
 export interface Props {
   priv: string;
 }
 
 const { priv } = Astro.props;
-
-const activeBands = bands.filter(
-  (band) =>
-    priv == "all" || band.privileges.some((p) => p.classes.includes(priv))
-);
 ---
 
-<div>
-  <BandLegend />
-  <div class="row row--grow-cards">
-    {
-      activeBands.map((band) => (
-        <div class="col">
-          <a href={`/band-${band.route}-${priv}`} class="card clickable">
-            <BandCard band={band} priv={priv} width={180} />
-          </a>
-        </div>
-      ))
-    }
-  </div>
-</div>
+<BandBrowser client:load priv={priv} />
