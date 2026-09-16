@@ -27,7 +27,7 @@ const builtAt = new Date().toISOString().slice(0,10)
             rel="noopener noreferrer"
             href="https://www.iaru-r1.org/reference/band-plans/"
             >IARU Region 1 band plans</a
-          >
+          > — rekomendētais joslu lietojums.
         </li>
         <li>
           <a
@@ -37,7 +37,16 @@ const builtAt = new Date().toISOString().slice(0,10)
             >MK noteikumi Nr. 257 — Radioamatieru eksaminācijas apliecību un
             radioamatieru radiostacijas atļauju saņemšanas kārtība, kā arī
             radioamatieru radiostaciju lietošanas kārtība</a
-          >
+          > — Latvijas radioamatieru kategoriju, joslu, jaudu un nosacījumu
+          juridiskais avots.
+        </li>
+        <li>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/WSJTX/wsjtx/blob/v3.0.2/models/FrequencyList.cpp"
+            >WSJT-X v3.0.2 default working frequencies</a
+          > — FT4 un FT8 preferred/default dial frekvences grāmatzīmēm.
         </li>
       </ul>
 
@@ -56,6 +65,10 @@ const builtAt = new Date().toISOString().slice(0,10)
           href="https://github.com/digami-inc/yl-bandplan"
           >digami-inc/yl-bandplan</a
         > repozitorijā.
+      </p>
+      <p>
+        Pašreizējā publiskā versija ir pieejama
+        <a href="https://bandplan.nakotne.com/">bandplan.nakotne.com</a>.
       </p>
 
       <h2>2026. gada modernizācija</h2>
@@ -81,13 +94,39 @@ const builtAt = new Date().toISOString().slice(0,10)
           VHF, UHF un SHF joslām līdz 250 GHz.
         </li>
         <li>
-          Kanoniskajā IARU datu slānī pašlaik ir 191 segments un 49 aktivitāšu
-          marķieri; vecie dati tiek izmantoti tikai tur, kur vēl saglabāta
-          sākotnējā vizualizācija.
+          Kanoniskajā IARU datu slānī ir 191 segments. Aktivitāšu grāmatzīmes
+          arī pārceltas uz kanonisko datu slāni, saglabājot sākotnējā projekta
+          marķierus un papildinot tos ar aktuālām WSJT-X frekvencēm.
         </li>
         <li>
           Joslu detalizētajās lapās juridiskā un IARU informācija tagad tiek
           rādīta no kanoniskajiem datiem kopā ar avota un pārbaudes informāciju.
+        </li>
+        <li>
+          A/B/C kategorijas izvēle filtrē gan juridisko informāciju, gan IARU
+          tabulu un joslas vizualizāciju atbilstoši izvēlētās licences iespējām.
+          Izvēlētā kategorija tiek saglabāta pārlūkā un izmantota arī nākamajā
+          apmeklējuma reizē.
+        </li>
+        <li>
+          Pievienots IARU lietojuma filtrs CW, SSB, DIGI, FM, SAT, REP un BEACON
+          režīmiem. Izvēloties režīmu, tiek izcelti tie segmenti, kuros konkrētais
+          lietojums ir tieši norādīts IARU joslu plānā.
+        </li>
+        <li>
+          Joslu kartēm pievienota krāsu leģenda ar skaidru nodalījumu starp IARU
+          rekomendēto lietojumu un Latvijas juridisko atļauju.
+        </li>
+        <li>
+          Saglabāts sākotnējā projekta vizuālais stils un proporcijas, bet joslu
+          attēlojums pārslēgts uz kanoniskajiem juridiskajiem un IARU datiem.
+        </li>
+        <li>
+          Grāmatzīmes pārslēgtas no vecā <code>band.bookmarks</code> modeļa uz
+          kanonisko activity-marker datu slāni. Pievienotas WSJT-X v3.0.2 FT8 un
+          FT4 preferred/default dial frekvences tajās joslās, kur WSJT-X tās
+          definē; alternatīvās DXpedition frekvences netiek izmantotas kā
+          pamatgrāmatzīmes.
         </li>
         <li>
           Sākumlapai pievienots frekvences meklētājs “Vai es te drīkstu raidīt?”,
@@ -95,11 +134,19 @@ const builtAt = new Date().toISOString().slice(0,10)
         </li>
         <li>
           Pievienots automātisks datu validators un GitHub Actions CI, kas katram
-          push pārbauda datus, IARU migrāciju un pilno Astro build.
+          push pārbauda datus, IARU migrāciju, vizualizāciju invariantu un pilno
+          Astro build.
         </li>
       </ul>
 
       <h2>Izmaiņu vēsture</h2>
+      <p>
+        2026-09-16 Datu modelis un interfeiss modernizēts, saglabājot sākotnējā
+        projekta vizuālo valodu. Ieviests kanonisks MK Nr. 257 un IARU datu
+        slānis, A/B/C filtrēšana, IARU lietojuma filtrs, krāsu leģenda,
+        frekvences meklētājs, kanoniskas grāmatzīmes un WSJT-X FT4/FT8 aktivitāšu
+        frekvences. Pievienota automātiska datu validācija un CI.
+      </p>
       <p>
         2026-03-18 Izveidota interaktivitāte — pārvietojoties ar peli pāri IARU
         joslas plānam, tas iezīmējas. Ar iezīmētām sadaļām iespējams dalīties,
