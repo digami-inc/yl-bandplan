@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import type { Band } from "../bandplan";
 import BandCard from "./BandCard.vue";
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { useClickOutside } from '../composables/useClickOutside';
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import { useClickOutside } from "../composables/useClickOutside";
+import {
+  getIaruDisplayRows,
+  getIaruSourcesForBand,
+} from "../data/iaru/presentation";
 
 const props = defineProps<{
   band: Band;
@@ -10,8 +14,11 @@ const props = defineProps<{
 }>();
 
 const rules = props.band.rules.filter(
-  (r) => props.priv == "all" || r.class == props.priv.toUpperCase()
+  (r) => props.priv == "all" || r.class == props.priv.toUpperCase(),
 );
+
+const iaruRows = getIaruDisplayRows(props.band);
+const iaruSources = getIaruSourcesForBand(props.band);
 
 const containerRef = ref<HTMLElement | null>(null);
 
@@ -20,8 +27,17 @@ const selectedSlice = ref<{ from: string; to: string } | null>(null);
 const hoveredMarker = ref<string | null>(null);
 const selectedMarker = ref<string | null>(null);
 
-function iaruToBandUnits(value: string, iaruUnits: string, bandUnits: string): number {
-  const scale: Record<string, number> = { hz: 1, khz: 1e3, mhz: 1e6, ghz: 1e9 };
+function iaruToBandUnits(
+  value: string,
+  iaruUnits: string,
+  bandUnits: string,
+): number {
+  const scale: Record<string, number> = {
+    hz: 1,
+    khz: 1e3,
+    mhz: 1e6,
+    ghz: 1e9,
+  };
   const from = scale[iaruUnits.toLowerCase()] ?? 1;
   const to = scale[bandUnits.toLowerCase()] ?? 1;
   return +value * (from / to);
@@ -34,16 +50,22 @@ function readHash() {
   selectedSlice.value = null;
   selectedMarker.value = null;
   if (!hash) return;
-  const lastDash = hash.lastIndexOf('-');
+  const lastDash = hash.lastIndexOf("-");
   if (lastDash > 0) {
-    selectedSlice.value = { from: hash.slice(0, lastDash), to: hash.slice(lastDash + 1) };
+    selectedSlice.value = {
+      from: hash.slice(0, lastDash),
+      to: hash.slice(lastDash + 1),
+    };
   } else {
     selectedMarker.value = hash;
   }
 }
 
-onMounted(() => { readHash(); window.addEventListener('hashchange', readHash); });
-onUnmounted(() => window.removeEventListener('hashchange', readHash));
+onMounted(() => {
+  readHash();
+  window.addEventListener("hashchange", readHash);
+});
+onUnmounted(() => window.removeEventListener("hashchange", readHash));
 
 function selectSlice(slice: { from: string; to: string }) {
   selectedSlice.value = slice;
@@ -60,7 +82,11 @@ function selectMarker(freq: string) {
 function deselect() {
   selectedSlice.value = null;
   selectedMarker.value = null;
-  history.replaceState(null, '', window.location.pathname + window.location.search);
+  history.replaceState(
+    null,
+    "",
+    window.location.pathname + window.location.search,
+  );
 }
 
 const effectiveHighlight = computed(() => {
@@ -68,7 +94,11 @@ const effectiveHighlight = computed(() => {
   const slice = hoveredSlice.value ?? selectedSlice.value;
   if (!slice) return undefined;
   return {
-    from: iaruToBandUnits(slice.from, props.band.iaruUnits, props.band.units),
+    from: iaruToBandUnits(
+      slice.from,
+      props.band.iaruUnits,
+      props.band.units,
+    ),
     to: iaruToBandUnits(slice.to, props.band.iaruUnits, props.band.units),
     fromLabel: slice.from,
     toLabel: slice.to,
@@ -106,42 +136,50 @@ const effectiveMarker = computed(() => {
         class="hide-md"
       />
 
-      <div
-        class="card-content"
-        :class="{ 'card-content--nobottom': !band.iaruNotes }"
-      >
-        <h2>IARU {{ band.name }} joslas plāns</h2>
+      <div class="card-content">
+        <h2>IARU Region 1 — {{ band.name }} joslas plāns</h2>
         <div class="table-container">
           <div class="table-row header">
             <div>{{ band.iaruUnits }}</div>
-            <div class="narrow">Bandwidth</div>
-            <div class="wide">Description</div>
+            <div class="narrow">Maks. joslas platums</div>
+            <div class="wide">Ieteicamais lietojums</div>
           </div>
           <div
-            v-for="(slice, id) in band.iaru"
-            :key="id"
+            v-for="slice in iaruRows"
+            :key="slice.id"
             class="table-row iarucolor"
-            :class="[slice.mode, { 'iaru-selected': selectedSlice?.from === slice.from && selectedSlice?.to === slice.to }]"
+            :class="[
+              slice.colorClass,
+              {
+                'iaru-selected':
+                  selectedSlice?.from === slice.from &&
+                  selectedSlice?.to === slice.to,
+              },
+            ]"
             @mouseenter="hoveredSlice = slice"
             @mouseleave="hoveredSlice = null"
             @click.stop="selectSlice(slice)"
           >
             <div>{{ slice.from }} - {{ slice.to }} {{ band.iaruUnits }}</div>
             <div class="narrow">
-              <span v-if="slice.bw">{{ slice.bw }} Hz</span
-              ><span v-else>-</span>
+              <span v-if="slice.bandwidthHz">{{ slice.bandwidthHz }} Hz</span>
+              <span v-else>—</span>
             </div>
             <div class="wide sm">
-              {{ slice.desc }}
+              {{ slice.description }}
               <div v-if="slice.note">{{ slice.note }}</div>
             </div>
           </div>
         </div>
-        <div v-if="band.iaruNotes">
-          <p v-for="(note, id) in band.iaruNotes" :key="id" class="sm">
-            {{ note }}
-          </p>
-        </div>
+
+        <p v-for="source in iaruSources" :key="source.id" class="sm">
+          Avots:
+          <a :href="source.url" target="_blank" rel="noopener noreferrer">
+            {{ source.title }}
+          </a>
+          <span v-if="source.revision"> · {{ source.revision }}</span>
+          · pārbaudīts {{ source.verifiedOn }}.
+        </p>
       </div>
 
       <div class="card-content" v-if="band.bookmarks">
@@ -150,7 +188,7 @@ const effectiveMarker = computed(() => {
           <tbody>
             <tr>
               <th>{{ band.units }}</th>
-              <th>Description</th>
+              <th>Apraksts</th>
             </tr>
             <tr
               v-for="(mark, id) in band.bookmarks"
@@ -168,7 +206,7 @@ const effectiveMarker = computed(() => {
       </div>
 
       <div class="card-content card-content--nobottom">
-        <h2>MK Noteikumi Nr.257</h2>
+        <h2>MK noteikumi Nr. 257</h2>
         <p class="sm">
           Radioamatieru eksaminācijas apliecību un radioamatieru radiostacijas
           atļauju saņemšanas kārtība, kā arī radioamatieru radiostaciju
@@ -199,9 +237,9 @@ const effectiveMarker = computed(() => {
       <div class="card-content">
         <h2>{{ band.name }}</h2>
         <p>
-          This band is not available for "{{ priv.toUpperCase() }}" staticons.
+          Šī josla nav pieejama {{ priv.toUpperCase() }} kategorijas stacijām.
           <a :href="`/band-${band.route}-all`">
-            Activate all privileges to view
+            Rādīt visas kategorijas
           </a>
         </p>
       </div>
