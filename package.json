@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "prettier": "prettier --write src/",
-    "validate:data": "bun src/data/validate.ts",
+    "validate:data": "bun src/data/validate.ts && bun src/data/validate-visualization.ts",
     "audit:iaru": "bun src/data/audit-iaru-inventory.ts"
   },
   "dependencies": {
