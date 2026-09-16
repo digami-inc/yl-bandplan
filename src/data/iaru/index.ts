@@ -1,5 +1,6 @@
 import { bands } from "../../bandplan";
 import type { ActivityMarker, IaruSegment } from "../types";
+import { current70cmSegments } from "./current-vhf-up";
 
 const UNIT_DECIMALS: Record<string, number> = {
   khz: 3,
@@ -22,7 +23,7 @@ const HF_BAND_IDS = new Set([
   "10m",
 ]);
 
-const VERIFIED_VHF_UP_BAND_IDS = new Set(["6m", "4m", "2m"]);
+const VERIFIED_VHF_UP_BAND_IDS = new Set(["6m", "4m", "2m", "13cm"]);
 
 function decimalFrequencyToHz(value: string, unit: string): number {
   const decimals = UNIT_DECIMALS[unit.trim().toLowerCase()];
@@ -125,7 +126,7 @@ function normalizeLegacyIaruSegments(): IaruSegment[] {
         sourceReference: isHf
           ? `${band.name} — IARU Region 1 HF band plan; Novi Sad 2020 changes applied`
           : isVerifiedVhfUp
-            ? `${band.name} — currently valid IARU Region 1 VHF band plan; VHF table effective December 2020 (VGC Novi Sad)`
+            ? `${band.name} — currently valid IARU Region 1 VHF+ band plan`
             : `${band.name} — legacy IARU data pending verification against current IARU Region 1 VHF+ bandplan`,
       };
 
@@ -178,14 +179,18 @@ const noviSad2020Satellite15m: IaruSegment = {
  *
  * HF is based on the existing Region 1 table with the approved Novi Sad 2020
  * changes applied. The 50, 70 and 144 MHz bands have been checked against the
- * currently published IARU Region 1 VHF table. Higher bands remain normalized
- * losslessly from the legacy project with sourceId=original-bandplan until each
- * group is checked against the currently valid VHF+ bandplan.
+ * currently published IARU Region 1 VHF table. The legacy 430-440 MHz table is
+ * replaced by the Zlatibor 2023 plan, and the 2300-2450 MHz rows have been
+ * checked against the current VHF+ handbook. Higher bands remain normalized
+ * from the legacy project until each group is checked against the current plan.
  */
 export const iaruSegments: IaruSegment[] = [
-  ...legacyNormalizedIaruSegments,
+  ...legacyNormalizedIaruSegments.filter(
+    (segment) => segment.bandId !== "70cm",
+  ),
+  ...current70cmSegments,
   noviSad2020Satellite15m,
-];
+].sort((a, b) => a.fromHz - b.fromHz || a.toHz - b.toHz || a.id.localeCompare(b.id));
 
 export const iaruActivityMarkers: ActivityMarker[] = bands.flatMap((band) =>
   (band.bookmarks ?? []).map((bookmark, index) => ({

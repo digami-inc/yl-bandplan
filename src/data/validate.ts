@@ -206,15 +206,15 @@ function validateIaruData(): void {
     );
   }
 
-  if (iaruMigrationStats.verifiedVhfUpSegments !== 27) {
+  if (iaruMigrationStats.verifiedVhfUpSegments !== 46) {
     fail(
-      `IARU VHF+: expected 27 verified 50/70/144 MHz segments, found ${iaruMigrationStats.verifiedVhfUpSegments}`,
+      `IARU VHF+: expected 46 verified/current segments, found ${iaruMigrationStats.verifiedVhfUpSegments}`,
     );
   }
 
-  if (iaruMigrationStats.pendingVhfUpSegments !== 72) {
+  if (iaruMigrationStats.pendingVhfUpSegments !== 53) {
     fail(
-      `IARU VHF+: expected 72 legacy segments pending verification, found ${iaruMigrationStats.pendingVhfUpSegments}`,
+      `IARU VHF+: expected 53 legacy segments pending verification, found ${iaruMigrationStats.pendingVhfUpSegments}`,
     );
   }
 
@@ -241,6 +241,50 @@ function validateIaruData(): void {
     vhf70BeaconSegments.some((segment) => segment.maxBandwidthHz !== 1_000)
   ) {
     fail("IARU VHF: both 70.000-70.100 MHz beacon segments must have 1000 Hz max bandwidth");
+  }
+
+  const expected70cm: Array<[number, number, number | undefined]> = [
+    [430_000_000, 432_000_000, undefined],
+    [432_000_000, 432_400_000, 2_700],
+    [432_400_000, 432_490_000, 500],
+    [432_491_000, 432_493_000, 500],
+    [432_500_000, 432_987_500, undefined],
+    [433_000_000, 433_387_500, undefined],
+    [433_400_000, 433_587_500, undefined],
+    [433_600_000, 434_000_000, undefined],
+    [434_000_000, 434_587_500, undefined],
+    [434_600_000, 434_987_500, undefined],
+    [435_000_000, 436_000_000, undefined],
+    [436_000_000, 438_000_000, undefined],
+    [438_000_000, 440_000_000, undefined],
+  ];
+
+  const actual70cm = iaruSegments
+    .filter((segment) => segment.bandId === "70cm")
+    .sort((a, b) => a.fromHz - b.fromHz || a.toHz - b.toHz);
+
+  if (actual70cm.length !== expected70cm.length) {
+    fail(`IARU UHF: expected ${expected70cm.length} current 70 cm segments, found ${actual70cm.length}`);
+  }
+
+  expected70cm.forEach(([fromHz, toHz, bandwidth], index) => {
+    const actual = actual70cm[index];
+    if (
+      actual.fromHz !== fromHz ||
+      actual.toHz !== toHz ||
+      actual.maxBandwidthHz !== bandwidth ||
+      actual.sourceId !== "iaru-r1-vhf-up"
+    ) {
+      fail(`IARU UHF: unexpected 70 cm segment at index ${index}`);
+    }
+  });
+
+  const current13cm = iaruSegments.filter(
+    (segment) => segment.bandId === "13cm" && segment.sourceId === "iaru-r1-vhf-up",
+  );
+
+  if (current13cm.length !== 6) {
+    fail(`IARU UHF: expected 6 verified 13 cm segments, found ${current13cm.length}`);
   }
 
   const seenMarkerIds = new Set<string>();

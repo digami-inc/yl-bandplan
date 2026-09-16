@@ -50,7 +50,10 @@ export const sources: Record<string, DataSource> = {
     verifiedOn: "2026-09-16",
     notes: [
       "IARU Region 1 pašlaik spēkā esošie bandplāni no 50 MHz līdz 250 GHz.",
-      "VHF+ segmenti tiek verificēti joslu pa joslai; līdz pārbaudei legacy dati netiek marķēti kā autoritatīvi.",
+      "Verificēti pret pašlaik publicētajiem IARU avotiem: 50 MHz, 70 MHz, 144 MHz, 430–440 MHz un 2300–2450 MHz.",
+      "430–440 MHz izmanto Zlatibor 2023 ZL23_C5_Rec_06 apstiprināto tabulu, nevis legacy projekta veco sadalījumu.",
+      "1240–1300 MHz pagaidām paliek pending: pēc WRC-23/RNSS izmaiņām IARU izstrādā pārskatītu 23 cm bandplānu.",
+      "Pārējie VHF+ segmenti tiek verificēti joslu pa joslai; līdz pārbaudei legacy dati netiek marķēti kā autoritatīvi.",
       "Nav Latvijas juridisko raidīšanas tiesību avots.",
     ],
   },
