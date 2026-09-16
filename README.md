@@ -18,8 +18,6 @@ Esmu pārņēmis projekta turpmāku uzturēšanu ar mērķi saglabāt to aktuāl
 
 Sākotnējā autora ieguldījums un projekta izcelsme tiek saglabāta un norādīta arī failā [NOTICE.md](NOTICE.md).
 
-> Piezīme par licenci: sākotnējais autors ir devis atļauju projektu izmantot, modificēt un izplatīt ar atribūciju, taču sākotnējam projektam nav pievienota formāla atvērtā pirmkoda licence. Šis repozitorijs tādēļ neapgalvo MIT, GPL vai citas licences piemērošanu sākotnējam kodam.
-
 ## Datu avoti
 
 Galvenie datu avoti:
