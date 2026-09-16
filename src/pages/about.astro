@@ -7,73 +7,136 @@ const builtAt = new Date().toISOString().slice(0,10)
   <div class="card card--topmargin">
     <div class="card-content">
       <h1>
-        <img src="/favicon.svg" width="64" height="64" />Ham bandplan reference
+        <img src="/favicon.svg" width="64" height="64" />YL radioamatieru joslu plāns
       </h1>
-      <p>Programma ir izstrādes stadijā un dati var būt kļūdaini.</p>
+      <p>
+        Interaktīvs YL radioamatieru frekvenču joslu plāns ar Latvijas
+        normatīvo prasību un IARU Region 1 rekomendāciju attēlojumu.
+      </p>
       <h3>
-        Versija 2023-06-04
-        <small>(būvēta {builtAt})</small>
+        Atjaunots 2026-09-16
+        <small>(būvēts {builtAt})</small>
         <a href="/">🔄</a>
       </h3>
-      <p>Dati ņemti no:</p>
+
+      <h2>Datu avoti</h2>
       <ul>
         <li>
           <a
             target="_blank"
+            rel="noopener noreferrer"
             href="https://www.iaru-r1.org/reference/band-plans/"
-            >IARU R1 Band Plans (www.iaru-r1.org)</a
+            >IARU Region 1 band plans</a
           >
         </li>
         <li>
           <a
             target="_blank"
+            rel="noopener noreferrer"
             href="https://likumi.lv/ta/id/342127-radioamatieru-eksaminacijas-apliecibu-un-radioamatieru-radiostacijas-atlauju-sanemsanas-kartiba-ka-ari-radioamatieru-radiostaciju-lietosanas-kartiba"
-            >Radioamatieru eksaminācijas apliecību un radioamatieru
-            radiostacijas atļauju saņemšanas kārtība, kā arī radioamatieru
-            radiostaciju lietošanas kārtība</a
+            >MK noteikumi Nr. 257 — Radioamatieru eksaminācijas apliecību un
+            radioamatieru radiostacijas atļauju saņemšanas kārtība, kā arī
+            radioamatieru radiostaciju lietošanas kārtība</a
           >
         </li>
       </ul>
+
+      <h2>Par projektu</h2>
       <p>
-        Autors: YL3AME Kristaps <a target="_blank" href="https://yl3ame.hex.id.lv/"
+        Sākotnējais projekta autors ir YL3AME Kristaps —
+        <a target="_blank" rel="noopener noreferrer" href="https://yl3ame.hex.id.lv/"
           >yl3ame.hex.id.lv</a
-        >
-      </p>
-      <h2>Kas Jauns</h2>
-      <p>
-        2026-03-18 Izveidoju interaktivitāti - pārvietojoties ar peli pāri IARU joslas plānam, tas iezīmējas. Iespējams dalīties ar iezīmētām sadaļām adreses laukā.
+        >.
       </p>
       <p>
-        2026-03-09 Nomainīju domēnu no bandplan.yl2.lv uz <a href="https://bandplan.hex.id.lv/">bandplan.hex.id.lv</a>. Jo hex.id.lv domēns ir bezmaksas un šis nav gluži pelnošs projekts :)
-      </p>
-      <p>
-        2023-06-04 Joslas atjaunotas pēc jaunajiem 2023. gada 23. maija MK
-        noteikumiem 257, pievienotas milimetru joslas, atjaunota programmas
-        tehnoloģija.
-      </p>
-      <p>
-        2022-07-24 Kods publicēts <a
+        Projekta turpmākā uzturēšana un modernizācija notiek
+        <a
           target="_blank"
-          href="https://gitea.kecom.lv/enkrs/bandplan.yl2.lv">gitea.kecom.lv</a
-        > un dažas nepublicētās izmaiņas pieliktas.
+          rel="noopener noreferrer"
+          href="https://github.com/digami-inc/yl-bandplan"
+          >digami-inc/yl-bandplan</a
+        > repozitorijā.
       </p>
-      <p>2020-06-02 23cm bands.</p>
-      <p>2020-05-30 Dažādi datu labojumi, paldies komentētājiem soc tīklos.</p>
-      <p>2020-05-28 Pievienotas grāmatzīmes Latviešu valodā HF plāniem.</p>
+
+      <h2>2026. gada modernizācija</h2>
+      <ul>
+        <li>
+          Latvijas juridiskie dati pārcelti strukturētā datu slānī: A, B un C
+          kategorijas noteikumi tiek glabāti atsevišķi no IARU rekomendācijām.
+        </li>
+        <li>
+          MK noteikumu Nr. 257 dati pārbaudīti un validēti: 38 A kategorijas,
+          9 B kategorijas un 2 C kategorijas noteikumi.
+        </li>
+        <li>
+          Pievienoti strukturēti juridiskie nosacījumi, jaudas veidi,
+          maksimālie joslas platumi, atļautie darba veidi un izstarojuma klases.
+        </li>
+        <li>
+          Pievienota terminu un saīsinājumu vārdnīca, tostarp PRIM, PRIMeks,
+          sek, pX, pZ, e.i.r.p., CW, SSB, MGM, EME un MS.
+        </li>
+        <li>
+          IARU Region 1 dati normalizēti vienotā Hz formātā un aktualizēti HF,
+          VHF, UHF un SHF joslām līdz 250 GHz.
+        </li>
+        <li>
+          Kanoniskajā IARU datu slānī pašlaik ir 191 segments un 49 aktivitāšu
+          marķieri; vecie dati tiek izmantoti tikai tur, kur vēl saglabāta
+          sākotnējā vizualizācija.
+        </li>
+        <li>
+          Joslu detalizētajās lapās juridiskā un IARU informācija tagad tiek
+          rādīta no kanoniskajiem datiem kopā ar avota un pārbaudes informāciju.
+        </li>
+        <li>
+          Sākumlapai pievienots frekvences meklētājs “Vai es te drīkstu raidīt?”,
+          kas rāda piemērojamos A/B/C noteikumus un IARU rekomendācijas.
+        </li>
+        <li>
+          Pievienots automātisks datu validators un GitHub Actions CI, kas katram
+          push pārbauda datus, IARU migrāciju un pilno Astro build.
+        </li>
+      </ul>
+
+      <h2>Izmaiņu vēsture</h2>
       <p>
-        2020-05-22 Pabeigti VHF un UHF IARU komentāri, nelielas precizitātes
-        vizuālajās kartēs
+        2026-03-18 Izveidota interaktivitāte — pārvietojoties ar peli pāri IARU
+        joslas plānam, tas iezīmējas. Ar iezīmētām sadaļām iespējams dalīties,
+        izmantojot adreses lauku.
       </p>
       <p>
-        2020-05-14 Izveidota PWA applikācijas konfigurācija, pievienota ikona.
+        2026-03-09 Domēns nomainīts no bandplan.yl2.lv uz
+        <a href="https://bandplan.hex.id.lv/">bandplan.hex.id.lv</a>.
       </p>
       <p>
-        2020-05-13 Pabeigti MK noteikumi 2. pielikums. Izlabots IARU tabulas
-        krāsas 40m. Atvērta kartiņa aizveras pārslēdzot privilēģijas.
+        2023-06-04 Joslas atjaunotas pēc 2023. gada 23. maija MK noteikumiem
+        Nr. 257, pievienotas milimetru joslas un atjaunota programmas tehnoloģija.
       </p>
       <p>
-        2020-05-12 Uzlabots izskats. Pabeigtas visu HF joslu IARU un MK
-        noteikumu tabulas.
+        2022-07-24 Kods publicēts
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://gitea.kecom.lv/enkrs/bandplan.yl2.lv"
+          >gitea.kecom.lv</a
+        > un pievienotas dažas iepriekš nepublicētas izmaiņas.
+      </p>
+      <p>2020-06-02 Pievienota 23 cm josla.</p>
+      <p>2020-05-30 Dažādi datu labojumi.</p>
+      <p>2020-05-28 Pievienotas grāmatzīmes latviešu valodā HF plāniem.</p>
+      <p>
+        2020-05-22 Pabeigti VHF un UHF IARU komentāri un veikti nelieli
+        precizējumi vizuālajās kartēs.
+      </p>
+      <p>2020-05-14 Izveidota PWA konfigurācija un pievienota ikona.</p>
+      <p>
+        2020-05-13 Pabeigti MK noteikumu 2. pielikuma dati. Izlabota IARU
+        tabulas krāsa 40 m joslā.
+      </p>
+      <p>
+        2020-05-12 Uzlabots izskats un pabeigtas HF joslu IARU un MK noteikumu
+        tabulas.
       </p>
       <p>2020-05-08 Izlabota drukas kļūda bandplan tabulā.</p>
     </div>
