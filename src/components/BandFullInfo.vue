@@ -63,6 +63,10 @@ function readHash() {
 }
 
 onMounted(() => {
+  const currentPriv = props.priv.toLowerCase();
+  if (["all", "a", "b", "c"].includes(currentPriv)) {
+    localStorage.setItem("yl-bandplan-privilege", currentPriv);
+  }
   readHash();
   window.addEventListener("hashchange", readHash);
 });
