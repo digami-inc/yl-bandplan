@@ -103,6 +103,32 @@ function mergeRanges(ranges: HzRange[]): HzRange[] {
   return merged;
 }
 
+function subtractRanges(range: HzRange, covers: HzRange[]): HzRange[] {
+  let pending: HzRange[] = [{ ...range }];
+
+  for (const cover of covers) {
+    const next: HzRange[] = [];
+
+    for (const part of pending) {
+      if (!overlaps(part, cover)) {
+        next.push(part);
+        continue;
+      }
+
+      if (cover.fromHz > part.fromHz) {
+        next.push({ fromHz: part.fromHz, toHz: Math.min(cover.fromHz, part.toHz) });
+      }
+      if (cover.toHz < part.toHz) {
+        next.push({ fromHz: Math.max(cover.toHz, part.fromHz), toHz: part.toHz });
+      }
+    }
+
+    pending = next.filter((part) => part.fromHz < part.toHz);
+  }
+
+  return pending;
+}
+
 function visualLabel(description: string, note?: string): string {
   const text = `${description} ${note ?? ""}`.toLowerCase();
 
@@ -295,14 +321,30 @@ export function getBandVisualModel(band: Band, priv: string): BandVisualModel {
       })),
     );
 
-    const legacyPrivilege = legacyPrivilegeForClass(band, licenceClass);
-    const hasModeRestriction = classRules.some(
-      (rule) => rule.allowedModes?.length || rule.emissionClasses?.length,
+    const unrestrictedCoverage = mergeRanges(
+      classRules
+        .filter((rule) => !rule.allowedModes?.length && !rule.emissionClasses?.length)
+        .map((rule) => ({
+          fromHz: Math.max(rule.fromHz, fromHz),
+          toHz: Math.min(rule.toHz, toHzValue),
+        })),
     );
 
+    const restrictedRules = classRules.filter(
+      (rule) => rule.allowedModes?.length || rule.emissionClasses?.length,
+    );
+    const hasEffectiveModeRestriction = restrictedRules.some((rule) => {
+      const restrictedRange: HzRange = {
+        fromHz: Math.max(rule.fromHz, fromHz),
+        toHz: Math.min(rule.toHz, toHzValue),
+      };
+      return subtractRanges(restrictedRange, unrestrictedCoverage).length > 0;
+    });
+
+    const legacyPrivilege = legacyPrivilegeForClass(band, licenceClass);
     let visualSlicesHz: HzSlice[];
 
-    if (hasModeRestriction && legacyPrivilege) {
+    if (hasEffectiveModeRestriction && legacyPrivilege) {
       visualSlicesHz = legacyRestrictedSlices(
         band,
         legacyPrivilege,
