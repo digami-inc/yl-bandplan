@@ -9,6 +9,7 @@ console.log("=== IARU migration status ===");
 console.log(`Legacy segments:        ${iaruMigrationStats.legacySegments}`);
 console.log(`Canonical segments:     ${iaruMigrationStats.canonicalSegments}`);
 console.log(`HF current/verified:    ${iaruMigrationStats.verifiedHfSegments}`);
+console.log(`VHF+ current/verified:  ${iaruMigrationStats.verifiedVhfUpSegments}`);
 console.log(`VHF+ pending verify:    ${iaruMigrationStats.pendingVhfUpSegments}`);
 console.log(`Activity markers:       ${iaruMigrationStats.activityMarkers}`);
 
@@ -42,6 +43,22 @@ for (const segment of iaruSegments.filter(
     (segment.bandId === "10m" &&
       segment.fromHz >= 29_000_000 &&
       segment.toHz <= 29_510_000),
+)) {
+  console.log(
+    `${segment.id}: ${segment.fromHz}-${segment.toHz} Hz | bw=${segment.maxBandwidthHz ?? "none"} | ${segment.sourceReference}`,
+  );
+}
+
+console.log("\n=== Current-VHF corrections ===");
+
+for (const segment of iaruSegments.filter(
+  (segment) =>
+    (segment.bandId === "6m" &&
+      segment.fromHz === 50_000_000 &&
+      segment.toHz === 50_030_000) ||
+    (segment.bandId === "4m" &&
+      segment.fromHz >= 70_000_000 &&
+      segment.toHz <= 70_100_000),
 )) {
   console.log(
     `${segment.id}: ${segment.fromHz}-${segment.toHz} Hz | bw=${segment.maxBandwidthHz ?? "none"} | ${segment.sourceReference}`,

@@ -206,10 +206,41 @@ function validateIaruData(): void {
     );
   }
 
-  if (iaruMigrationStats.pendingVhfUpSegments !== 99) {
+  if (iaruMigrationStats.verifiedVhfUpSegments !== 27) {
     fail(
-      `IARU VHF+: expected 99 legacy segments pending verification, found ${iaruMigrationStats.pendingVhfUpSegments}`,
+      `IARU VHF+: expected 27 verified 50/70/144 MHz segments, found ${iaruMigrationStats.verifiedVhfUpSegments}`,
     );
+  }
+
+  if (iaruMigrationStats.pendingVhfUpSegments !== 72) {
+    fail(
+      `IARU VHF+: expected 72 legacy segments pending verification, found ${iaruMigrationStats.pendingVhfUpSegments}`,
+    );
+  }
+
+  const vhf50Beacon = iaruSegments.find(
+    (segment) =>
+      segment.bandId === "6m" &&
+      segment.fromHz === 50_000_000 &&
+      segment.toHz === 50_030_000,
+  );
+
+  if (vhf50Beacon?.maxBandwidthHz !== 500) {
+    fail("IARU VHF: 50.000-50.030 MHz must have 500 Hz max bandwidth");
+  }
+
+  const vhf70BeaconSegments = iaruSegments.filter(
+    (segment) =>
+      segment.bandId === "4m" &&
+      segment.fromHz >= 70_000_000 &&
+      segment.toHz <= 70_100_000,
+  );
+
+  if (
+    vhf70BeaconSegments.length !== 2 ||
+    vhf70BeaconSegments.some((segment) => segment.maxBandwidthHz !== 1_000)
+  ) {
+    fail("IARU VHF: both 70.000-70.100 MHz beacon segments must have 1000 Hz max bandwidth");
   }
 
   const seenMarkerIds = new Set<string>();
@@ -235,6 +266,7 @@ function validateIaruData(): void {
 
   console.log(`OK: ${iaruSegments.length} canonical IARU segments validated`);
   console.log(`OK: ${iaruMigrationStats.verifiedHfSegments} HF segments current/verified`);
+  console.log(`OK: ${iaruMigrationStats.verifiedVhfUpSegments} VHF+ segments current/verified`);
   console.log(`OK: ${iaruMigrationStats.pendingVhfUpSegments} VHF+ segments pending verification`);
   console.log(`OK: ${iaruActivityMarkers.length} activity markers normalized`);
 }

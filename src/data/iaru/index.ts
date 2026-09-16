@@ -22,6 +22,8 @@ const HF_BAND_IDS = new Set([
   "10m",
 ]);
 
+const VERIFIED_VHF_UP_BAND_IDS = new Set(["6m", "4m", "2m"]);
+
 function decimalFrequencyToHz(value: string, unit: string): number {
   const decimals = UNIT_DECIMALS[unit.trim().toLowerCase()];
 
@@ -64,21 +66,67 @@ function isNoviSad2020WidebandSegment(segment: IaruSegment): boolean {
   );
 }
 
+function applyCurrentVhfCorrections(segment: IaruSegment): void {
+  // The currently published Region 1 VHF table (effective December 2020)
+  // gives 500 Hz across 50.000-50.100 MHz, including the coordinated
+  // beacon sub-segment 50.000-50.030 MHz.
+  if (
+    segment.bandId === "6m" &&
+    segment.fromHz === 50_000_000 &&
+    segment.toHz === 50_030_000
+  ) {
+    segment.maxBandwidthHz = 500;
+    segment.notes = [
+      ...(segment.notes ?? []),
+      "Current IARU Region 1 VHF table specifies a 500 Hz maximum bandwidth for 50.000–50.100 MHz.",
+    ];
+  }
+
+  // The current 70 MHz table specifies 1000 Hz for both beacon segments.
+  if (
+    segment.bandId === "4m" &&
+    ((segment.fromHz === 70_000_000 && segment.toHz === 70_090_000) ||
+      (segment.fromHz === 70_090_000 && segment.toHz === 70_100_000))
+  ) {
+    segment.maxBandwidthHz = 1_000;
+    segment.notes = [
+      ...(segment.notes ?? []),
+      "Current IARU Region 1 VHF table specifies a 1000 Hz maximum bandwidth for this 70 MHz beacon segment.",
+    ];
+  }
+
+  if (
+    segment.bandId === "2m" &&
+    segment.fromHz === 144_491_000 &&
+    segment.toHz === 144_493_000
+  ) {
+    segment.modes = ["MGM and Telegraphy"];
+    segment.usage = ["Personal weak-signal beacons", "Experimental MGM"];
+  }
+}
+
 function normalizeLegacyIaruSegments(): IaruSegment[] {
   return bands.flatMap((band) =>
     band.iaru.map((legacy, index) => {
+      const isHf = HF_BAND_IDS.has(band.route);
+      const isVerifiedVhfUp = VERIFIED_VHF_UP_BAND_IDS.has(band.route);
+
       const segment: IaruSegment = {
         id: `iaru-${band.route}-${String(index + 1).padStart(3, "0")}`,
         bandId: band.route,
         fromHz: decimalFrequencyToHz(legacy.from, band.iaruUnits),
         toHz: decimalFrequencyToHz(legacy.to, band.iaruUnits),
         modes: [legacy.desc],
-        sourceId: HF_BAND_IDS.has(band.route)
+        sourceId: isHf
           ? "iaru-r1-hf"
-          : "original-bandplan",
-        sourceReference: HF_BAND_IDS.has(band.route)
+          : isVerifiedVhfUp
+            ? "iaru-r1-vhf-up"
+            : "original-bandplan",
+        sourceReference: isHf
           ? `${band.name} — IARU Region 1 HF band plan; Novi Sad 2020 changes applied`
-          : `${band.name} — legacy IARU data pending verification against current IARU Region 1 VHF+ bandplan`,
+          : isVerifiedVhfUp
+            ? `${band.name} — currently valid IARU Region 1 VHF band plan; VHF table effective December 2020 (VGC Novi Sad)`
+            : `${band.name} — legacy IARU data pending verification against current IARU Region 1 VHF+ bandplan`,
       };
 
       if (legacy.bw !== undefined && legacy.bw > 0) {
@@ -98,6 +146,10 @@ function normalizeLegacyIaruSegments(): IaruSegment[] {
           ...(segment.notes ?? []),
           "The former 6 kHz maximum-bandwidth restriction was removed. Experimental wide-bandwidth operation must be non-interfering to other stations, including the amateur-satellite service segment at 29300–29510 kHz.",
         ];
+      }
+
+      if (isVerifiedVhfUp) {
+        applyCurrentVhfCorrections(segment);
       }
 
       return segment;
@@ -125,9 +177,10 @@ const noviSad2020Satellite15m: IaruSegment = {
  * Canonical IARU data used by the new data layer.
  *
  * HF is based on the existing Region 1 table with the approved Novi Sad 2020
- * changes applied. VHF and above are normalized losslessly from the legacy
- * project but deliberately keep sourceId=original-bandplan until each band is
- * checked against the currently valid IARU Region 1 VHF+ bandplan.
+ * changes applied. The 50, 70 and 144 MHz bands have been checked against the
+ * currently published IARU Region 1 VHF table. Higher bands remain normalized
+ * losslessly from the legacy project with sourceId=original-bandplan until each
+ * group is checked against the currently valid VHF+ bandplan.
  */
 export const iaruSegments: IaruSegment[] = [
   ...legacyNormalizedIaruSegments,
@@ -151,6 +204,9 @@ export const iaruMigrationStats = {
   canonicalSegments: iaruSegments.length,
   verifiedHfSegments: iaruSegments.filter(
     (segment) => segment.sourceId === "iaru-r1-hf",
+  ).length,
+  verifiedVhfUpSegments: iaruSegments.filter(
+    (segment) => segment.sourceId === "iaru-r1-vhf-up",
   ).length,
   pendingVhfUpSegments: iaruSegments.filter(
     (segment) => segment.sourceId === "original-bandplan",
