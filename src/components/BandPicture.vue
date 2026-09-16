@@ -9,6 +9,8 @@ const props = defineProps<{
   units: string;
   showName: boolean;
   windowWidth?: number;
+  modeActive?: boolean;
+  modeRanges?: { from: number; to: number }[];
   highlight?: { from: number; to: number; fromLabel: string; toLabel: string };
   marker?: { freq: number; label: string };
 }>();
@@ -19,6 +21,13 @@ const width = windowWidth - (props.showName ? 20 : 0);
 
 const toPixel = (freq: number) =>
   ((freq - props.from) / bandwidth) * width + 0.25;
+
+function sliceMatchesMode(slice: { from: number; to: number }): boolean {
+  if (!props.modeActive) return true;
+  return (props.modeRanges ?? []).some(
+    (range) => slice.from < range.to && slice.to > range.from,
+  );
+}
 
 const hlStart = computed(() =>
   props.highlight ? Math.max(0.25, toPixel(props.highlight.from)) : 0.25,
@@ -79,10 +88,13 @@ const endLabelLower = computed(
         :height="slice.lane === 'bottom' ? 6 : 12"
         :x="toPixel(slice.from)"
         :width="Math.max(0, toPixel(slice.to) - toPixel(slice.from))"
-        :class="slice.mode"
+        :class="[
+          slice.mode,
+          { 'mode-dim': modeActive && !sliceMatchesMode(slice) },
+        ]"
       />
       <text
-        v-if="slice.text"
+        v-if="slice.text && (!modeActive || sliceMatchesMode(slice))"
         class="bandmode"
         :class="slice.mode"
         :y="slice.lane === 'bottom' ? 19 : 13"
@@ -104,14 +116,14 @@ const endLabelLower = computed(
       />
 
       <line
-        v-if="typeof slice.startText !== 'undefined' && !highlight && !marker"
+        v-if="typeof slice.startText !== 'undefined' && !highlight && !marker && (!modeActive || sliceMatchesMode(slice))"
         :y1="slice.lane === 'bottom' ? 14 : 8"
         :y2="20 + Math.abs(slice.startText) * 8"
         :x1="toPixel(slice.from) - 0.25"
         :x2="toPixel(slice.from) - 0.25"
       />
       <text
-        v-if="typeof slice.startText !== 'undefined' && slice.startText !== 0 && !highlight && !marker"
+        v-if="typeof slice.startText !== 'undefined' && slice.startText !== 0 && !highlight && !marker && (!modeActive || sliceMatchesMode(slice))"
         :x="toPixel(slice.from) - 0.25 + (slice.startText < 0 ? -2 : 2)"
         :y="20 + Math.abs(slice.startText) * 8"
         :text-anchor="slice.startText < 0 ? 'end' : 'start'"
@@ -120,14 +132,14 @@ const endLabelLower = computed(
       </text>
 
       <line
-        v-if="typeof slice.endText !== 'undefined' && !highlight && !marker"
+        v-if="typeof slice.endText !== 'undefined' && !highlight && !marker && (!modeActive || sliceMatchesMode(slice))"
         :y1="slice.lane === 'bottom' ? 14 : 8"
         :y2="20 + Math.abs(slice.endText) * 8"
         :x1="toPixel(slice.to) - 0.25"
         :x2="toPixel(slice.to) - 0.25"
       />
       <text
-        v-if="typeof slice.endText !== 'undefined' && slice.endText !== 0 && !highlight && !marker"
+        v-if="typeof slice.endText !== 'undefined' && slice.endText !== 0 && !highlight && !marker && (!modeActive || sliceMatchesMode(slice))"
         :x="toPixel(slice.to) - 0.25 + (slice.endText < 0 ? -2 : 2)"
         :y="20 + Math.abs(slice.endText) * 8"
         :text-anchor="slice.endText < 0 ? 'end' : 'start'"
