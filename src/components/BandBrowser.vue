@@ -76,8 +76,8 @@ onMounted(() => {
   <div>
     <BandLegend />
 
-    <div class="mode-filter" aria-label="Darba veida filtrs">
-      <span class="mode-filter__label">Režīms:</span>
+    <div class="mode-filter" aria-label="IARU lietojuma filtrs">
+      <span class="mode-filter__label">IARU lietojums:</span>
       <div class="toolbar mode-filter__toolbar">
         <button
           v-for="mode in MODE_FILTERS"
@@ -92,16 +92,21 @@ onMounted(() => {
       </div>
     </div>
 
+    <p v-if="selectedMode !== 'all'" class="mode-filter__note">
+      Krāsaini paliek tikai segmenti, kuros {{ MODE_FILTER_LABELS[selectedMode] }} ir tieši norādīts IARU joslu plānā.
+      “All modes” segmenti netiek automātiski pieskaitīti izvēlētajam režīmam.
+    </p>
+
     <div v-if="filteredBands.length" class="row row--grow-cards">
       <div v-for="band in filteredBands" :key="band.route" class="col">
         <a :href="`/band-${band.route}-${priv}`" class="card clickable">
-          <BandCard :band="band" :priv="priv" :width="180" />
+          <BandCard :band="band" :priv="priv" :width="180" :mode="selectedMode" />
         </a>
       </div>
     </div>
 
     <div v-else class="filter-empty">
-      Šai licences kategorijai izvēlētajā režīmā joslas netika atrastas.
+      Šai licences kategorijai izvēlētais režīms nav tieši norādīts nevienā IARU segmentā.
     </div>
   </div>
 </template>
@@ -112,7 +117,7 @@ onMounted(() => {
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
-  margin: 0 0 16px;
+  margin: 0 0 6px;
 }
 
 .mode-filter__label {
@@ -128,6 +133,12 @@ onMounted(() => {
   border: 0;
   font: inherit;
   color: inherit;
+}
+
+.mode-filter__note {
+  margin: 0 0 16px;
+  color: #555;
+  font-size: 12px;
 }
 
 .filter-empty {
