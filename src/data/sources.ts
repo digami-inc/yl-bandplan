@@ -58,6 +58,19 @@ export const sources: Record<string, DataSource> = {
     ],
   },
 
+  wsjtx: {
+    id: "wsjtx",
+    title: "WSJT-X v3.0.2 default working frequencies",
+    url: "https://github.com/WSJTX/wsjtx/blob/v3.0.2/models/FrequencyList.cpp",
+    revision: "v3.0.2",
+    verifiedOn: "2026-09-16",
+    notes: [
+      "FT4 un FT8 grāmatzīmēm izmantotas WSJT-X preferred/default dial frekvences.",
+      "DXpedition un intercontinental alternatīvās frekvences netiek izmantotas kā pamatgrāmatzīmes.",
+      "Šis ir aktivitāšu frekvenču avots, nevis Latvijas juridisko raidīšanas tiesību avots.",
+    ],
+  },
+
   originalBandplan: {
     id: "original-bandplan",
     title: "Original bandplan.yl2.lv / bandplan.hex.id.lv project",
