@@ -6,6 +6,7 @@ import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useClickOutside } from "../composables/useClickOutside";
 import { getIaruSourcesForBand } from "../data/iaru/presentation";
 import { getIaruDisplayRowsForPrivilege } from "../data/iaru/licence-filter";
+import { getActivityDisplayMarkers } from "../data/iaru/activity-presentation";
 import {
   getLegalDisplayRows,
   getLegalSource,
@@ -20,6 +21,7 @@ const legalRows = getLegalDisplayRows(props.band, props.priv);
 const legalSource = getLegalSource();
 const iaruRows = getIaruDisplayRowsForPrivilege(props.band, props.priv);
 const iaruSources = getIaruSourcesForBand(props.band);
+const activityMarkers = getActivityDisplayMarkers(props.band);
 
 const containerRef = ref<HTMLElement | null>(null);
 
@@ -192,7 +194,7 @@ const effectiveMarker = computed(() => {
         </p>
       </div>
 
-      <div class="card-content" v-if="band.bookmarks">
+      <div class="card-content" v-if="activityMarkers.length">
         <h2>Grāmatzīmes</h2>
         <table>
           <tbody>
@@ -201,8 +203,8 @@ const effectiveMarker = computed(() => {
               <th>Apraksts</th>
             </tr>
             <tr
-              v-for="(mark, id) in band.bookmarks"
-              :key="id"
+              v-for="mark in activityMarkers"
+              :key="mark.id"
               style="cursor: pointer"
               @mouseenter="hoveredMarker = mark.pos"
               @mouseleave="hoveredMarker = null"
