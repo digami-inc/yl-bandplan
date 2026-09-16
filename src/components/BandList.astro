@@ -1,5 +1,6 @@
 ---
 import BandCard from "./BandCard.vue";
+import BandLegend from "./BandLegend.vue";
 import { bands } from "../bandplan";
 
 export interface Props {
@@ -15,6 +16,7 @@ const activeBands = bands.filter(
 ---
 
 <div>
+  <BandLegend />
   <div class="row row--grow-cards">
     {
       activeBands.map((band) => (
