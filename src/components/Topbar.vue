@@ -34,7 +34,7 @@ defineProps<{
     </div>
     <div v-else class="toolbar">
       <a
-        href="/"
+        href="/?priv=all"
         class="menu"
         :class="{ active: priv == 'all' || priv == undefined }"
         >All</a
