@@ -1,4 +1,5 @@
 import { bands } from "../bandplan";
+import { getIaruDisplayRowsForPrivilege } from "./iaru/licence-filter";
 import { getBandVisualModel } from "./visualization";
 
 function fail(message: string): never {
@@ -63,7 +64,8 @@ if (band9cm.toHz !== 3_475_000_000) {
   fail(`9cm: IARU visualization envelope must extend to 3475 MHz, got ${band9cm.toHz} Hz`);
 }
 
-const band40mB = getBandVisualModel(bandByRoute("40m"), "b");
+const band40m = bandByRoute("40m");
+const band40mB = getBandVisualModel(band40m, "b");
 const band40mBRow = band40mB.rows[0];
 if (
   !band40mBRow ||
@@ -83,12 +85,26 @@ if (!band40mBRow.slices.every((slice) => slice.kind === "legal-restriction")) {
   fail("40m/B: restricted-mode visualization must remain marked as legally constrained");
 }
 
-const band2mA = getBandVisualModel(bandByRoute("2m"), "a");
+const band40mAllIaru = getIaruDisplayRowsForPrivilege(band40m, "all");
+const band40mBIaru = getIaruDisplayRowsForPrivilege(band40m, "b");
+if (band40mBIaru.length === 0 || band40mBIaru.length >= band40mAllIaru.length) {
+  fail("40m/B: licence-filtered IARU table must contain a reduced non-empty row set");
+}
+if (
+  band40mBIaru.some(
+    (row) => row.fromHz < 7_010_000 || row.toHz > 7_080_000,
+  )
+) {
+  fail("40m/B: licence-filtered IARU rows must stay inside 7010-7080 kHz");
+}
+
+const band2m = bandByRoute("2m");
+const band2mA = getBandVisualModel(band2m, "a");
 if (band2mA.rows.some((row) => row.slices.some((slice) => slice.kind === "legal-restriction"))) {
   fail("2m/A: special 1000 W rule must not restrict the underlying unrestricted 100 W allocation");
 }
 
-const band2mC = getBandVisualModel(bandByRoute("2m"), "c");
+const band2mC = getBandVisualModel(band2m, "c");
 const band2mCRow = band2mC.rows[0];
 if (!band2mCRow || band2mCRow.legalRanges.length !== 1) {
   fail("2m/C: canonical legal range missing");
@@ -106,4 +122,18 @@ if (!band2mCRow.slices.every((slice) => slice.kind === "legal-restriction")) {
   fail("2m/C: emission-limited visualization must remain marked as legally constrained");
 }
 
+const band2mAllIaru = getIaruDisplayRowsForPrivilege(band2m, "all");
+const band2mCIaru = getIaruDisplayRowsForPrivilege(band2m, "c");
+if (band2mCIaru.length === 0 || band2mCIaru.length >= band2mAllIaru.length) {
+  fail("2m/C: licence-filtered IARU table must contain a reduced non-empty row set");
+}
+if (
+  band2mCIaru.some(
+    (row) => row.fromHz < 144_000_000 || row.toHz > 146_000_000,
+  )
+) {
+  fail("2m/C: licence-filtered IARU rows must stay inside 144-146 MHz");
+}
+
 console.log(`OK: ${bands.length} canonical band visualizations validated`);
+console.log("OK: licence-filtered IARU detail tables validated");
