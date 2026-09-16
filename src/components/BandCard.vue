@@ -24,7 +24,7 @@ const compactMode = computed(
 <template>
   <div
     :class="[
-      class,
+      props.class,
       compactMode ? 'band-card-content--compact' : 'band-card-content--full',
     ]"
     class="card-content card-content--nobottom band-card-content"
