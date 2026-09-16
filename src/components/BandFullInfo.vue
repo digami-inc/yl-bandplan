@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Band } from "../bandplan";
 import BandCard from "./BandCard.vue";
+import BandLegend from "./BandLegend.vue";
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useClickOutside } from "../composables/useClickOutside";
 import { getIaruSourcesForBand } from "../data/iaru/presentation";
@@ -138,6 +139,7 @@ const effectiveMarker = computed(() => {
 
       <div class="card-content">
         <h2>IARU Region 1 — {{ band.name }} joslas plāns</h2>
+        <BandLegend />
         <p v-if="priv != 'all'" class="sm">
           Rādīti tikai {{ priv.toUpperCase() }} kategorijas atļautajam darbam atbilstošie IARU segmenti.
           Juridiskie nosacījumi ir MK noteikumu tabulā zemāk.
