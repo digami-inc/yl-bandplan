@@ -1,6 +1,11 @@
 import { bands } from "../bandplan";
 import { getIaruDisplayRowsForPrivilege } from "./iaru/licence-filter";
-import { MODE_FILTERS, bandMatchesMode } from "./mode-filter";
+import {
+  MODE_FILTERS,
+  bandMatchesMode,
+  getModeVisualRanges,
+  rowMatchesMode,
+} from "./mode-filter";
 import { getBandVisualModel } from "./visualization";
 
 function fail(message: string): never {
@@ -139,6 +144,12 @@ if (
 if (MODE_FILTERS.join(",") !== "all,cw,ssb,digi,fm,sat,rep,beacon") {
   fail("mode filter set changed unexpectedly");
 }
+if (rowMatchesMode("All modes", "cw") || rowMatchesMode("All modes", "fm")) {
+  fail("explicit mode filter must not treat generic All modes as CW or FM");
+}
+if (!rowMatchesMode("CW, SSB", "cw") || !rowMatchesMode("CW, SSB", "ssb")) {
+  fail("explicit CW/SSB mode matching failed");
+}
 if (!bandMatchesMode(bandByRoute("30m"), "a", "cw")) {
   fail("30m/A must be visible in CW mode filter");
 }
@@ -154,7 +165,13 @@ if (!bandMatchesMode(band2m, "a", "sat")) {
 if (!bandMatchesMode(band40m, "b", "cw")) {
   fail("40m/B must be visible in CW mode filter");
 }
+if (getModeVisualRanges(band2m, "a", "fm").length === 0) {
+  fail("2m/A FM mode filter must produce visual highlight ranges");
+}
+if (getModeVisualRanges(band2m, "a", "all").length !== 0) {
+  fail("All mode filter must not dim any visualization ranges");
+}
 
 console.log(`OK: ${bands.length} canonical band visualizations validated`);
 console.log("OK: licence-filtered IARU detail tables validated");
-console.log("OK: licence and mode filters validated");
+console.log("OK: explicit licence and mode filters validated");
