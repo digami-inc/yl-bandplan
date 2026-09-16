@@ -40,6 +40,19 @@ export interface LegalRule extends FrequencyRange {
   power: PowerLimit;
 
   maxBandwidthHz?: number;
+
+  /**
+   * Juridiski atļautie darba veidi, ja konkrētajam noteikumam tie ir ierobežoti.
+   * Piemēram: CW, SSB, MGM.
+   */
+  allowedModes?: string[];
+
+  /**
+   * Juridiski atļautās izstarojuma klases, ja tās ir noteiktas.
+   * Piemēram: F3E, G3E, FXW.
+   */
+  emissionClasses?: string[];
+
   conditions?: string[];
 
   sourceId: string;
