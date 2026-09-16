@@ -7,16 +7,18 @@ import {
   getIaruDisplayRows,
   getIaruSourcesForBand,
 } from "../data/iaru/presentation";
+import {
+  getLegalDisplayRows,
+  getLegalSource,
+} from "../data/lv/presentation";
 
 const props = defineProps<{
   band: Band;
   priv: string;
 }>();
 
-const rules = props.band.rules.filter(
-  (r) => props.priv == "all" || r.class == props.priv.toUpperCase(),
-);
-
+const legalRows = getLegalDisplayRows(props.band, props.priv);
+const legalSource = getLegalSource();
 const iaruRows = getIaruDisplayRows(props.band);
 const iaruSources = getIaruSourcesForBand(props.band);
 
@@ -114,7 +116,7 @@ const effectiveMarker = computed(() => {
 
 <template>
   <div ref="containerRef" @click="deselect">
-    <div class="card card--topmargin" v-if="rules.length > 0">
+    <div class="card card--topmargin" v-if="legalRows.length > 0">
       <a v-if="priv == 'all'" href="/" class="card-close">✕</a>
       <a v-else :href="`/priv-${priv}`" class="card-close">✕</a>
       <BandCard
@@ -218,17 +220,35 @@ const effectiveMarker = computed(() => {
             <div>Radiofrekvenču josla</div>
             <div class="narrow">Sadalījuma kategorija</div>
             <div class="narrow">Jauda</div>
-            <div class="wide sm">Piezīmes</div>
+            <div class="wide sm">Nosacījumi un skaidrojumi</div>
           </div>
 
-          <div v-for="(rule, id) in rules" :key="id" class="table-row">
-            <div v-if="priv == 'all'" class="digit">{{ rule.class }}</div>
-            <div>{{ rule.band }}</div>
-            <div class="narrow">{{ rule.cat }}</div>
-            <div class="narrow">{{ rule.pwr }}</div>
-            <div class="wide sm">{{ rule.notes }}</div>
+          <div v-for="rule in legalRows" :key="rule.id" class="table-row">
+            <div v-if="priv == 'all'" class="digit">{{ rule.licenceClass }}</div>
+            <div>{{ rule.from }} - {{ rule.to }} {{ rule.unit }}</div>
+            <div class="narrow">{{ rule.allocation }}</div>
+            <div class="narrow">{{ rule.power }}</div>
+            <div class="wide sm">
+              <div v-for="note in rule.notes" :key="note">{{ note }}</div>
+              <div v-if="rule.glossary.length" class="sm">
+                <strong>Apzīmējumi:</strong>
+                <span v-for="(entry, index) in rule.glossary" :key="entry.id">
+                  <span v-if="index">; </span>{{ entry.term }} — {{ entry.short }}
+                </span>
+              </div>
+              <div class="sm">{{ rule.sourceReference }}</div>
+            </div>
           </div>
         </div>
+
+        <p class="sm">
+          Avots:
+          <a :href="legalSource.url" target="_blank" rel="noopener noreferrer">
+            {{ legalSource.title }}
+          </a>
+          <span v-if="legalSource.revision"> · {{ legalSource.revision }}</span>
+          · pārbaudīts {{ legalSource.verifiedOn }}.
+        </p>
       </div>
     </div>
     <div class="card card--topmargin" v-else>
