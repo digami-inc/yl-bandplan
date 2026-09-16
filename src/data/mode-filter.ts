@@ -1,6 +1,6 @@
 import type { Band } from "../bandplan";
-import { getBandVisualModel } from "./visualization";
 import { getIaruDisplayRowsForPrivilege } from "./iaru/licence-filter";
+import { getBandVisualModel } from "./visualization";
 
 export const MODE_FILTERS = ["all", "cw", "ssb", "digi", "fm", "sat", "rep", "beacon"] as const;
 export type ModeFilter = (typeof MODE_FILTERS)[number];
@@ -16,29 +16,36 @@ export const MODE_FILTER_LABELS: Record<ModeFilter, string> = {
   beacon: "BEACON",
 };
 
+export interface ModeVisualRange {
+  from: number;
+  to: number;
+}
+
+const UNIT_HZ: Record<string, number> = {
+  hz: 1,
+  khz: 1_000,
+  mhz: 1_000_000,
+  ghz: 1_000_000_000,
+};
+
 export function isModeFilter(value: string | null | undefined): value is ModeFilter {
   return Boolean(value && MODE_FILTERS.includes(value.toLowerCase() as ModeFilter));
 }
 
-function containsAllMode(text: string): boolean {
-  return /\ball[ -]?modes?\b/.test(text);
-}
-
-function rowMatchesMode(text: string, mode: ModeFilter): boolean {
+export function rowMatchesMode(text: string, mode: ModeFilter): boolean {
   if (mode === "all") return true;
 
   const value = text.toLowerCase();
-  const allMode = containsAllMode(value);
 
   switch (mode) {
     case "cw":
-      return allMode || /\bcw\b|telegraph/.test(value);
+      return /\bcw\b|telegraph/.test(value);
     case "ssb":
-      return allMode || /\bssb\b/.test(value);
+      return /\bssb\b/.test(value);
     case "digi":
-      return allMode || /\bmgm\b|digital|digimode|\bdata\b/.test(value);
+      return /\bmgm\b|digital|digimode|\bdata\b/.test(value);
     case "fm":
-      return allMode || /\bfm\b|digital voice/.test(value);
+      return /\bfm\b|digital voice/.test(value);
     case "sat":
       return /satellite|space communication/.test(value);
     case "rep":
@@ -53,12 +60,32 @@ export function bandAvailableForPrivilege(band: Band, priv: string): boolean {
   return getBandVisualModel(band, priv).rows.length > 0;
 }
 
-export function bandMatchesMode(band: Band, priv: string, mode: ModeFilter): boolean {
-  if (mode === "all") return bandAvailableForPrivilege(band, priv);
-  if (!bandAvailableForPrivilege(band, priv)) return false;
-
+export function getModeRowsForBand(band: Band, priv: string, mode: ModeFilter) {
   const rows = getIaruDisplayRowsForPrivilege(band, priv);
-  return rows.some((row) =>
+  if (mode === "all") return rows;
+  return rows.filter((row) =>
     rowMatchesMode(`${row.description} ${row.note ?? ""}`, mode),
   );
+}
+
+export function getModeVisualRanges(
+  band: Band,
+  priv: string,
+  mode: ModeFilter,
+): ModeVisualRange[] {
+  if (mode === "all") return [];
+
+  const unit = UNIT_HZ[band.units.toLowerCase()];
+  if (!unit) throw new Error(`Unknown frequency unit: ${band.units}`);
+
+  return getModeRowsForBand(band, priv, mode).map((row) => ({
+    from: row.fromHz / unit,
+    to: row.toHz / unit,
+  }));
+}
+
+export function bandMatchesMode(band: Band, priv: string, mode: ModeFilter): boolean {
+  if (!bandAvailableForPrivilege(band, priv)) return false;
+  if (mode === "all") return true;
+  return getModeRowsForBand(band, priv, mode).length > 0;
 }
