@@ -45,9 +45,14 @@ function setMode(mode: ModeFilter) {
 onMounted(() => {
   const url = new URL(window.location.href);
   const currentPriv = props.priv.toLowerCase();
+  const explicitPriv = url.searchParams.get("priv")?.toLowerCase();
   const storedPriv = localStorage.getItem(PRIV_STORAGE_KEY)?.toLowerCase();
 
-  if (
+  if (explicitPriv === "all" && currentPriv === "all") {
+    localStorage.setItem(PRIV_STORAGE_KEY, "all");
+    url.searchParams.delete("priv");
+    history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+  } else if (
     url.pathname === "/" &&
     currentPriv === "all" &&
     isPrivilege(storedPriv) &&
@@ -55,13 +60,12 @@ onMounted(() => {
   ) {
     window.location.replace(`/priv-${storedPriv}${url.search}${url.hash}`);
     return;
-  }
-
-  if (isPrivilege(currentPriv)) {
+  } else if (isPrivilege(currentPriv)) {
     localStorage.setItem(PRIV_STORAGE_KEY, currentPriv);
   }
 
-  const fromUrl = url.searchParams.get("mode")?.toLowerCase();
+  const currentUrl = new URL(window.location.href);
+  const fromUrl = currentUrl.searchParams.get("mode")?.toLowerCase();
   const storedMode = localStorage.getItem(MODE_STORAGE_KEY)?.toLowerCase();
 
   if (isModeFilter(fromUrl)) selectedMode.value = fromUrl;
