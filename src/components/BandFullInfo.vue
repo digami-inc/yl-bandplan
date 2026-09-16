@@ -3,10 +3,8 @@ import type { Band } from "../bandplan";
 import BandCard from "./BandCard.vue";
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useClickOutside } from "../composables/useClickOutside";
-import {
-  getIaruDisplayRows,
-  getIaruSourcesForBand,
-} from "../data/iaru/presentation";
+import { getIaruSourcesForBand } from "../data/iaru/presentation";
+import { getIaruDisplayRowsForPrivilege } from "../data/iaru/licence-filter";
 import {
   getLegalDisplayRows,
   getLegalSource,
@@ -19,7 +17,7 @@ const props = defineProps<{
 
 const legalRows = getLegalDisplayRows(props.band, props.priv);
 const legalSource = getLegalSource();
-const iaruRows = getIaruDisplayRows(props.band);
+const iaruRows = getIaruDisplayRowsForPrivilege(props.band, props.priv);
 const iaruSources = getIaruSourcesForBand(props.band);
 
 const containerRef = ref<HTMLElement | null>(null);
@@ -140,6 +138,10 @@ const effectiveMarker = computed(() => {
 
       <div class="card-content">
         <h2>IARU Region 1 — {{ band.name }} joslas plāns</h2>
+        <p v-if="priv != 'all'" class="sm">
+          Rādīti tikai {{ priv.toUpperCase() }} kategorijas atļautajam darbam atbilstošie IARU segmenti.
+          Juridiskie nosacījumi ir MK noteikumu tabulā zemāk.
+        </p>
         <div class="table-container">
           <div class="table-row header">
             <div>{{ band.iaruUnits }}</div>
