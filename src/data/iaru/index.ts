@@ -4,6 +4,7 @@ import {
   currentVhfUpReplacementSegments,
   replacedVhfUpBandIds,
 } from "./current-vhf-up";
+import { wsjtxActivityMarkers } from "./wsjtx-activity-markers";
 
 const UNIT_DECIMALS: Record<string, number> = {
   khz: 3,
@@ -198,7 +199,7 @@ export const iaruSegments: IaruSegment[] = [
     a.fromHz - b.fromHz || a.toHz - b.toHz || a.id.localeCompare(b.id),
 );
 
-export const iaruActivityMarkers: ActivityMarker[] = bands.flatMap((band) =>
+const legacyActivityMarkers: ActivityMarker[] = bands.flatMap((band) =>
   (band.bookmarks ?? []).map((bookmark, index) => ({
     id: `activity-${band.route}-${String(index + 1).padStart(3, "0")}`,
     bandId: band.route,
@@ -208,6 +209,26 @@ export const iaruActivityMarkers: ActivityMarker[] = bands.flatMap((band) =>
     sourceId: "original-bandplan",
     sourceReference: `${band.name} bookmark from original bandplan project`,
   })),
+);
+
+function activityMarkerKey(marker: ActivityMarker): string {
+  return `${marker.bandId}:${marker.frequencyHz}:${marker.name.trim().toLowerCase()}`;
+}
+
+const wsjtxActivityMarkerKeys = new Set(
+  wsjtxActivityMarkers.map(activityMarkerKey),
+);
+
+export const iaruActivityMarkers: ActivityMarker[] = [
+  ...legacyActivityMarkers.filter(
+    (marker) => !wsjtxActivityMarkerKeys.has(activityMarkerKey(marker)),
+  ),
+  ...wsjtxActivityMarkers,
+].sort(
+  (a, b) =>
+    a.frequencyHz - b.frequencyHz ||
+    a.bandId.localeCompare(b.bandId) ||
+    a.name.localeCompare(b.name),
 );
 
 export const iaruMigrationStats = {
