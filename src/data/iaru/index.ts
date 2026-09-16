@@ -1,6 +1,9 @@
 import { bands } from "../../bandplan";
 import type { ActivityMarker, IaruSegment } from "../types";
-import { current70cmSegments } from "./current-vhf-up";
+import {
+  currentVhfUpReplacementSegments,
+  replacedVhfUpBandIds,
+} from "./current-vhf-up";
 
 const UNIT_DECIMALS: Record<string, number> = {
   khz: 3,
@@ -23,7 +26,14 @@ const HF_BAND_IDS = new Set([
   "10m",
 ]);
 
-const VERIFIED_VHF_UP_BAND_IDS = new Set(["6m", "4m", "2m", "13cm"]);
+// These bands are already structurally compatible with the currently published
+// IARU Region 1 plan and only need small verified corrections below.
+const VERIFIED_LEGACY_COMPATIBLE_VHF_UP_BAND_IDS = new Set([
+  "6m",
+  "4m",
+  "2m",
+  "13cm",
+]);
 
 function decimalFrequencyToHz(value: string, unit: string): number {
   const decimals = UNIT_DECIMALS[unit.trim().toLowerCase()];
@@ -68,9 +78,6 @@ function isNoviSad2020WidebandSegment(segment: IaruSegment): boolean {
 }
 
 function applyCurrentVhfCorrections(segment: IaruSegment): void {
-  // The currently published Region 1 VHF table (effective December 2020)
-  // gives 500 Hz across 50.000-50.100 MHz, including the coordinated
-  // beacon sub-segment 50.000-50.030 MHz.
   if (
     segment.bandId === "6m" &&
     segment.fromHz === 50_000_000 &&
@@ -79,11 +86,10 @@ function applyCurrentVhfCorrections(segment: IaruSegment): void {
     segment.maxBandwidthHz = 500;
     segment.notes = [
       ...(segment.notes ?? []),
-      "Current IARU Region 1 VHF table specifies a 500 Hz maximum bandwidth for 50.000–50.100 MHz.",
+      "Current IARU Region 1 VHF plan specifies a 500 Hz maximum bandwidth for 50.000–50.100 MHz.",
     ];
   }
 
-  // The current 70 MHz table specifies 1000 Hz for both beacon segments.
   if (
     segment.bandId === "4m" &&
     ((segment.fromHz === 70_000_000 && segment.toHz === 70_090_000) ||
@@ -92,7 +98,7 @@ function applyCurrentVhfCorrections(segment: IaruSegment): void {
     segment.maxBandwidthHz = 1_000;
     segment.notes = [
       ...(segment.notes ?? []),
-      "Current IARU Region 1 VHF table specifies a 1000 Hz maximum bandwidth for this 70 MHz beacon segment.",
+      "Current IARU Region 1 VHF plan specifies a 1000 Hz maximum bandwidth for this 70 MHz beacon segment.",
     ];
   }
 
@@ -101,7 +107,7 @@ function applyCurrentVhfCorrections(segment: IaruSegment): void {
     segment.fromHz === 144_491_000 &&
     segment.toHz === 144_493_000
   ) {
-    segment.modes = ["MGM and Telegraphy"];
+    segment.modes = ["MGM"];
     segment.usage = ["Personal weak-signal beacons", "Experimental MGM"];
   }
 }
@@ -110,7 +116,8 @@ function normalizeLegacyIaruSegments(): IaruSegment[] {
   return bands.flatMap((band) =>
     band.iaru.map((legacy, index) => {
       const isHf = HF_BAND_IDS.has(band.route);
-      const isVerifiedVhfUp = VERIFIED_VHF_UP_BAND_IDS.has(band.route);
+      const isVerifiedVhfUp =
+        VERIFIED_LEGACY_COMPATIBLE_VHF_UP_BAND_IDS.has(band.route);
 
       const segment: IaruSegment = {
         id: `iaru-${band.route}-${String(index + 1).padStart(3, "0")}`,
@@ -126,8 +133,8 @@ function normalizeLegacyIaruSegments(): IaruSegment[] {
         sourceReference: isHf
           ? `${band.name} — IARU Region 1 HF band plan; Novi Sad 2020 changes applied`
           : isVerifiedVhfUp
-            ? `${band.name} — currently valid IARU Region 1 VHF+ band plan`
-            : `${band.name} — legacy IARU data pending verification against current IARU Region 1 VHF+ bandplan`,
+            ? `${band.name} — IARU Region 1 VHF+ Handbook 10.03 (February 2026)`
+            : `${band.name} — legacy IARU data retained only for migration comparison`,
       };
 
       if (legacy.bw !== undefined && legacy.bw > 0) {
@@ -138,8 +145,6 @@ function normalizeLegacyIaruSegments(): IaruSegment[] {
         segment.notes = [legacy.note.trim()];
       }
 
-      // Novi Sad 2020 C4 Recommendation 04 removed the old 6 kHz maximum
-      // bandwidth restriction from 29000 to 29510 kHz.
       if (isNoviSad2020WidebandSegment(segment)) {
         delete segment.maxBandwidthHz;
         segment.sourceReference = "Novi Sad 2020 C4 Recommendation 04";
@@ -177,20 +182,21 @@ const noviSad2020Satellite15m: IaruSegment = {
 /**
  * Canonical IARU data used by the new data layer.
  *
- * HF is based on the existing Region 1 table with the approved Novi Sad 2020
- * changes applied. The 50, 70 and 144 MHz bands have been checked against the
- * currently published IARU Region 1 VHF table. The legacy 430-440 MHz table is
- * replaced by the Zlatibor 2023 plan, and the 2300-2450 MHz rows have been
- * checked against the current VHF+ handbook. Higher bands remain normalized
- * from the legacy project until each group is checked against the current plan.
+ * HF is the legacy Region 1 table with the approved Novi Sad 2020 changes.
+ * VHF+ is verified against the currently published Region 1 VHF+ Handbook
+ * 10.03 (February 2026). Bands whose old representation was materially stale
+ * are replaced by explicit current tables from current-vhf-up.ts.
  */
 export const iaruSegments: IaruSegment[] = [
   ...legacyNormalizedIaruSegments.filter(
-    (segment) => segment.bandId !== "70cm",
+    (segment) => !replacedVhfUpBandIds.has(segment.bandId),
   ),
-  ...current70cmSegments,
+  ...currentVhfUpReplacementSegments,
   noviSad2020Satellite15m,
-].sort((a, b) => a.fromHz - b.fromHz || a.toHz - b.toHz || a.id.localeCompare(b.id));
+].sort(
+  (a, b) =>
+    a.fromHz - b.fromHz || a.toHz - b.toHz || a.id.localeCompare(b.id),
+);
 
 export const iaruActivityMarkers: ActivityMarker[] = bands.flatMap((band) =>
   (band.bookmarks ?? []).map((bookmark, index) => ({

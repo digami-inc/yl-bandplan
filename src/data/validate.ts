@@ -31,23 +31,15 @@ function validateLegalRules(
   let previousFromHz = -1;
 
   for (const rule of rules) {
-    if (seenIds.has(rule.id)) {
-      fail(`duplicate rule id: ${rule.id}`);
-    }
+    if (seenIds.has(rule.id)) fail(`duplicate rule id: ${rule.id}`);
     seenIds.add(rule.id);
 
     if (!Number.isInteger(rule.fromHz) || !Number.isInteger(rule.toHz)) {
       fail(`${rule.id}: frequencies must be integer Hz values`);
     }
-
-    if (rule.fromHz <= 0 || rule.toHz <= 0) {
-      fail(`${rule.id}: frequencies must be positive`);
+    if (rule.fromHz <= 0 || rule.toHz <= 0 || rule.fromHz >= rule.toHz) {
+      fail(`${rule.id}: invalid frequency range`);
     }
-
-    if (rule.fromHz >= rule.toHz) {
-      fail(`${rule.id}: fromHz must be lower than toHz`);
-    }
-
     if (rule.fromHz < previousFromHz) {
       fail(`${rule.id}: rules are not ordered by starting frequency`);
     }
@@ -56,10 +48,7 @@ function validateLegalRules(
     if (!Number.isFinite(rule.power.maxWatts) || rule.power.maxWatts <= 0) {
       fail(`${rule.id}: invalid power limit`);
     }
-
-    if (!rule.power.sourceText.trim()) {
-      fail(`${rule.id}: missing original power text`);
-    }
+    if (!rule.power.sourceText.trim()) fail(`${rule.id}: missing original power text`);
 
     if (
       rule.maxBandwidthHz !== undefined &&
@@ -73,14 +62,9 @@ function validateLegalRules(
       ["emissionClasses", rule.emissionClasses],
     ] as const) {
       if (values !== undefined) {
-        if (values.length === 0) {
-          fail(`${rule.id}: ${fieldName} must not be empty`);
+        if (values.length === 0 || values.some((value) => !value.trim())) {
+          fail(`${rule.id}: ${fieldName} contains invalid values`);
         }
-
-        if (values.some((value) => !value.trim())) {
-          fail(`${rule.id}: ${fieldName} contains an empty value`);
-        }
-
         if (new Set(values).size !== values.length) {
           fail(`${rule.id}: ${fieldName} contains duplicate values`);
         }
@@ -97,11 +81,7 @@ function validateLegalRules(
 
     for (const conditionId of rule.conditions ?? []) {
       const condition = legalConditions[conditionId];
-
-      if (!condition) {
-        fail(`${rule.id}: unknown legal condition "${conditionId}"`);
-      }
-
+      if (!condition) fail(`${rule.id}: unknown legal condition "${conditionId}"`);
       requiredGlossaryIds.push(...(condition.glossaryIds ?? []));
     }
 
@@ -114,10 +94,7 @@ function validateLegalRules(
     if (!knownSourceIds.has(rule.sourceId)) {
       fail(`${rule.id}: unknown sourceId "${rule.sourceId}"`);
     }
-
-    if (!rule.sourceReference.trim()) {
-      fail(`${rule.id}: missing sourceReference`);
-    }
+    if (!rule.sourceReference.trim()) fail(`${rule.id}: missing sourceReference`);
   }
 
   console.log(`OK: ${rules.length} ${name} legal rules validated`);
@@ -127,51 +104,36 @@ function validateIaruData(): void {
   const seenSegmentIds = new Set<string>();
 
   if (iaruMigrationStats.legacySegments !== 180) {
-    fail(
-      `IARU migration: expected 180 legacy segments, found ${iaruMigrationStats.legacySegments}`,
-    );
+    fail(`IARU migration: expected 180 legacy segments, found ${iaruMigrationStats.legacySegments}`);
   }
-
-  if (iaruSegments.length !== 181) {
-    fail(`IARU: expected 181 canonical segments, found ${iaruSegments.length}`);
+  if (iaruSegments.length !== 191) {
+    fail(`IARU: expected 191 canonical segments, found ${iaruSegments.length}`);
   }
 
   for (const segment of iaruSegments) {
-    if (seenSegmentIds.has(segment.id)) {
-      fail(`IARU: duplicate segment id "${segment.id}"`);
-    }
+    if (seenSegmentIds.has(segment.id)) fail(`IARU: duplicate segment id "${segment.id}"`);
     seenSegmentIds.add(segment.id);
 
     if (!Number.isSafeInteger(segment.fromHz) || !Number.isSafeInteger(segment.toHz)) {
       fail(`${segment.id}: frequencies must be safe integer Hz values`);
     }
-
     if (segment.fromHz <= 0 || segment.toHz <= 0 || segment.fromHz >= segment.toHz) {
       fail(`${segment.id}: invalid frequency range`);
     }
-
     if (
       segment.maxBandwidthHz !== undefined &&
       (!Number.isInteger(segment.maxBandwidthHz) || segment.maxBandwidthHz <= 0)
     ) {
       fail(`${segment.id}: invalid maxBandwidthHz`);
     }
-
-    if (!segment.bandId.trim()) {
-      fail(`${segment.id}: missing bandId`);
-    }
-
+    if (!segment.bandId.trim()) fail(`${segment.id}: missing bandId`);
     if (segment.modes.length === 0 || segment.modes.some((mode) => !mode.trim())) {
       fail(`${segment.id}: modes must contain non-empty values`);
     }
-
     if (!knownSourceIds.has(segment.sourceId)) {
       fail(`${segment.id}: unknown sourceId "${segment.sourceId}"`);
     }
-
-    if (!segment.sourceReference?.trim()) {
-      fail(`${segment.id}: missing sourceReference`);
-    }
+    if (!segment.sourceReference?.trim()) fail(`${segment.id}: missing sourceReference`);
   }
 
   const stale10mBandwidth = iaruSegments.filter(
@@ -181,128 +143,100 @@ function validateIaruData(): void {
       segment.toHz <= 29_510_000 &&
       segment.maxBandwidthHz !== undefined,
   );
-
   if (stale10mBandwidth.length !== 0) {
-    fail(
-      `IARU HF: ${stale10mBandwidth.length} segment(s) still carry the pre-2020 6 kHz bandwidth restriction`,
-    );
+    fail(`IARU HF: ${stale10mBandwidth.length} segment(s) still carry the pre-2020 6 kHz restriction`);
   }
 
-  const satellite15m = iaruSegments.find(
-    (segment) => segment.id === "iaru-15m-satellite-2020",
-  );
-
-  if (
-    !satellite15m ||
-    satellite15m.fromHz !== 21_125_000 ||
-    satellite15m.toHz !== 21_450_000
-  ) {
+  const satellite15m = iaruSegments.find((segment) => segment.id === "iaru-15m-satellite-2020");
+  if (!satellite15m || satellite15m.fromHz !== 21_125_000 || satellite15m.toHz !== 21_450_000) {
     fail("IARU HF: Novi Sad 2020 15 m amateur-satellite recommendation missing");
   }
 
   if (iaruMigrationStats.verifiedHfSegments !== 82) {
-    fail(
-      `IARU HF: expected 82 verified/current HF segments, found ${iaruMigrationStats.verifiedHfSegments}`,
-    );
+    fail(`IARU HF: expected 82 verified/current HF segments, found ${iaruMigrationStats.verifiedHfSegments}`);
+  }
+  if (iaruMigrationStats.verifiedVhfUpSegments !== 109) {
+    fail(`IARU VHF+: expected 109 verified/current segments, found ${iaruMigrationStats.verifiedVhfUpSegments}`);
+  }
+  if (iaruMigrationStats.pendingVhfUpSegments !== 0) {
+    fail(`IARU VHF+: expected no pending canonical segments, found ${iaruMigrationStats.pendingVhfUpSegments}`);
   }
 
-  if (iaruMigrationStats.verifiedVhfUpSegments !== 46) {
-    fail(
-      `IARU VHF+: expected 46 verified/current segments, found ${iaruMigrationStats.verifiedVhfUpSegments}`,
-    );
-  }
+  const expectedVhfUpBandCounts: Record<string, number> = {
+    "6m": 8,
+    "4m": 5,
+    "2m": 14,
+    "70cm": 13,
+    "23cm": 18,
+    "13cm": 6,
+    "9cm": 5,
+    "6cm": 9,
+    "3cm": 9,
+    "12mm": 5,
+    "6mm": 3,
+    "4mm": 5,
+    "122G": 2,
+    "134G": 4,
+    "241G": 3,
+  };
 
-  if (iaruMigrationStats.pendingVhfUpSegments !== 53) {
-    fail(
-      `IARU VHF+: expected 53 legacy segments pending verification, found ${iaruMigrationStats.pendingVhfUpSegments}`,
+  for (const [bandId, expectedCount] of Object.entries(expectedVhfUpBandCounts)) {
+    const current = iaruSegments.filter(
+      (segment) => segment.bandId === bandId && segment.sourceId === "iaru-r1-vhf-up",
     );
+    if (current.length !== expectedCount) {
+      fail(`IARU VHF+ ${bandId}: expected ${expectedCount} verified segments, found ${current.length}`);
+    }
   }
 
   const vhf50Beacon = iaruSegments.find(
-    (segment) =>
-      segment.bandId === "6m" &&
-      segment.fromHz === 50_000_000 &&
-      segment.toHz === 50_030_000,
+    (segment) => segment.bandId === "6m" && segment.fromHz === 50_000_000 && segment.toHz === 50_030_000,
   );
-
   if (vhf50Beacon?.maxBandwidthHz !== 500) {
     fail("IARU VHF: 50.000-50.030 MHz must have 500 Hz max bandwidth");
   }
 
   const vhf70BeaconSegments = iaruSegments.filter(
-    (segment) =>
-      segment.bandId === "4m" &&
-      segment.fromHz >= 70_000_000 &&
-      segment.toHz <= 70_100_000,
+    (segment) => segment.bandId === "4m" && segment.fromHz >= 70_000_000 && segment.toHz <= 70_100_000,
   );
-
-  if (
-    vhf70BeaconSegments.length !== 2 ||
-    vhf70BeaconSegments.some((segment) => segment.maxBandwidthHz !== 1_000)
-  ) {
+  if (vhf70BeaconSegments.length !== 2 || vhf70BeaconSegments.some((segment) => segment.maxBandwidthHz !== 1_000)) {
     fail("IARU VHF: both 70.000-70.100 MHz beacon segments must have 1000 Hz max bandwidth");
   }
 
-  const expected70cm: Array<[number, number, number | undefined]> = [
-    [430_000_000, 432_000_000, undefined],
-    [432_000_000, 432_400_000, 2_700],
-    [432_400_000, 432_490_000, 500],
-    [432_491_000, 432_493_000, 500],
-    [432_500_000, 432_987_500, undefined],
-    [433_000_000, 433_387_500, undefined],
-    [433_400_000, 433_587_500, undefined],
-    [433_600_000, 434_000_000, undefined],
-    [434_000_000, 434_587_500, undefined],
-    [434_600_000, 434_987_500, undefined],
-    [435_000_000, 436_000_000, undefined],
-    [436_000_000, 438_000_000, undefined],
-    [438_000_000, 440_000_000, undefined],
-  ];
-
-  const actual70cm = iaruSegments
-    .filter((segment) => segment.bandId === "70cm")
-    .sort((a, b) => a.fromHz - b.fromHz || a.toHz - b.toHz);
-
-  if (actual70cm.length !== expected70cm.length) {
-    fail(`IARU UHF: expected ${expected70cm.length} current 70 cm segments, found ${actual70cm.length}`);
+  const band23End = Math.max(...iaruSegments.filter((segment) => segment.bandId === "23cm").map((segment) => segment.toHz));
+  if (band23End !== 1_300_000_000) {
+    fail(`IARU 23cm: current plan must extend to 1300 MHz, got ${band23End} Hz`);
   }
 
-  expected70cm.forEach(([fromHz, toHz, bandwidth], index) => {
-    const actual = actual70cm[index];
-    if (
-      actual.fromHz !== fromHz ||
-      actual.toHz !== toHz ||
-      actual.maxBandwidthHz !== bandwidth ||
-      actual.sourceId !== "iaru-r1-vhf-up"
-    ) {
-      fail(`IARU UHF: unexpected 70 cm segment at index ${index}`);
-    }
-  });
-
-  const current13cm = iaruSegments.filter(
-    (segment) => segment.bandId === "13cm" && segment.sourceId === "iaru-r1-vhf-up",
+  const stale9cmBandwidth = iaruSegments.filter(
+    (segment) => segment.bandId === "9cm" && segment.maxBandwidthHz !== undefined,
   );
+  if (stale9cmBandwidth.length !== 0) {
+    fail("IARU 9cm: current 3400-3475 MHz table must not retain legacy bandwidth limits");
+  }
 
-  if (current13cm.length !== 6) {
-    fail(`IARU UHF: expected 6 verified 13 cm segments, found ${current13cm.length}`);
+  const segment10369 = iaruSegments.find(
+    (segment) => segment.bandId === "3cm" && segment.fromHz === 10_369_000_000 && segment.toHz === 10_370_000_000,
+  );
+  if (!segment10369 || segment10369.maxBandwidthHz !== undefined) {
+    fail("IARU 3cm: current 10369-10370 MHz all-modes segment missing or has stale bandwidth limit");
+  }
+
+  const preferred241G = iaruSegments.find(
+    (segment) => segment.bandId === "241G" && segment.fromHz === 248_001_000_000 && segment.toHz === 250_000_000_000,
+  );
+  if (!preferred241G) {
+    fail("IARU 241G: preferred segment must start at 248.001 GHz");
   }
 
   const seenMarkerIds = new Set<string>();
-
   for (const marker of iaruActivityMarkers) {
-    if (seenMarkerIds.has(marker.id)) {
-      fail(`activity marker: duplicate id "${marker.id}"`);
-    }
+    if (seenMarkerIds.has(marker.id)) fail(`activity marker: duplicate id "${marker.id}"`);
     seenMarkerIds.add(marker.id);
-
     if (!Number.isSafeInteger(marker.frequencyHz) || marker.frequencyHz <= 0) {
       fail(`${marker.id}: invalid frequencyHz`);
     }
-
-    if (!marker.name.trim()) {
-      fail(`${marker.id}: missing name`);
-    }
-
+    if (!marker.name.trim()) fail(`${marker.id}: missing name`);
     if (marker.sourceId && !knownSourceIds.has(marker.sourceId)) {
       fail(`${marker.id}: unknown sourceId "${marker.sourceId}"`);
     }

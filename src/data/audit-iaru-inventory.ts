@@ -18,25 +18,21 @@ console.log("band\tsegments\tsource status");
 
 for (const band of bands) {
   const segments = iaruSegments.filter((segment) => segment.bandId === band.route);
+  if (!segments.length) continue;
 
-  if (!segments.length) {
-    continue;
-  }
-
-  const sources = [...new Set(segments.map((segment) => segment.sourceId))];
-  const status = sources.every((sourceId) => sourceId === "iaru-r1-hf")
+  const sourceIds = [...new Set(segments.map((segment) => segment.sourceId))];
+  const status = sourceIds.every((sourceId) => sourceId === "iaru-r1-hf")
     ? "current HF"
-    : sources.every((sourceId) => sourceId === "iaru-r1-vhf-up")
+    : sourceIds.every((sourceId) => sourceId === "iaru-r1-vhf-up")
       ? "current VHF+"
-      : sources.includes("original-bandplan")
-        ? "PENDING VHF+ VERIFY"
-        : sources.join(",");
+      : sourceIds.includes("original-bandplan")
+        ? "PENDING VERIFY"
+        : sourceIds.join(",");
 
   console.log(`${band.route}\t${segments.length}\t${status}`);
 }
 
-console.log("\n=== Known current-HF patches ===");
-
+console.log("\n=== Current-HF patches ===");
 for (const segment of iaruSegments.filter(
   (segment) =>
     segment.id === "iaru-15m-satellite-2020" ||
@@ -49,20 +45,10 @@ for (const segment of iaruSegments.filter(
   );
 }
 
-console.log("\n=== Current-VHF corrections ===");
-
-for (const segment of iaruSegments.filter(
-  (segment) =>
-    (segment.bandId === "6m" &&
-      segment.fromHz === 50_000_000 &&
-      segment.toHz === 50_030_000) ||
-    (segment.bandId === "4m" &&
-      segment.fromHz >= 70_000_000 &&
-      segment.toHz <= 70_100_000),
-)) {
-  console.log(
-    `${segment.id}: ${segment.fromHz}-${segment.toHz} Hz | bw=${segment.maxBandwidthHz ?? "none"} | ${segment.sourceReference}`,
-  );
+console.log("\n=== Material VHF+ replacements/corrections ===");
+for (const bandId of ["6m", "4m", "70cm", "23cm", "9cm", "6cm", "3cm", "241G"]) {
+  const segments = iaruSegments.filter((segment) => segment.bandId === bandId);
+  console.log(`${bandId}: ${segments.length} current segment(s)`);
 }
 
 console.log(`\nNormalized activity markers: ${iaruActivityMarkers.length}`);
