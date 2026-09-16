@@ -64,8 +64,23 @@ if (band9cm.toHz !== 3_475_000_000) {
 }
 
 const band40mB = getBandVisualModel(bandByRoute("40m"), "b");
-if (!band40mB.rows.some((row) => row.slices.some((slice) => slice.kind === "legal-restriction" && slice.text === "CW/MGM"))) {
-  fail("40m/B: CW/MGM legal restriction overlay missing");
+const band40mBRow = band40mB.rows[0];
+if (
+  !band40mBRow ||
+  band40mBRow.legalRanges.length !== 1 ||
+  band40mBRow.legalRanges[0].from !== 7010 ||
+  band40mBRow.legalRanges[0].to !== 7080
+) {
+  fail("40m/B: canonical legal visualization must be limited to 7010-7080 kHz");
+}
+const band40mBLabels = new Set(
+  band40mBRow.slices.map((slice) => slice.text?.toLowerCase()).filter(Boolean),
+);
+if (!band40mBLabels.has("cw") || !band40mBLabels.has("digi")) {
+  fail("40m/B: original CW/DIGI presentation must be preserved inside the legal range");
+}
+if (!band40mBRow.slices.every((slice) => slice.kind === "legal-restriction")) {
+  fail("40m/B: restricted-mode visualization must remain marked as legally constrained");
 }
 
 const band2mA = getBandVisualModel(bandByRoute("2m"), "a");
@@ -74,8 +89,21 @@ if (band2mA.rows.some((row) => row.slices.some((slice) => slice.kind === "legal-
 }
 
 const band2mC = getBandVisualModel(bandByRoute("2m"), "c");
-if (!band2mC.rows.some((row) => row.slices.some((slice) => slice.kind === "legal-restriction" && slice.text === "F3E/G3E/FXW"))) {
-  fail("2m/C: emission-class restriction overlay missing");
+const band2mCRow = band2mC.rows[0];
+if (!band2mCRow || band2mCRow.legalRanges.length !== 1) {
+  fail("2m/C: canonical legal range missing");
+}
+if (
+  band2mCRow.legalRanges[0].from !== 144 ||
+  band2mCRow.legalRanges[0].to !== 146
+) {
+  fail("2m/C: legal visualization must remain limited to 144-146 MHz");
+}
+if (!band2mCRow.slices.some((slice) => slice.text?.toLowerCase().includes("fm"))) {
+  fail("2m/C: original FM presentation must be preserved");
+}
+if (!band2mCRow.slices.every((slice) => slice.kind === "legal-restriction")) {
+  fail("2m/C: emission-limited visualization must remain marked as legally constrained");
 }
 
 console.log(`OK: ${bands.length} canonical band visualizations validated`);
