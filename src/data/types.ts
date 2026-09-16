@@ -1,3 +1,5 @@
+import type { LegalConditionId } from "./lv/legal-conditions";
+
 export type FrequencyHz = number;
 
 export type LicenceClass = "A" | "B" | "C";
@@ -53,7 +55,7 @@ export interface LegalRule extends FrequencyRange {
    */
   emissionClasses?: string[];
 
-  conditions?: string[];
+  conditions?: LegalConditionId[];
 
   sourceId: string;
   sourceReference: string;

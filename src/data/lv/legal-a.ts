@@ -1,14 +1,5 @@
 import type { LegalRule } from "../types";
 
-const EMC_CONDITION =
-  "Jāizvērtē elektromagnētiskā situācija stacijas uzstādīšanas vietā un jānodrošina, lai stacija neradītu kaitīgus traucējumus Latvijas un citu valstu amatieru dienesta un citu radiosakaru dienestu stacijām.";
-
-const BORDER_CONDITION =
-  "50–52 MHz un 70–70,5 MHz joslās elektromagnētiskā lauka intensitāte uz Latvijas robežas ar kaimiņvalstīm, kurās šīs joslas nav piešķirtas radioamatieru dienestam, nedrīkst pārsniegt 6 dBµV/m 10 m augstumā virs zemes 50 % vietu un 10 % laika.";
-
-const EME_MS_CONTEST =
-  "Tikai EME, MS sakariem vai darbam starptautiskās sacensībās; darba veidi CW, SSB un MGM.";
-
 export const aCategoryLegalRules: LegalRule[] = [
   {
     id: "a-001",
@@ -224,7 +215,7 @@ export const aCategoryLegalRules: LegalRule[] = [
       maxWatts: 800,
       sourceText: "pX ≤ 800 W",
     },
-    conditions: [EMC_CONDITION, BORDER_CONDITION],
+    conditions: ["emc-assessment", "border-field-strength"],
     sourceId: "mk257",
     sourceReference: "1. pielikums, 15. punkts; piezīmes 3. un 4.",
   },
@@ -239,7 +230,7 @@ export const aCategoryLegalRules: LegalRule[] = [
       maxWatts: 800,
       sourceText: "pX ≤ 800 W",
     },
-    conditions: [EMC_CONDITION, BORDER_CONDITION],
+    conditions: ["emc-assessment", "border-field-strength"],
     sourceId: "mk257",
     sourceReference: "1. pielikums, 16. punkts; piezīmes 3. un 4.",
   },
@@ -254,7 +245,7 @@ export const aCategoryLegalRules: LegalRule[] = [
       maxWatts: 100,
       sourceText: "pX ≤ 100 W",
     },
-    conditions: [EMC_CONDITION, BORDER_CONDITION],
+    conditions: ["emc-assessment", "border-field-strength"],
     sourceId: "mk257",
     sourceReference: "1. pielikums, 17. punkts; piezīmes 3. un 4.",
   },
@@ -284,7 +275,7 @@ export const aCategoryLegalRules: LegalRule[] = [
       sourceText: "pX ≤ 1000 W",
     },
     allowedModes: ["CW", "SSB", "MGM"],
-    conditions: [EME_MS_CONTEST, EMC_CONDITION],
+    conditions: ["eme-ms-contest", "emc-assessment"],
     sourceId: "mk257",
     sourceReference: "1. pielikums, 19. punkts; piezīme 3.",
   },
@@ -314,7 +305,7 @@ export const aCategoryLegalRules: LegalRule[] = [
       sourceText: "pX ≤ 1000 W",
     },
     allowedModes: ["CW", "SSB", "MGM"],
-    conditions: [EME_MS_CONTEST, EMC_CONDITION],
+    conditions: ["eme-ms-contest", "emc-assessment"],
     sourceId: "mk257",
     sourceReference: "1. pielikums, 21. punkts; piezīme 3.",
   },
@@ -329,7 +320,7 @@ export const aCategoryLegalRules: LegalRule[] = [
       maxWatts: 100,
       sourceText: "pX ≤ 100 W",
     },
-    conditions: [EMC_CONDITION],
+    conditions: ["emc-assessment"],
     sourceId: "mk257",
     sourceReference: "1. pielikums, 22. punkts; piezīme 3.",
   },
@@ -345,7 +336,7 @@ export const aCategoryLegalRules: LegalRule[] = [
       sourceText: "pX ≤ 300 W",
     },
     allowedModes: ["CW", "SSB", "MGM"],
-    conditions: [EME_MS_CONTEST, EMC_CONDITION],
+    conditions: ["eme-ms-contest", "emc-assessment"],
     sourceId: "mk257",
     sourceReference: "1. pielikums, 23. punkts; piezīme 3.",
   },

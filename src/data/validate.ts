@@ -3,12 +3,15 @@ import { aCategoryLegalRules } from "./lv/legal-a";
 import { bCategoryLegalRules } from "./lv/legal-b";
 import { cCategoryLegalRules } from "./lv/legal-c";
 import { sources } from "./sources";
+import { glossary } from "./glossary";
+import { legalConditions } from "./lv/legal-conditions";
 
 function fail(message: string): never {
   throw new Error(`DATA VALIDATION FAILED: ${message}`);
 }
 
 const knownSourceIds = new Set(Object.values(sources).map((source) => source.id));
+const knownGlossaryIds = new Set<string>(glossary.map((entry) => entry.id));
 const seenIds = new Set<string>();
 
 function validateLegalRules(
@@ -76,6 +79,30 @@ function validateLegalRules(
         if (new Set(values).size !== values.length) {
           fail(`${rule.id}: ${fieldName} contains duplicate values`);
         }
+      }
+    }
+
+    const requiredGlossaryIds = [
+      rule.allocation,
+      rule.power.designation,
+      ...(rule.power.eirp ? ["eirp"] : []),
+      ...(rule.allowedModes ?? []),
+      ...(rule.emissionClasses ?? []),
+    ];
+
+    for (const conditionId of rule.conditions ?? []) {
+      const condition = legalConditions[conditionId];
+
+      if (!condition) {
+        fail(`${rule.id}: unknown legal condition "${conditionId}"`);
+      }
+
+      requiredGlossaryIds.push(...(condition.glossaryIds ?? []));
+    }
+
+    for (const glossaryId of requiredGlossaryIds) {
+      if (!knownGlossaryIds.has(glossaryId)) {
+        fail(`${rule.id}: missing glossary entry for "${glossaryId}"`);
       }
     }
 

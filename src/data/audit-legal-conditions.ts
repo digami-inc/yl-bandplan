@@ -1,5 +1,6 @@
 import { bands } from "../bandplan";
 import { legalRules } from "./lv/legal-rules";
+import { legalConditions } from "./lv/legal-conditions";
 
 const UNIT_MULTIPLIER: Record<string, number> = {
   khz: 1_000,
@@ -99,7 +100,11 @@ for (const rule of legalRules) {
     `e.i.r.p.:         ${rule.power.eirp === true ? "yes" : "-"}`,
   );
   console.log(
-    `conditions:       ${rule.conditions?.join(" | ") ?? "-"}`,
+    `conditions:       ${
+      rule.conditions
+        ?.map((id) => legalConditions[id].text)
+        .join(" | ") ?? "-"
+    }`,
   );
 }
 
